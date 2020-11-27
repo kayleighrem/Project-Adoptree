@@ -22,14 +22,14 @@ import kotlin.collections.ArrayList
 
 class TreeAdapter : RecyclerView.Adapter<TreeAdapter.TreeViewHolder>() {
     private val treeList = ArrayList<Fragment>()
-    lateinit var linearLayout: LinearLayout
+    lateinit var relativeLayout: RelativeLayout
     lateinit var expandableLayout: RelativeLayout
 
 
     private var onItemClickListener: ((Tree) -> Unit)? = null
 
     inner class TreeViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        var linearLayout: LinearLayout = itemView.findViewById(R.id.card_linear_layout)
+        val relativeLayout: RelativeLayout = itemView.findViewById(R.id.card_relative_layout)
         var expandableLayout: RelativeLayout = itemView.findViewById(R.id.expandable_card_layout)
         var sessionManager: SessionManager = SessionManager(itemView.context)
     }
@@ -70,13 +70,8 @@ class TreeAdapter : RecyclerView.Adapter<TreeAdapter.TreeViewHolder>() {
         holder.itemView.apply {
             if (holder.sessionManager.isLogin()) {
                 expandableLayout.visibility = View.VISIBLE
-//                if (article.IsLiked == true) {
-//                    likeButton.setImageResource(R.drawable.ic_baseline_favorite_24)
-//                } else {
-//                    likeButton.setImageResource(R.drawable.ic_baseline_favorite_border_24)
-//                }
             }
-            linearLayout.setOnClickListener {
+            relativeLayout.setOnClickListener {
                 val pos: Int = holder.adapterPosition
                 if (pos != RecyclerView.NO_POSITION) {
 //                    onLikedButtonClickListener?.let {

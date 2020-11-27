@@ -21,7 +21,7 @@ class IntroPage3Fragment : Fragment() {
         view.finish.setOnClickListener {
             findNavController().navigate(R.id.action_viewPagerFragment_to_loginFragment)
 //            findNavController().navigate(R.id.action_splashFragment_to_loginFragment)
-            findNavController().navigate(R.id.action_viewPagerFragment_to_homeFragment)
+//            findNavController().navigate(R.id.action_viewPagerFragment_to_homeFragment)
             onBoardingFinished()
         }
         return view

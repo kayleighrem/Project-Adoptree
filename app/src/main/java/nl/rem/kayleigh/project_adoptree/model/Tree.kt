@@ -1,5 +1,7 @@
 package nl.rem.kayleigh.project_adoptree.model
 
+import java.io.Serializable
+
 data class Tree(
     val id: Int,
     val forestId: Int,
@@ -9,7 +11,7 @@ data class Tree(
     val longitude: String,
     val dateSeeded: String,
     val assignedTree: AssignedTree
-)
+) : Serializable
 
 data class AssignedTree(
     val user_id: User,

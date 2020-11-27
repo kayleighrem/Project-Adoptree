@@ -5,16 +5,16 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import kotlinx.android.synthetic.main.item_tree_card.*
 import nl.rem.kayleigh.project_adoptree.R
 
-class AdoptionFragment : Fragment() {
+class TimelineFragment : Fragment(R.layout.fragment_timeline) {
+    companion object {
+        const val TAG = "TimelineFragment"
+    }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-//        arguments?.let {
-//            param1 = it.getString(ARG_PARAM1)
-//            param2 = it.getString(ARG_PARAM2)
-//        }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
     }
 
     override fun onCreateView(
@@ -22,6 +22,6 @@ class AdoptionFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_adoption, container, false)
+        return inflater.inflate(R.layout.fragment_timeline, container, false)
     }
 }

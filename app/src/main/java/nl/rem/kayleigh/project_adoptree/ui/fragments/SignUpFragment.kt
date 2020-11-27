@@ -27,44 +27,44 @@ class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        viewModel = (activity as HomeActivity).userViewModel
-        initializeUI()
-
-        viewModel.signUpResponse.observe(viewLifecycleOwner, Observer { response ->
-            loading.visibility = View.GONE
-            when (response) {
-                is Resource.Success -> {
-                    confirmPasswordText.onEditorAction(EditorInfo.IME_ACTION_DONE)
-                    findNavController().navigate(
-                        R.id.action_signupFragment_to_loginFragment
-                    )
-                }
-                is Resource.Error -> {
-                    Toast.makeText(requireContext(), response.message, Toast.LENGTH_LONG).show()
-                    response.message?.let { message ->
-                        Log.e(TAG, "${getString(R.string.error_log)} $message")
-                    }
-                }
-            }
-        })
+//        super.onViewCreated(view, savedInstanceState)
+//        viewModel = (activity as HomeActivity).userViewModel
+//        initializeUI()
+//
+//        viewModel.signUpResponse.observe(viewLifecycleOwner, Observer { response ->
+//            loading.visibility = View.GONE
+//            when (response) {
+//                is Resource.Success -> {
+//                    confirmPasswordText.onEditorAction(EditorInfo.IME_ACTION_DONE)
+//                    findNavController().navigate(
+//                        R.id.action_signupFragment_to_loginFragment
+//                    )
+//                }
+//                is Resource.Error -> {
+//                    Toast.makeText(requireContext(), response.message, Toast.LENGTH_LONG).show()
+//                    response.message?.let { message ->
+//                        Log.e(TAG, "${getString(R.string.error_log)} $message")
+//                    }
+//                }
+//            }
+//        })
     }
 
     private fun initializeUI() {
-        signUp.setOnClickListener {
-            val username = usernameText.text.toString().trim()
-            val password = passwordText.text.toString().trim()
-            val confirmPassword = confirmPasswordText.text.toString().trim()
-            if (isPasswordValid(password) && isPasswordMatching(password, confirmPassword)) {
-                user = User(username, password)
-                loading.visibility = View.VISIBLE
-                viewModel.createUser(user)
-            } else if (!isPasswordValid(password)) {
-                passwordText.error = getString(R.string.error_password_length)
-            } else {
-                confirmPasswordText.error = getString(R.string.error_password_no_match)
-            }
-        }
+//        signUp.setOnClickListener {
+//            val username = usernameText.text.toString().trim()
+//            val password = passwordText.text.toString().trim()
+//            val confirmPassword = confirmPasswordText.text.toString().trim()
+//            if (isPasswordValid(password) && isPasswordMatching(password, confirmPassword)) {
+//                user = User(username, password)
+//                loading.visibility = View.VISIBLE
+//                viewModel.createUser(user)
+//            } else if (!isPasswordValid(password)) {
+//                passwordText.error = getString(R.string.error_password_length)
+//            } else {
+//                confirmPasswordText.error = getString(R.string.error_password_no_match)
+//            }
+//        }
     }
 
     private fun isPasswordValid(password: String): Boolean {

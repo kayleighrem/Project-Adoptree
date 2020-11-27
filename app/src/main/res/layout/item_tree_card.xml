@@ -10,7 +10,7 @@
     app:cardUseCompatPadding="true">
 
     <RelativeLayout
-        android:id="@+id/card_linear_layout"
+        android:id="@+id/card_relative_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="left"

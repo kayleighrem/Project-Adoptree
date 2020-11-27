@@ -73,5 +73,12 @@
     <string name="welcome">Welcome!</string>
     <string name="title_activity_login">LoginActivity</string>
     <string name="reset_password">Reset password</string>
+    <string name="title_activity_adoption">AdoptionActivity</string>
+    <string name="title_adopt_a_tree">Adopt a tree</string>
+    <string name="register">Register</string>
+    <string name="label_filter">Filter</string>
+    <string name="test">TEST</string>
+    <string name="results">results</string>
+    <string name="next_step">next step</string>
 
 </resources>

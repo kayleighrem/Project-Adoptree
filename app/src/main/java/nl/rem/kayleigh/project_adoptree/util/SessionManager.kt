@@ -2,6 +2,7 @@ package nl.rem.kayleigh.project_adoptree.util
 
 import android.content.Context
 import android.content.SharedPreferences
+import nl.rem.kayleigh.project_adoptree.model.UserResponse
 import nl.rem.kayleigh.project_adoptree.util.Constants.Companion.AUTH
 import nl.rem.kayleigh.project_adoptree.util.Constants.Companion.LOGIN
 import nl.rem.kayleigh.project_adoptree.util.Constants.Companion.PREF_NAME
@@ -27,5 +28,16 @@ class SessionManager(private val context: Context) {
 
     fun isLogin(): Boolean {
         return shared.getBoolean(LOGIN, false)
+    }
+
+    fun getUserDetails(): UserResponse {
+        val username = shared.getString(USERNAME, null)
+        val auth = shared.getString(AUTH, null)
+        return UserResponse(username, auth)
+    }
+
+    fun clearUserDetails() {
+        editor.clear()
+        editor.apply()
     }
 }

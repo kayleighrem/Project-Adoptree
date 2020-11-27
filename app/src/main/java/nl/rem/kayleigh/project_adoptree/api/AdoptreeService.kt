@@ -18,8 +18,8 @@ interface AdoptreeService {
     @POST("user/login")
     suspend fun login(@Body user: User): Response<UserResponse>
 
-    @GET("tree")
-    suspend fun getAllTrees(@Header("x-authtoken") authToken: String): Response<Tree>
+    @GET("user/{id}/tree")
+    suspend fun getTrees(@Header("x-authtoken") authToken: String?): Response<Tree>
 
 //    @Headers("Content-Type: application/json")
 //    @POST("user")

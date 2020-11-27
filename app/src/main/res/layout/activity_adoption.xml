@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorBackground"
-    tools:context=".ui.fragments.AdoptionFragment">
+    tools:context=".ui.activities.AdoptionActivity">
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
@@ -28,40 +28,11 @@
                 />
         </androidx.appcompat.widget.Toolbar>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:padding="20dp">
-            <ImageView
-                android:id="@+id/icon_filter"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingRight="10dp"
-                android:src="@drawable/ic_baseline_filter_list_24"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/label_filter"
-                />
-
-            <Button
-                android:id="@+id/btn_reset_password"
-                android:layout_width="180sp"
-                android:layout_height="@dimen/button_height"
-                android:layout_gravity="bottom"
-                android:background="@drawable/rounded_corners"
-                android:enabled="true"
-                android:text="@string/next_step"
-                android:theme="@style/CustomButtonStyle" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textAlignment="viewEnd"
-                android:text="@string/results"></TextView>
-
-        </LinearLayout>
-
+        <ImageView
+            android:id="@+id/icon_filter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_baseline_filter_list_24"/>
     </com.google.android.material.appbar.AppBarLayout>
 
     <FrameLayout
@@ -76,7 +47,5 @@
             android:text="Adoption Activity"
             android:layout_gravity="center"/>
 
-
     </FrameLayout>
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>
