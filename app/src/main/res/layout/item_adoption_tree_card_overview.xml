@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:backgroundTint="@color/colorBackground"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:id="@+id/card_relative_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@color/colorWhite"
+        android:padding="15dp"
+        android:layout_margin="15dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <ImageView
+                android:id="@+id/tree_image"
+                android:layout_width="73dp"
+                android:layout_height="97dp"
+                android:background="@drawable/rounded_corners"
+                android:src="@drawable/tree_icon"
+                app:tint="@color/colorAccentGreen" />
+
+            <LinearLayout
+                android:id="@+id/info_tree"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dp"
+                android:orientation="vertical"
+                android:layout_toRightOf="@id/tree_image">
+
+                <TextView
+                    android:id="@+id/tree_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="25dp"
+                    android:textAllCaps="true"
+                    android:text="tree title" />
+
+                <TextView
+                    android:id="@+id/tree_age"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Age: 3 weeks old" />
+
+                <TextView
+                    android:id="@+id/tree_status"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="To be planted" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+
+        <TextView
+            android:id="@+id/location"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Location" >
+        </TextView>
+
+        <View
+            android:id="@+id/divider1"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@id/location"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:background="?android:attr/listDivider" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/filledTextField"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:backgroundTint="@color/colorInputGrey"
+            android:hint="@string/title_overview">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/personal_sign"
+                app:counterEnabled="true"
+                app:counterMaxLength="150"
+                android:backgroundTint="@color/colorInputGrey"
+                android:layout_height="match_parent"
+                android:layout_width="match_parent">
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            app:helperText="@string/title_overview"
+            android:layout_height="80dp"
+            app:boxBackgroundColor="@color/colorInputGrey"
+            app:boxStrokeColor="@color/colorInputGrey"
+            app:endIconMode="custom"
+            app:endIconDrawable="@drawable/ic_baseline_check_circle_24"
+            app:endIconContentDescription="content_description_end_icon"
+            android:tooltipText="@string/title_timeline">
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/title_timeline"
+                app:counterMaxLength="150"
+                app:counterEnabled="true"
+
+
+
+                >
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            app:endIconMode="custom"
+            app:endIconDrawable="@drawable/ic_baseline_check_circle_24"
+            app:endIconContentDescription="content_description_end_icon">
+        </com.google.android.material.textfield.TextInputLayout>
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

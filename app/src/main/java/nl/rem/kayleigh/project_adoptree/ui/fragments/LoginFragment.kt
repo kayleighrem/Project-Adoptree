@@ -45,22 +45,12 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
 
     @RequiresApi(Build.VERSION_CODES.O)
     private fun initializeUI() {
-
-//        setSupportActionBar(toolbar)
-//        supportActionBar?.apply {
-//            title = ""
-//            setDisplayHomeAsUpEnabled(true)
-//        }
-//        collapsing_toolbar.title = ""
-//
-//        article = args.article ?: (intent.getSerializableExtra(ARTICLE) as Article)
-//        not_logged_in_message.visibility = View.VISIBLE
-
         btn_forgot_password.setOnClickListener {
             findNavController().navigate(R.id.action_loginFragment_to_forgotPasswordFragment)
         }
 
         btn_new_user.setOnClickListener {
+            navigateToFragment("AdoptionFragment")
             findNavController().navigate(R.id.action_loginFragment_to_adoptionFragment)
         }
 
@@ -82,6 +72,18 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
             findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
 
         }
+    }
+
+    private fun navigateToFragment(fragmentname: String) {
+        val fragment =
+                when (fragmentname) {
+                    "LoginFragment" -> R.id.loginFragment
+                    "HomeFragment" -> R.id.homeFragment
+                    "AdoptionFragment" -> R.id.adoptionFragment
+                    else -> {
+                        R.id.loginFragment
+                    }
+                }
     }
 
     private fun isPasswordValid(password: String): Boolean {

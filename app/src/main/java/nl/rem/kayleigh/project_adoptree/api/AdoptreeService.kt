@@ -4,11 +4,11 @@ import nl.rem.kayleigh.project_adoptree.model.Tree
 import nl.rem.kayleigh.project_adoptree.model.User
 import nl.rem.kayleigh.project_adoptree.model.UserResponse
 import nl.rem.kayleigh.project_adoptree.model.UserResponseRegister
+import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.*
 
 interface AdoptreeService {
-
 
     @Headers("Content-Type: application/json")
     @POST("Users/register")
@@ -20,6 +20,15 @@ interface AdoptreeService {
 
     @GET("user/{id}/tree")
     suspend fun getTrees(@Header("x-authtoken") authToken: String?): Response<Tree>
+
+    @DELETE("user/{id}/like")
+    suspend fun unlikeAnArticle(
+            @Path("id") id: Int,
+            @Header("x-authtoken") authToken: String
+    ): Response<Unit>
+
+    @GET("tree")
+    suspend fun getAllTrees(@Query("assignedTree") notassigned: String) : List<Tree>
 
 //    @Headers("Content-Type: application/json")
 //    @POST("user")

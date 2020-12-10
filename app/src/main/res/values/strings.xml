@@ -80,5 +80,11 @@
     <string name="test">TEST</string>
     <string name="results">results</string>
     <string name="next_step">next step</string>
+    <string name="btn_adopt">Adopt</string>
+    <string name="btn_info">info</string>
+    <string name="title_overview">Overview</string>
+    <string name="total">Total: </string>
+    <string name="euro_sign">€</string>
+    <string name="amount_40">40.10</string>
 
 </resources>

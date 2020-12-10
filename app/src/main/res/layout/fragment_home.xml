@@ -31,7 +31,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:text="@string/title_home"
-                android:theme="@style/ToolbarTitle" />
+                android:theme="@style/ToolbarTitle"
+                android:layout_marginRight="30dp"
+                android:gravity="center"/>
         </androidx.appcompat.widget.Toolbar>
 
         <androidx.recyclerview.widget.RecyclerView
@@ -43,7 +45,9 @@
             android:paddingBottom="50dp"
             android:scrollbars="vertical"
             android:visibility="gone"
-            tools:listitem="@layout/item_tree_card"></androidx.recyclerview.widget.RecyclerView>
+            tools:listitem="@layout/item_tree_card">
+
+        </androidx.recyclerview.widget.RecyclerView>
 
 
         <TextView

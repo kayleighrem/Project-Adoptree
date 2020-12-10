@@ -11,12 +11,14 @@ import nl.rem.kayleigh.project_adoptree.model.Tree
 import nl.rem.kayleigh.project_adoptree.repository.TreeRepository
 import nl.rem.kayleigh.project_adoptree.util.Resource
 import retrofit2.Response
+import java.lang.StringBuilder
 
 class HomeViewModel(private val treeRepository: TreeRepository, val context: Context) : ViewModel() {
 
     private val _trees: MutableLiveData<Resource<Tree>> = MutableLiveData()
     val trees: MutableLiveData<Resource<Tree>>
         get() = _trees
+    val notassigned: String = "null"
 
     companion object {
         const val TAG ="HomeViewModel"
@@ -25,8 +27,8 @@ class HomeViewModel(private val treeRepository: TreeRepository, val context: Con
     fun getTrees(authToken: String?) = viewModelScope.launch {
         try {
             _trees.postValue(Resource.Loading())
-            val response = treeRepository.getTrees(authToken)
-            _trees.postValue(handleTreesResponse(response))
+            val response = treeRepository.getAllTrees(notassigned)
+//            _trees.postValue(handleTreesResponse(response))
         } catch (e: Exception) {
             _trees.postValue(Resource.Error(context.getString(R.string.connection_error)))
             Log.e(TAG, "${context.getString(R.string.error_log)} ${e.message}")

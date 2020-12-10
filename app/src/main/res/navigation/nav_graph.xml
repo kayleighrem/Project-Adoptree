@@ -90,4 +90,9 @@
         android:name="nl.rem.kayleigh.project_adoptree.ui.activities.AdoptionActivity"
         android:label="activity_adoption"
         tools:layout="@layout/activity_adoption" />
+    <fragment
+        android:id="@+id/adoptionOverviewFragment"
+        android:name="nl.rem.kayleigh.project_adoptree.ui.fragments.AdoptionOverviewFragment"
+        android:label="fragment_adoption_overview"
+        tools:layout="@layout/fragment_adoption_overview" />
 </navigation>

@@ -13,6 +13,9 @@
     <style name="ToolbarTitle">
         <item name="android:gravity">center</item>
         <item name="android:textSize">23sp</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:layout_marginLeft">30sp</item>
+        <item name="android:layout_marginRight">30sp</item>
     </style>
 
     <style name="TextAppearance.AppCompat.Widget.ActionBar.Title" parent="@android:style/TextAppearance">

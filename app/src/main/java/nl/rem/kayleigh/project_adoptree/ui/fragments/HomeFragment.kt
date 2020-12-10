@@ -1,10 +1,8 @@
 package nl.rem.kayleigh.project_adoptree.ui.fragments
 
 import android.os.Bundle
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.RelativeLayout
 import androidx.navigation.fragment.findNavController
@@ -29,6 +27,10 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         const val TAG = "HomeFragment"
     }
 
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 //        linearLayout = findViewById(R.id.card_linear_layout)
@@ -43,8 +45,8 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 //            setUpRecyclerView()
 //        }
 
-//        initializeUI()
-//        setUpRecyclerView()
+        initializeUI()
+        setUpRecyclerView()
     }
 
     override fun onCreateView(

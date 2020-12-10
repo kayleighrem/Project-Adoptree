@@ -1,82 +1,105 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorBackground"
-    tools:context=".ui.fragments.AdoptionFragment">
+    android:backgroundTint="@color/colorBackground"
+    tools:context=".ui.fragments.AdoptionFragment"
+    android:orientation="vertical">
 
     <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/top_toolbar"
         android:layout_width="match_parent"
-        android:background="@color/colorBackground"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:background="@color/colorBackground">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="56dp"
-            android:layout_marginBottom="6dp"
             android:background="@color/colorWhite">
+
             <TextView
                 android:id="@+id/title"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:text="@string/title_adopt_a_tree"
                 android:theme="@style/ToolbarTitle"
-                />
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:gravity="center"/>
         </androidx.appcompat.widget.Toolbar>
 
         <LinearLayout
+            android:id="@+id/filter_section"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:padding="20dp">
+
             <ImageView
                 android:id="@+id/icon_filter"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingRight="10dp"
-                android:src="@drawable/ic_baseline_filter_list_24"/>
+                android:src="@drawable/ic_baseline_filter_list_24" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/label_filter"
-                />
-
-            <Button
-                android:id="@+id/btn_reset_password"
-                android:layout_width="180sp"
-                android:layout_height="@dimen/button_height"
-                android:layout_gravity="bottom"
-                android:background="@drawable/rounded_corners"
-                android:enabled="true"
-                android:text="@string/next_step"
-                android:theme="@style/CustomButtonStyle" />
+                android:text="@string/label_filter" />
 
             <TextView
+                android:id="@+id/number_results"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textAlignment="viewEnd"
-                android:text="@string/results"></TextView>
-
+                android:text="@string/results"
+                android:textAlignment="viewEnd" />
         </LinearLayout>
-
     </com.google.android.material.appbar.AppBarLayout>
 
-    <FrameLayout
+    <LinearLayout
+        android:id="@+id/recycler_view_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:padding="@dimen/inner_frame_layout_padding">
+        android:layout_height="539dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/top_toolbar">
 
-        <TextView
-            android:id="@+id/text"
-            android:layout_width="wrap_content"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_adoptionRecyclerView"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="Adoption Activity"
-            android:layout_gravity="center"/>
+            android:layout_below="@id/frame_layout"
+            tools:listitem="@layout/item_adoption_tree_card">
 
+        </androidx.recyclerview.widget.RecyclerView>
+    </LinearLayout>
 
-    </FrameLayout>
+    <LinearLayout
+        android:id="@+id/button_section"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@color/colorWhiteTransparant"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/recycler_view_layout" >
+        <Button
+            android:id="@+id/btn_next_step"
+            android:layout_width="180sp"
+            android:layout_height="@dimen/button_height"
+            android:layout_gravity="right"
+            android:background="@drawable/rounded_corners"
+            android:text="@string/next_step"
+            android:theme="@style/CustomButtonStyle"
+            app:layout_constraintTop_toBottomOf="@+id/frame_layout"
+            tools:ignore="MissingConstraints" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
+
+</LinearLayout>

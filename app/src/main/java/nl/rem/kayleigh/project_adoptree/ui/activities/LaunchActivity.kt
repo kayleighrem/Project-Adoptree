@@ -5,9 +5,18 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
+import android.util.Log
 import nl.rem.kayleigh.project_adoptree.R
+import nl.rem.kayleigh.project_adoptree.api.AdoptreeService
+import nl.rem.kayleigh.project_adoptree.model.Tree
+import nl.rem.kayleigh.project_adoptree.repository.TreeRepository
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class LaunchActivity : AppCompatActivity() {
+    private lateinit var treeRepository: TreeRepository
+
     companion object {
         private const val SPLASH_TIME_OUT: Long = 3000
     }
@@ -15,6 +24,7 @@ class LaunchActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_launch)
+
 
 //        Handler().postDelayed({
             startActivity(
