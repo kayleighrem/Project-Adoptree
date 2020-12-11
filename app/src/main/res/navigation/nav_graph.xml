@@ -80,7 +80,16 @@
         android:id="@+id/adoptionFragment"
         android:name="nl.rem.kayleigh.project_adoptree.ui.fragments.AdoptionFragment"
         android:label="fragment_adoption"
-        tools:layout="@layout/fragment_adoption" />
+        tools:layout="@layout/fragment_adoption">
+        <action
+            android:id="@+id/action_adoptionFragment_to_adoptionTreeInfoActivity"
+            app:destination="@+id/adoptionTreeInfoActivity" />
+    </fragment>
+    <activity
+        android:id="@+id/adoptionTreeInfoActivity"
+        android:name="nl.rem.kayleigh.project_adoptree.ui.activities.AdoptionTreeInfoActivity"
+        android:label="@string/test"
+        tools:layout="@layout/activity_adoption_tree_info" />
     <activity
         android:id="@+id/loginActivity"
         android:name="nl.rem.kayleigh.project_adoptree.ui.activities.LoginActivity"

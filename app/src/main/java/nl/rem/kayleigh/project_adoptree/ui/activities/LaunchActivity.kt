@@ -15,7 +15,6 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class LaunchActivity : AppCompatActivity() {
-    private lateinit var treeRepository: TreeRepository
 
     companion object {
         private const val SPLASH_TIME_OUT: Long = 3000

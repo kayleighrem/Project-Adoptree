@@ -1,10 +1,8 @@
 package nl.rem.kayleigh.project_adoptree.api
 
-import nl.rem.kayleigh.project_adoptree.model.Tree
-import nl.rem.kayleigh.project_adoptree.model.User
-import nl.rem.kayleigh.project_adoptree.model.UserResponse
-import nl.rem.kayleigh.project_adoptree.model.UserResponseRegister
+import nl.rem.kayleigh.project_adoptree.model.*
 import retrofit2.Call
+import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.http.*
 
@@ -27,8 +25,11 @@ interface AdoptreeService {
             @Header("x-authtoken") authToken: String
     ): Response<Unit>
 
-    @GET("tree")
-    suspend fun getAllTrees(@Query("assignedTree") notassigned: String) : List<Tree>
+    @Headers("Content-Type: application/json")
+    @GET("tree/1")
+    suspend fun getAllTrees() : TreeResult
+//    suspend fun getAllTrees() : Response<List<Tree>>
+//    suspend fun getAllTrees(@Query("assignedTree") notassigned: String) : Response<TreeResult>
 
 //    @Headers("Content-Type: application/json")
 //    @POST("user")

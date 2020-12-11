@@ -27,7 +27,7 @@ class HomeViewModel(private val treeRepository: TreeRepository, val context: Con
     fun getTrees(authToken: String?) = viewModelScope.launch {
         try {
             _trees.postValue(Resource.Loading())
-            val response = treeRepository.getAllTrees(notassigned)
+            val response = treeRepository.getAllTrees()
 //            _trees.postValue(handleTreesResponse(response))
         } catch (e: Exception) {
             _trees.postValue(Resource.Error(context.getString(R.string.connection_error)))
