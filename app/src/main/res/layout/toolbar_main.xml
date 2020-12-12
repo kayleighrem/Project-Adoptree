@@ -11,7 +11,7 @@
         android:background="@color/colorWhite"
         tools:ignore="MissingConstraints">
         <TextView
-            android:id="@+id/title"
+            android:id="@+id/tv_title"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:theme="@style/ToolbarTitle"

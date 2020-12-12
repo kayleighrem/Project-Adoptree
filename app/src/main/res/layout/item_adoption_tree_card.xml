@@ -1,82 +1,91 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:backgroundTint="@color/colorAccentGreenTransparant"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_height="wrap_content">
 
-    <RelativeLayout
-        android:id="@+id/card_adoption_relative_layout"
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cv_adoption_item"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorWhite"
-        android:layout_margin="15dp">
+        android:layout_marginLeft="11dp"
+        android:layout_marginTop="7dp"
+        android:layout_marginRight="11dp"
+        android:layout_marginBottom="7dp"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="2dp">
 
-        <ImageView
-            android:id="@+id/tree_image"
-            android:layout_width="106dp"
-            android:layout_height="149dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="10dp"
-            android:layout_marginBottom="10dp"
-            android:background="@drawable/rounded_corners"
-            android:src="@drawable/tree_icon"
-            app:tint="@color/colorAccentGreen" />
-
-        <LinearLayout
-            android:id="@+id/info_tree"
-            android:layout_width="wrap_content"
+        <RelativeLayout
+            android:id="@+id/card_adoption_relative_layout"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:orientation="vertical"
-            android:layout_toRightOf="@id/tree_image">
+            android:background="@color/colorWhite"
+            android:layout_margin="15dp">
 
-            <TextView
-                android:id="@+id/tree_name"
+            <ImageView
+                android:id="@+id/tree_image"
+                android:layout_width="106dp"
+                android:layout_height="149dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/rounded_corners"
+                android:src="@drawable/tree_icon"
+                app:tint="@color/colorAccentGreen" />
+
+            <LinearLayout
+                android:id="@+id/info_tree"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="25dp"
-                android:textAllCaps="true"
-                android:text="tree title" />
+                android:layout_margin="10dp"
+                android:orientation="vertical"
+                android:layout_toRightOf="@id/tree_image">
 
-            <TextView
-                android:id="@+id/tree_age"
+                <TextView
+                    android:id="@+id/tree_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="25dp"
+                    android:textAllCaps="true"
+                    android:text="tree title" />
+
+                <TextView
+                    android:id="@+id/tree_age"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Age: 3 weeks old" />
+
+                <TextView
+                    android:id="@+id/tree_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Price" />
+
+                <TextView
+                    android:id="@+id/tree_location"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Not planted yet" />
+
+            </LinearLayout>
+            <Button
+                android:id="@+id/btn_adopt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Age: 3 weeks old" />
+                android:text="@string/btn_adopt"
+                android:layout_marginStart="10dp"
+                android:layout_toRightOf="@id/tree_image"
+                android:layout_below="@id/info_tree"/>
 
-            <TextView
-                android:id="@+id/tree_price"
+            <Button
+                android:id="@+id/btn_info"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Price" />
-
-            <TextView
-                android:id="@+id/tree_location"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Not planted yet" />
-
-        </LinearLayout>
-        <Button
-            android:id="@+id/btn_adopt"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/btn_adopt"
-            android:layout_marginStart="10dp"
-            android:layout_toRightOf="@id/tree_image"
-            android:layout_below="@id/info_tree"/>
-
-        <Button
-            android:id="@+id/btn_info"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:text="@string/btn_info"
-            android:layout_toRightOf="@id/btn_adopt"
-            android:layout_below="@id/info_tree"/>
-    </RelativeLayout>
-
-</androidx.cardview.widget.CardView>
+                android:layout_marginStart="20dp"
+                android:text="@string/btn_info"
+                android:layout_toRightOf="@id/btn_adopt"
+                android:layout_below="@id/info_tree"/>
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+</FrameLayout>
