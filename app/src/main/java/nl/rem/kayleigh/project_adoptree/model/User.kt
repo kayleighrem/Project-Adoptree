@@ -1,5 +1,7 @@
 package nl.rem.kayleigh.project_adoptree.model
 
+import java.io.Serializable
+
 //class User {
 //    val firstname: String
 //    val lastname: String
@@ -24,7 +26,7 @@ data class User(
     val forgetToken: String,
     val role: Role,
     val createdAt: String
-)
+) : Serializable
 
 enum class Role(
     Admin: Int = 0,

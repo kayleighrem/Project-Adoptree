@@ -7,5 +7,6 @@ import retrofit2.Call
 import retrofit2.Response
 
 class AdoptionRepository {
-    fun getAllTrees(): Call<List<Tree>> = RetrofitInstance.api.getAllTrees()
+    suspend fun getAvailableTrees() = RetrofitInstance.api.getAvailableTrees()
+//    fun getAllTrees(): Call<List<Tree>> = RetrofitInstance.api.getAllTrees()
 }

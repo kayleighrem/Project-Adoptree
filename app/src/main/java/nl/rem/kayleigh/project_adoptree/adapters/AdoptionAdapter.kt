@@ -14,21 +14,25 @@ import kotlinx.android.synthetic.main.item_adoption_tree_card.view.*
 import nl.rem.kayleigh.project_adoptree.R
 import nl.rem.kayleigh.project_adoptree.model.Tree
 import nl.rem.kayleigh.project_adoptree.util.SessionManager
-import java.time.LocalDateTime
-import java.time.format.DateTimeFormatter
-import java.time.format.FormatStyle
 import java.util.*
 
-class AdoptionAdapter : RecyclerView.Adapter<AdoptionAdapter.AdoptionViewHolder>()  {
-    inner class AdoptionViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+class AdoptionAdapter : RecyclerView.Adapter<AdoptionAdapter.ViewHolder>()  {
+    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var sessionManager: SessionManager = SessionManager(itemView.context)
-        init {
-            println("test adapter 32")
-            itemView.setOnClickListener {
-                val position: Int = adapterPosition
-                Toast.makeText(itemView.context, "You clicked on item # ${position + 1}", Toast.LENGTH_SHORT).show()
-            }
-        }
+
+//        fun bind(tree: Tree, listener: (Tree) -> Unit) = with(itemView) {
+//            println("test bind?")
+//            tree_age.text = tree.dateSeeded
+//            tree_name.text = tree.forestId.toString()
+//            setOnClickListener { listener(tree) }
+//        }
+//        init {
+//            println("test adapter 32")
+//            itemView.setOnClickListener {
+//                val position: Int = adapterPosition
+//                Toast.makeText(itemView.context, "You clicked on item # ${position + 1}", Toast.LENGTH_SHORT).show()
+//            }
+//        }
     }
 
     fun test() {
@@ -51,7 +55,7 @@ class AdoptionAdapter : RecyclerView.Adapter<AdoptionAdapter.AdoptionViewHolder>
     val differ = AsyncListDiffer(this, differCallback)
 
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AdoptionViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         println("test adapter 41")
 //        adoptionRepository = adoptionRepository
 //        CoroutineScope(Dispatchers.IO).launch {
@@ -59,7 +63,7 @@ class AdoptionAdapter : RecyclerView.Adapter<AdoptionAdapter.AdoptionViewHolder>
 ////
 ////            println("trees: "+ trees)
 //        }
-        return AdoptionViewHolder(
+        return ViewHolder(
             LayoutInflater.from(parent.context).inflate(
                 R.layout.item_adoption_tree_card,
                     parent,
@@ -79,12 +83,13 @@ class AdoptionAdapter : RecyclerView.Adapter<AdoptionAdapter.AdoptionViewHolder>
     private var onAddButtonClickListener: ((Tree, Int) -> Unit)? = null
 
     @RequiresApi(Build.VERSION_CODES.O)
-    override fun onBindViewHolder(holder: AdoptionViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         println("test adoptionadapter 89")
         val tree = differ.currentList[position]
-        println(tree)
+        println("tree???? = " + tree)
         holder.itemView.apply {
             if (holder.sessionManager.isLogin()) {
+                println("test if login? ")
                 // TODO if login
             }
 //            likeButton.setOnClickListener {
@@ -110,11 +115,22 @@ class AdoptionAdapter : RecyclerView.Adapter<AdoptionAdapter.AdoptionViewHolder>
 
     override fun getItemCount(): Int {
         println("test itemcount")
+        println(differ.currentList.size)
         return differ.currentList.size
     }
 
-    fun setOnItemClickListener(listener: (Tree) -> Unit) {
+    fun setOnItemClickListener(trees: List<Tree>, listener: (Tree) -> Unit) {
         println("test itemclick")
         onItemClickListener = listener
+    }
+
+    fun setOnItemClickListener(listener: (Tree) -> Unit) {
+        println("test onclick?")
+        onItemClickListener = listener
+    }
+
+
+    fun setOnLikedButtonClickListener(listener: (Tree, Int) -> Unit) {
+        onAddButtonClickListener = listener
     }
 }

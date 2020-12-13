@@ -19,13 +19,13 @@ data class TreeResult (
 
 data class AssignedTree(
     val user_id: Int?,
-    val tree_Id: Int?,
+    val tree_id: Tree?,
     val order_id: Int?,
     val created_at: String?,
     val expire_date: String?,
     val tree_name: String?,
     val tree_color: String?
-)
+) : Serializable
 
 data class TreeSign(
     val id: Int,

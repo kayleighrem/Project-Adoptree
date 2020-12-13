@@ -27,7 +27,7 @@ interface AdoptreeService {
 
     @Headers("Content-Type: application/json")
     @GET("tree")
-    fun getAllTrees() : Call<List<Tree>>
+    suspend fun getAvailableTrees() : Response<Tree>
 //    suspend fun getAllTrees() : Response<List<Tree>>
 //    suspend fun getAllTrees(@Query("assignedTree") notassigned: String) : Response<TreeResult>
 
