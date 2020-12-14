@@ -6,6 +6,7 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import nl.rem.kayleigh.project_adoptree.util.Constants.Companion.BASE_URL
 import retrofit2.converter.moshi.MoshiConverterFactory
+import retrofit2.create
 
 class RetrofitInstance {
     companion object {
@@ -23,6 +24,10 @@ class RetrofitInstance {
 
         val api: AdoptreeService by lazy {
             retrofit.create(AdoptreeService::class.java)
+        }
+
+        val userapi: UserService by lazy {
+            retrofit.create(UserService::class.java)
         }
     }
 }

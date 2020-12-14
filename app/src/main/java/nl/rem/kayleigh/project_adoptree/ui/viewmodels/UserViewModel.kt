@@ -56,6 +56,19 @@ class UserViewModel(private val userRepository: UserRepository, val context: Con
         }
     }
 
+    suspend fun createUser(firstname: String, lastname: String, username: String, email: String, password: String) {
+        try {
+            userRepository.createUser(firstname, lastname, username, email, password)
+//            _signUpResponse.value = handleSignUpResponse(userRepository.createUser(firstname, lastname, username, email, password))
+        } catch (e: Exception) {
+            _signUpResponse.postValue(Resource.Error(context.getString(R.string.connection_error)))
+            Log.e(
+                TAG,
+                "${context.getString(R.string.error_log)} ${e.message}"
+            )
+        }
+    }
+
     private fun handleSignUpResponse(response: Response<UserResponseRegister>): Resource<UserResponseRegister> {
         if (response.isSuccessful && response.body()?.Success == true) {
             response.body()?.let {

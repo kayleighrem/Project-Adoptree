@@ -11,7 +11,6 @@ import nl.rem.kayleigh.project_adoptree.model.Tree
 import nl.rem.kayleigh.project_adoptree.model.TreeResult
 import nl.rem.kayleigh.project_adoptree.repository.AdoptionRepository
 import nl.rem.kayleigh.project_adoptree.util.Resource
-import retrofit2.Response
 
 class AdoptionViewModel(private val adoptionRepository: AdoptionRepository, val context: Context) : ViewModel() {
     val trees: MutableLiveData<List<TreeResult>> = MutableLiveData()
@@ -20,10 +19,10 @@ class AdoptionViewModel(private val adoptionRepository: AdoptionRepository, val 
 //    private var treeResponse: MutableLiveData<Resource<Tree>>
 //        get() = _treeResponse
 
-    private val _articles: MutableLiveData<Resource<Tree>> = MutableLiveData()
-    val articles: MutableLiveData<Resource<Tree>>
+    private val _articles: MutableLiveData<Resource<List<Tree>>> = MutableLiveData()
+    val articles: MutableLiveData<Resource<List<Tree>>>
         get() = _articles
-    private var articleResponse: Tree? = null
+    private var articleResponse: List<Tree>? = ArrayList()
 
     companion object {
         const val TAG = "AdoptionViewModel"
@@ -63,8 +62,8 @@ class AdoptionViewModel(private val adoptionRepository: AdoptionRepository, val 
         try {
             _articles.postValue(Resource.Loading())
             println("test error? : ")
-            val response = adoptionRepository.getAvailableTrees()
-            _articles.postValue(handleTreeResponse(response))
+//            val response: Response<List<Tree>> = adoptionRepository.getAvailableTrees()
+//            _articles.postValue(handleTreeResponse(adoptionRepository.getAvailableTrees()))
         } catch (e: Exception) {
             println("test error 2 : ")
             _articles.postValue(Resource.Error(context.getString(R.string.connection_error)))
@@ -72,22 +71,23 @@ class AdoptionViewModel(private val adoptionRepository: AdoptionRepository, val 
         }
     }
 
-    private fun handleTreeResponse(response: Response<Tree>): Resource<Tree> {
+    private fun handleTreeResponse(response: List<Tree>): Resource<List<Tree>> {
         println("test handle response?")
-        if (response.isSuccessful) {
-            response.body()?.let { resultResponse ->
-                if (articleResponse == null) {
-                    articleResponse = resultResponse
-                } else {
-                    val oldArticles = articleResponse
-                    val newArticles = resultResponse
-//                    oldArticles?.addAll(newArticles)
-                }
-                return Resource.Success(articleResponse ?: resultResponse)
-            }
+        if (!response.isEmpty()) {
+            println("test respons is not empty")
+//            response.body()?.let { resultResponse ->
+//                if (articleResponse == null) {
+//                    articleResponse = resultResponse
+//                } else {
+//                    val oldArticles = articleResponse
+//                    val newArticles = resultResponse
+////                    oldArticles?.addAll(newArticles)
+//                }
+//                return Resource.Success(articleResponse ?: resultResponse)
+//            }
         }
         println("test else error? ")
-        return Resource.Error(response.message())
+        return Resource.Error("response.message()")
     }
 
 //    fun getAvailableTrees() {

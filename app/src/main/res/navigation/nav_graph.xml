@@ -84,6 +84,9 @@
         <action
             android:id="@+id/action_adoptionFragment_to_adoptionTreeInfoActivity"
             app:destination="@+id/adoptionTreeInfoActivity" />
+        <action
+            android:id="@+id/action_adoptionFragment_to_adoptionOverviewFragment"
+            app:destination="@id/adoptionOverviewFragment" />
     </fragment>
     <activity
         android:id="@+id/adoptionTreeInfoActivity"
@@ -103,5 +106,14 @@
         android:id="@+id/adoptionOverviewFragment"
         android:name="nl.rem.kayleigh.project_adoptree.ui.fragments.AdoptionOverviewFragment"
         android:label="fragment_adoption_overview"
-        tools:layout="@layout/fragment_adoption_overview" />
+        tools:layout="@layout/fragment_adoption_overview" >
+        <action
+            android:id="@+id/action_adoptionOverviewFragment_to_signUpFragment"
+            app:destination="@id/signUpFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/timelineFragment"
+        android:name="nl.rem.kayleigh.project_adoptree.ui.fragments.TimelineFragment"
+        android:label="fragment_timeline"
+        tools:layout="@layout/fragment_timeline" />
 </navigation>

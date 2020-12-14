@@ -35,7 +35,7 @@ class HomeViewModel(private val treeRepository: TreeRepository, val context: Con
         }
     }
 
-    private fun handleTreesResponse(response: Response<Tree>): Resource<Tree> {
+    private fun handleTreesResponse(response: Response<List<Tree>>): Resource<Tree> {
         if (response.isSuccessful) {
 //            response.body()?.let { resultResponse ->
 //                if (treeResponse == null) {

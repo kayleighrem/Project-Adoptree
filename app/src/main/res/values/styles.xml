@@ -1,7 +1,18 @@
 <resources>
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light.DarkActionBar">
         <item name="colorPrimary">@color/colorAccent</item>
+        <item name="android:textColor">@color/colorTextBrown</item>
+        <item name="colorPrimaryDark">@color/color_blue</item>
+        <item name="colorAccent">@color/colorAccentGreen</item>
+
+        <!--        <item name="bottomNavigationStyle">@color/colorNavBackground</item>-->
+        <!--        <item name="toolbarStyle">@color/colorNavBackground</item>-->
+    </style>
+
+    <style name="AppThemeNoActionBar" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <item name="colorPrimary">@color/colorAccent</item>
+        <item name="android:gravity">center</item>
         <item name="android:textColor">@color/colorTextBrown</item>
         <item name="colorPrimaryDark">@color/color_blue</item>
         <item name="colorAccent">@color/colorAccentGreen</item>
@@ -66,6 +77,10 @@
 
     <style name="CustomTitleStyle">
         <item name="android:textSize">30sp</item>
+    </style>
+
+    <style name="SettingsTabLayout" parent="TextAppearance.Design.Tab">
+        <item name="android:textSize">10sp</item>
     </style>
 
 </resources>

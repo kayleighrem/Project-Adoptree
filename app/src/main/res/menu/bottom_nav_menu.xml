@@ -6,7 +6,7 @@
         android:id="@+id/nav_home"
         android:icon="@drawable/ic_home_black_24dp"
         android:title="@string/title_home"
-        app:showAsAction="always"/>
+        android:visible="true"/>
     <item
         android:id="@+id/nav_timeline"
         android:icon="@drawable/ic_baseline_timeline_24"

@@ -3,13 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/colorBackground"
     tools:context=".ui.fragments.AdoptionOverviewFragment">
-
-    <com.google.android.material.appbar.AppBarLayout
-        android:layout_width="match_parent"
-        android:background="@color/colorBackground"
-        android:layout_height="match_parent">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
@@ -27,64 +23,104 @@
                 android:layout_marginRight="30dp"
                 android:gravity="center"/>
         </androidx.appcompat.widget.Toolbar>
-    </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view_overview"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:paddingTop="56dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="parent"
         tools:listitem="@layout/item_adoption_tree_card_overview" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:background="@drawable/rounded_corners"
-        android:backgroundTint="@color/colorWhite"
-        android:layout_marginLeft="15sp"
-        android:layout_marginRight="15sp"
-        android:layout_marginBottom="20sp"
-        android:layout_gravity="bottom">
-
-        <TextView
-            android:id="@+id/total"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:text="@string/total"
-            android:textSize="20sp"
-            android:layout_margin="10dp"/>
-
+        android:orientation="vertical">
         <LinearLayout
+            android:id="@+id/section_total"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="right"
-            android:gravity="right"
-            android:orientation="horizontal">
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="@drawable/rounded_corners"
+            android:backgroundTint="@color/colorWhite"
+            android:layout_marginLeft="15sp"
+            android:layout_marginRight="15sp"
+            android:layout_marginBottom="20sp"
+            android:layout_gravity="bottom">
 
             <TextView
-                android:id="@+id/total_euro_sign"
+                android:id="@+id/total"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:textAlignment="textEnd"
-                android:text="@string/euro_sign"
+                android:text="@string/total"
                 android:textSize="20sp"
-                android:layout_margin="10dp"
-                tools:ignore="RtlCompat" />
+                android:layout_margin="10dp"/>
 
-            <TextView
-                android:id="@+id/total_euro"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:text="@string/amount_40"
-                android:textSize="20sp"
-                android:layout_margin="10dp"
-                android:gravity="right" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="right"
+                android:gravity="right"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/total_euro_sign"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:textAlignment="textEnd"
+                    android:text="@string/euro_sign"
+                    android:textSize="20sp"
+                    android:layout_margin="10dp"
+                    tools:ignore="RtlCompat" />
+
+                <TextView
+                    android:id="@+id/total_euro"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="@string/amount_40"
+                    android:textSize="20sp"
+                    android:layout_margin="10dp"
+                    android:gravity="right" />
+            </LinearLayout>
         </LinearLayout>
 
-    </LinearLayout>
+        <LinearLayout
+            android:id="@+id/button_section"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            app:layout_constraintBottom_toBottomOf="@id/section_total"
+            app:layout_constraintEnd_toEndOf="@id/section_total"
+            app:layout_constraintStart_toStartOf="@id/section_total"
+            android:orientation="horizontal">
 
+            <Button
+                android:id="@+id/btn_adopt_more"
+                android:layout_width="180sp"
+                android:layout_height="@dimen/button_height"
+                android:layout_gravity="left"
+                android:layout_weight="1"
+                android:layout_margin="5dp"
+                android:background="@drawable/rounded_corners"
+                android:text="@string/adopt_more"
+                android:theme="@style/CustomButtonStyle" />
+
+            <Button
+                android:id="@+id/btn_pay"
+                android:layout_width="180sp"
+                android:layout_height="@dimen/button_height"
+                android:layout_gravity="right"
+                android:layout_weight="1"
+                android:layout_margin="5dp"
+                android:background="@drawable/rounded_corners"
+                android:text="@string/next_step"
+                android:theme="@style/CustomButtonStyle" />
+        </LinearLayout>
+    </LinearLayout>
 </FrameLayout>

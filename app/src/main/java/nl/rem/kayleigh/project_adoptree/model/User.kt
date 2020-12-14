@@ -1,31 +1,18 @@
 package nl.rem.kayleigh.project_adoptree.model
 
 import java.io.Serializable
-
-//class User {
-//    val firstname: String
-//    val lastname: String
-//    val username: String
-//    val email: String
-//    val password: String
-//    val forgetToken: String
-//    val role: Int
-//    val createdAt: LocalDateTime
-//
-//    public User(String firstname, String lastname, String username, String email, String password, String forgetToken, Int role, LocalDateTime createdAt) {
-//
-//    }
-//}
+import java.util.*
 
 data class User(
+    val id: UUID?,
     val firstname: String,
     val lastname: String,
     val username: String,
     val email: String,
     val password: String,
-    val forgetToken: String,
-    val role: Role,
-    val createdAt: String
+    val forgetToken: String?,
+    val role: Role?,
+    val createdAt: String?
 ) : Serializable
 
 enum class Role(

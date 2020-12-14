@@ -4,7 +4,6 @@ import android.os.Build
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
 import android.widget.RelativeLayout
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
@@ -21,7 +20,7 @@ import java.time.format.FormatStyle
 import java.util.*
 import kotlin.collections.ArrayList
 
-class TreeAdapter : RecyclerView.Adapter<TreeAdapter.TreeViewHolder>() {
+class UserAdapter : RecyclerView.Adapter<UserAdapter.TreeViewHolder>() {
     private val treeList = ArrayList<Fragment>()
     lateinit var relativeLayout: RelativeLayout
     lateinit var expandableLayout: RelativeLayout

@@ -23,6 +23,8 @@ import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.fragment_adoption.*
 import kotlinx.android.synthetic.main.fragment_adoption.view.*
 import kotlinx.android.synthetic.main.fragment_intro_page3.view.*
+import kotlinx.android.synthetic.main.fragment_login.*
+import kotlinx.android.synthetic.main.item_adoption_tree_card.*
 import kotlinx.android.synthetic.main.item_adoption_tree_card.view.*
 import nl.rem.kayleigh.project_adoptree.R
 import nl.rem.kayleigh.project_adoptree.adapters.AdoptionAdapter
@@ -42,14 +44,13 @@ class AdoptionFragment : Fragment(R.layout.fragment_adoption) {
     var isLoading = false
     var isScrolling = false
 
-//    companion object {
-//        const val TAG = "AdoptionFragment"
-//    }
+    companion object {
+        const val TAG = "AdoptionFragment"
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         adoptionViewModel = (activity as HomeActivity).adoptionViewModel
-        println("view 1 : " + view)
         view.tv_number_results.text = "test"
         sessionManager = SessionManager(view.context)
         setUpRecyclerView()
@@ -57,7 +58,6 @@ class AdoptionFragment : Fragment(R.layout.fragment_adoption) {
 
         adoptionViewModel.articles.observe(viewLifecycleOwner, Observer { response ->
             Log.d("Response ", response.data.toString())
-
         })
 
         adoptionViewModel.articles.observe(viewLifecycleOwner, Observer { response ->
@@ -67,8 +67,8 @@ class AdoptionFragment : Fragment(R.layout.fragment_adoption) {
                     hideProgressBar()
                     if (treeList.isEmpty()) {
                         response.data?.let { treeResponse ->
-                            treeList.add(treeResponse)
-                            adoptionAdapter.differ.submitList(treeList.toList())
+//                            treeList.add(treeResponse)
+                            adoptionAdapter.differ.submitList(treeResponse.toList())
                         }
                     }
                 }
@@ -108,11 +108,20 @@ class AdoptionFragment : Fragment(R.layout.fragment_adoption) {
             println("test list is null?")
             adoptionViewModel.getAvailableTrees()
         }
-//        if (adoptionViewModel.articles.value?.data?.treeList.isNullOrEmpty()) {
-//            println("test list is nul?")
-//            adoptionViewModel.getAvailableTrees()
-//            println("test gettrees: " + adoptionViewModel.getAvailableTrees())
+
+        btn_next_step.setOnClickListener {
+            findNavController().navigate(R.id.action_adoptionFragment_to_adoptionOverviewFragment)
+        }
+
+//        btn_adopt.setOnClickListener {
+//           findNavController().navigate(R.id.action_adoptionOverviewFragment_to_signUpFragment)
+//        // TODO add to cart
 //        }
+//
+//        btn_info.setOnClickListener {
+//            findNavController().navigate(R.id.action_adoptionFragment_to_adoptionTreeInfoActivity)
+//        }
+
 
         adoptionAdapter.setOnItemClickListener {
             println("test onitemclicklistenere?")

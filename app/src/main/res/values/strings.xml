@@ -88,5 +88,6 @@
     <string name="amount_40">40.10</string>
     <string name="retry">retry</string>
     <string name="title_activity_adoption_tree_info">AdoptionTreeInfoActivity</string>
+    <string name="adopt_more">Adopt more</string>
 
 </resources>

@@ -5,18 +5,15 @@ import android.view.*
 import androidx.fragment.app.Fragment
 import android.widget.LinearLayout
 import android.widget.RelativeLayout
-import androidx.navigation.fragment.findNavController
-import kotlinx.android.synthetic.main.item_tree_card.*
 import nl.rem.kayleigh.project_adoptree.R
-import nl.rem.kayleigh.project_adoptree.adapters.TreeAdapter
+import nl.rem.kayleigh.project_adoptree.adapters.UserAdapter
 import kotlinx.android.synthetic.main.fragment_home.recycleView
-import androidx.recyclerview.widget.RecyclerView
 import nl.rem.kayleigh.project_adoptree.ui.viewmodels.HomeViewModel
 import nl.rem.kayleigh.project_adoptree.util.LinearLayoutManagerWrapper
 import nl.rem.kayleigh.project_adoptree.util.SessionManager
 
 class HomeFragment : Fragment(R.layout.fragment_home) {
-    lateinit var treeAdapter: TreeAdapter
+    lateinit var userAdapter: UserAdapter
     lateinit var sessionManager: SessionManager
     lateinit var homeViewModel: HomeViewModel
     lateinit var linearLayout: LinearLayout
@@ -72,21 +69,12 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         if (sessionManager.isLogin()) {
             authToken = sessionManager.getUserDetails().AuthToken.toString()
         }
-        treeAdapter.setOnItemClickListener {
-            val bundle = Bundle().apply {
-                putSerializable("tree", it)
-            }
-//            findNavController().navigate(
-//                R.id.,
-//                bundle
-//            )
-        }
     }
 
     private fun setUpRecyclerView() {
-        treeAdapter = TreeAdapter()
+        userAdapter = UserAdapter()
         recycleView.apply {
-            adapter = treeAdapter
+            adapter = userAdapter
             layoutManager = LinearLayoutManagerWrapper(activity)
 //            addOnScrollListener(this@HomeFragment.scrollListener)
 

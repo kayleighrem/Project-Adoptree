@@ -1,5 +1,6 @@
 package nl.rem.kayleigh.project_adoptree.ui.fragments
 
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -8,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import kotlinx.android.synthetic.main.fragment_login.*
@@ -15,22 +17,30 @@ import kotlinx.android.synthetic.main.fragment_login.loading
 import kotlinx.android.synthetic.main.fragment_sign_up.*
 import nl.rem.kayleigh.project_adoptree.R
 import nl.rem.kayleigh.project_adoptree.model.User
+import nl.rem.kayleigh.project_adoptree.repository.UserRepository
+import nl.rem.kayleigh.project_adoptree.ui.activities.HomeActivity
 import nl.rem.kayleigh.project_adoptree.ui.viewmodels.UserViewModel
 import nl.rem.kayleigh.project_adoptree.util.Resource
+import nl.rem.kayleigh.project_adoptree.util.SessionManager
 
 class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
     lateinit var viewModel: UserViewModel
+    lateinit var sessionManager: SessionManager
     lateinit var user: User
+    lateinit var userRepository: UserRepository
 
     companion object {
         const val TAG = "SignUpFragment"
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-//        super.onViewCreated(view, savedInstanceState)
-//        viewModel = (activity as HomeActivity).userViewModel
-//        initializeUI()
-//
+        super.onViewCreated(view, savedInstanceState)
+        sessionManager = SessionManager(view.context)
+        viewModel = (activity as HomeActivity).userViewModel
+        userRepository = UserRepository()
+        initializeUI()
+
 //        viewModel.signUpResponse.observe(viewLifecycleOwner, Observer { response ->
 //            loading.visibility = View.GONE
 //            when (response) {
@@ -51,20 +61,25 @@ class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
     }
 
     private fun initializeUI() {
-//        signUp.setOnClickListener {
-//            val username = usernameText.text.toString().trim()
-//            val password = passwordText.text.toString().trim()
-//            val confirmPassword = confirmPasswordText.text.toString().trim()
-//            if (isPasswordValid(password) && isPasswordMatching(password, confirmPassword)) {
+        signUp.setOnClickListener {
+            val firstname = firstnameText.text.toString().trim()
+            val lastname = lastnameText.text.toString().trim()
+            val username = usernameText.text.toString().trim()
+            val email = emailText.text.toString().trim()
+            val password = passwordText.text.toString().trim()
+            val confirmPassword = confirmPasswordText.text.toString().trim()
+            if (isPasswordValid(password) && isPasswordMatching(password, confirmPassword)) {
 //                user = User(username, password)
 //                loading.visibility = View.VISIBLE
 //                viewModel.createUser(user)
-//            } else if (!isPasswordValid(password)) {
-//                passwordText.error = getString(R.string.error_password_length)
-//            } else {
-//                confirmPasswordText.error = getString(R.string.error_password_no_match)
-//            }
-//        }
+//                viewModel.createUser(firstname, lastname, username, email, password)
+//                userRepository.createUser(firstname, lastname, username, email, password)
+            } else if (!isPasswordValid(password)) {
+                passwordText.error = getString(R.string.error_password_length)
+            } else {
+                confirmPasswordText.error = getString(R.string.error_password_no_match)
+            }
+        }
     }
 
     private fun isPasswordValid(password: String): Boolean {
