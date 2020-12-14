@@ -33,6 +33,7 @@
     <color name="light_blue_A400">#FF00B0FF</color>
     <color name="black_overlay">#66000000</color>
     <color name="color_logo">#265D0C</color>
+    <color name="color_redBrown">#A67004</color>
 
     <color name="colorButtonGreen">#87B62C</color>
 </resources>

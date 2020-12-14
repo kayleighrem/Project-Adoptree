@@ -3,20 +3,15 @@ package nl.rem.kayleigh.project_adoptree.ui.fragments
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.AbsListView
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.fragment.navArgs
 import kotlinx.android.synthetic.main.fragment_adoption_overview.*
 //import kotlinx.android.synthetic.main.fragment_articles.paginationProgressBar
 //import kotlinx.android.synthetic.main.fragment_articles.recycleView
 //import kotlinx.android.synthetic.main.fragment_articles.swipeRefreshLayout
-import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
@@ -29,7 +24,7 @@ import kotlinx.android.synthetic.main.item_adoption_tree_card.view.*
 import nl.rem.kayleigh.project_adoptree.R
 import nl.rem.kayleigh.project_adoptree.adapters.AdoptionAdapter
 import nl.rem.kayleigh.project_adoptree.model.Tree
-import nl.rem.kayleigh.project_adoptree.ui.activities.HomeActivity
+import nl.rem.kayleigh.project_adoptree.ui.activities.MainActivity
 import nl.rem.kayleigh.project_adoptree.ui.viewmodels.AdoptionViewModel
 import nl.rem.kayleigh.project_adoptree.util.LinearLayoutManagerWrapper
 import nl.rem.kayleigh.project_adoptree.util.Resource
@@ -50,7 +45,7 @@ class AdoptionFragment : Fragment(R.layout.fragment_adoption) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        adoptionViewModel = (activity as HomeActivity).adoptionViewModel
+        adoptionViewModel = (activity as MainActivity).adoptionViewModel
         view.tv_number_results.text = "test"
         sessionManager = SessionManager(view.context)
         setUpRecyclerView()

@@ -116,4 +116,10 @@
         android:name="nl.rem.kayleigh.project_adoptree.ui.fragments.TimelineFragment"
         android:label="fragment_timeline"
         tools:layout="@layout/fragment_timeline" />
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="nl.rem.kayleigh.project_adoptree.ui.fragments.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" />
+
 </navigation>

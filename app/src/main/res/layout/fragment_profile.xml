@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/colorBackground"
-    tools:context=".ui.fragments.SettingsFragment">
+    tools:context=".ui.fragments.ProfileFragment">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
@@ -18,7 +18,7 @@
             android:id="@+id/tv_title"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="@string/title_settings"
+            android:text="@string/title_profile"
             android:theme="@style/ToolbarTitle"
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"
@@ -35,7 +35,6 @@
         android:layout_below="@id/toolbar">
 
     </com.google.android.material.appbar.AppBarLayout>
-
 
     <FrameLayout
         android:layout_width="match_parent"

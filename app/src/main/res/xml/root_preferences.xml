@@ -1,5 +1,64 @@
-<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <PreferenceCategory app:title="@string/notifications">
+
+        <SwitchPreferenceCompat
+            android:contextClickable="true"
+            app:defaultValue="true"
+            app:key="growth"
+            app:title="@string/settings_growth" />
+
+        <SwitchPreferenceCompat
+            android:defaultValue="true"
+            app:key="humidity"
+            app:title="@string/settings_humidity" />
+
+        <SwitchPreferenceCompat
+            android:defaultValue="true"
+            app:key="temperature"
+            app:title="@string/settings_temperature" />
+
+        <SwitchPreferenceCompat
+            android:defaultValue="true"
+            app:key="co2reduction"
+            app:title="@string/settings_co2reduction" />
+
+        <SwitchPreferenceCompat
+            android:defaultValue="true"
+            app:key="co2reductiontips"
+            app:title="@string/settings_co2reductiontips" />
+
+        <SwitchPreferenceCompat
+            android:defaultValue="true"
+            app:key="events"
+            app:title="@string/settings_events" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory app:title="@string/general">
+
+        <ListPreference
+            android:defaultValue="English"
+            app:defaultValue="English"
+            app:entries="@array/languague_entries"
+            app:entryValues="@array/language_values"
+            app:key="english"
+            app:title="@string/settings_language"
+            app:useSimpleSummaryProvider="true" />
+
+        <SwitchPreferenceCompat
+            app:key="sync"
+            app:title="@string/sync_title" />
+
+        <SwitchPreferenceCompat
+            app:dependency="sync"
+            app:key="attachment"
+            app:summaryOff="@string/attachment_summary_off"
+            app:summaryOn="@string/attachment_summary_on"
+            app:title="@string/attachment_title" />
+
+    </PreferenceCategory>
     <PreferenceCategory app:title="@string/messages_header">
 
         <EditTextPreference
@@ -16,7 +75,6 @@
             app:useSimpleSummaryProvider="true" />
 
     </PreferenceCategory>
-
     <PreferenceCategory app:title="@string/sync_header">
 
         <SwitchPreferenceCompat

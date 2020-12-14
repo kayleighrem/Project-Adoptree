@@ -2,27 +2,14 @@ package nl.rem.kayleigh.project_adoptree.ui.fragments
 
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.view.View
-import android.view.inputmethod.EditorInfo
-import android.widget.TextView
-import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
-import androidx.navigation.findNavController
-import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.ui.setupWithNavController
-import kotlinx.android.synthetic.main.activity_home.*
-import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.fragment_login.*
 import nl.rem.kayleigh.project_adoptree.R
 import nl.rem.kayleigh.project_adoptree.model.User
-import nl.rem.kayleigh.project_adoptree.ui.activities.HomeActivity
-import nl.rem.kayleigh.project_adoptree.ui.activities.LoginActivity
 import nl.rem.kayleigh.project_adoptree.ui.viewmodels.UserViewModel
-import nl.rem.kayleigh.project_adoptree.util.Resource
 import nl.rem.kayleigh.project_adoptree.util.SessionManager
 
 class LoginFragment : Fragment(R.layout.fragment_login) {
@@ -37,7 +24,7 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-//        viewModel = (activity as HomeActivity).userViewModel
+//        viewModel = (activity as MainActivity).userViewModel
 
         sessionManager = SessionManager(view.context)
         initializeUI()

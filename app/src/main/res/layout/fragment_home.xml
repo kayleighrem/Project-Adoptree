@@ -29,35 +29,86 @@
         </androidx.appcompat.widget.Toolbar>
 
         <FrameLayout
+            android:id="@+id/fl_home_logged_in"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@id/toolbar">
+            android:layout_below="@id/toolbar"
+            android:visibility="invisible">
+
                 <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recycleView"
+                    android:id="@+id/rv_home_tree_items"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:clipToPadding="false"
                     android:paddingBottom="50dp"
                     android:scrollbars="vertical"
                     android:visibility="visible"
-                    tools:listitem="@layout/item_tree_card">
-                </androidx.recyclerview.widget.RecyclerView>
-
-                <TextView
-                    android:id="@+id/not_logged_in_message"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:text="@string/test"
-                    android:visibility="visible" />
+                    tools:listitem="@layout/item_tree_card"></androidx.recyclerview.widget.RecyclerView>
 
                 <FrameLayout
                     android:id="@+id/home_main_frame"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    >
-                </FrameLayout>
+                    android:layout_height="match_parent"></FrameLayout>
         </FrameLayout>
+
+        <RelativeLayout
+            android:id="@+id/rl_home_not_logged_in"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="20sp"
+            android:layout_below="@id/toolbar">
+                <Button
+                    android:id="@+id/btn_adopt_now"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:background="@drawable/rounded_corners"
+                    android:text="@string/adopt_now"
+                    android:textSize="20sp"
+                    />
+                <TextView
+                    android:id="@+id/tv_why_adoptree"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/home_not_logged_in_why_adoptree"
+                    android:background="@drawable/rounded_corners"
+                    android:backgroundTint="@color/colorWhite"
+                    android:layout_below="@id/btn_adopt_now"
+                    android:textAlignment="center"
+                    android:textSize="25sp"
+                    android:padding="25dp" />
+
+                <RelativeLayout
+                    android:id="@+id/rl_select_tree"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tv_why_adoptree"
+                    android:layout_marginTop="20sp"
+                    android:backgroundTint="@color/colorWhite"
+                    android:padding="5dp"
+                    android:background="@color/colorWhite">
+                        <ImageView
+                            android:id="@+id/iv_select_tree"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                                android:src="@drawable/announcements_image"/>
+                        <TextView
+                            android:id="@+id/tv_select"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/select_title"
+                            android:layout_toRightOf="@id/iv_select_tree"/>
+                        <TextView
+                            android:id="@+id/tv_select_text"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/select_text"
+                            android:layout_below="@id/tv_select"
+                            android:layout_toRightOf="@id/iv_select_tree"/>
+
+                </RelativeLayout>
+
+
+        </RelativeLayout>
 
 
 

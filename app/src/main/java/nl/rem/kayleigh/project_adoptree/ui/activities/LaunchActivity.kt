@@ -4,17 +4,13 @@ import android.app.ActivityOptions
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.Handler
-import android.util.Log
+import android.view.View
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import kotlinx.android.synthetic.main.activity_main.*
 import nl.rem.kayleigh.project_adoptree.R
-import nl.rem.kayleigh.project_adoptree.api.AdoptreeService
-import nl.rem.kayleigh.project_adoptree.model.Tree
-import nl.rem.kayleigh.project_adoptree.repository.TreeRepository
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 class LaunchActivity : AppCompatActivity() {
+    lateinit var bottomNavigationView: BottomNavigationView
 
     companion object {
         private const val SPLASH_TIME_OUT: Long = 3000
@@ -22,12 +18,15 @@ class LaunchActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+//        bottomNavigationView = findViewById(R.id.bottomNavigationView)
+//
+//        bottomNavigationView.visibility = View.GONE
         setContentView(R.layout.activity_launch)
 
 
 //        Handler().postDelayed({
             startActivity(
-                Intent(this, HomeActivity::class.java),
+                Intent(this, MainActivity::class.java),
                 ActivityOptions.makeSceneTransitionAnimation(this).toBundle()
             )
             finish()
