@@ -18,11 +18,7 @@ class LaunchActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-//        bottomNavigationView = findViewById(R.id.bottomNavigationView)
-//
-//        bottomNavigationView.visibility = View.GONE
         setContentView(R.layout.activity_launch)
-
 
 //        Handler().postDelayed({
             startActivity(

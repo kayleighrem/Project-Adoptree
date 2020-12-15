@@ -26,26 +26,149 @@
             />
     </androidx.appcompat.widget.Toolbar>
 
-    <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/appBarLayout"
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/color_grey"
-        android:background="@color/color_grey"
-        android:layout_below="@id/toolbar">
-
-    </com.google.android.material.appbar.AppBarLayout>
-
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/appBarLayout">
-        <TextView
+        android:layout_below="@id/toolbar"
+        android:padding="20dp">
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="@string/title_settings">
+            android:layout_below="@id/toolbar"
+            android:gravity="center">
 
-        </TextView>
-    </FrameLayout>
+            <RelativeLayout
+                android:id="@+id/rl_user_image"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" >
+                <ImageView
+                    android:id="@+id/iv_happy_tree"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:backgroundTint="@color/color_grey"
+                    android:src="@drawable/happy_tree_image" />
+                <TextView
+                    android:id="@+id/tv_username"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/hello_you"
+                    android:textAllCaps="true"
+                    android:gravity="center"
+                    android:textSize="30dp"
+                    android:layout_below="@id/iv_happy_tree">
+                </TextView>
+            </RelativeLayout>
 
+            <RelativeLayout
+                android:id="@+id/rl_profile_not_logged_in"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/rl_user_image"
+                android:visibility="invisible"
+                tools:ignore="NotSibling">
+
+                <TextView
+                    android:id="@+id/log_in"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/rl_user_image"
+                    android:background="@color/colorWhite"
+                    android:padding="10dp"
+                    android:text="@string/log_in" />
+
+                <TextView
+                    android:id="@+id/adopt_now"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/log_in"
+                    android:layout_marginTop="1dp"
+                    android:background="@color/colorWhite"
+                    android:padding="10dp"
+                    android:text="@string/adopt_now_title" />
+            </RelativeLayout>
+            <RelativeLayout
+                android:id="@+id/rl_profile_logged_in"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/rl_user_image"
+                tools:ignore="NotSibling">
+                <TextView
+                    android:id="@+id/your_email_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:text="@string/your_email"
+                    android:layout_below="@id/rl_user_image"
+                    android:textColor="@color/color_redBrown" />
+                <TextView
+                    android:id="@+id/your_email"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/your_email_title"
+                    android:layout_marginTop="5dp"
+                    android:text="@string/email_example" />
+                <TextView
+                    android:id="@+id/your_phone_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:text="@string/your_phone"
+                    android:layout_below="@id/your_email"
+                    android:textColor="@color/color_redBrown" />
+                <TextView
+                    android:id="@+id/your_phone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/your_phone_title"
+                    android:layout_marginTop="5dp"
+                    android:text="@string/phone_example" />
+                <TextView
+                    android:id="@+id/your_address_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:text="@string/your_address"
+                    android:layout_below="@id/your_phone"
+                    android:textColor="@color/color_redBrown" />
+                <TextView
+                    android:id="@+id/your_address"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/your_address_title"
+                    android:layout_marginTop="5dp"
+                    android:text="@string/address_example" />
+                <TextView
+                    android:id="@+id/your_zip_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:text="@string/your_zip"
+                    android:layout_below="@id/your_address"
+                    android:textColor="@color/color_redBrown" />
+                <TextView
+                    android:id="@+id/your_zip"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/your_zip_title"
+                    android:layout_marginTop="5dp"
+                    android:text="@string/zip_example" />
+                <TextView
+                    android:id="@+id/your_country_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:text="@string/your_country"
+                    android:layout_below="@id/your_zip"
+                    android:textColor="@color/color_redBrown" />
+                <TextView
+                    android:id="@+id/your_country"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/your_country_title"
+                    android:layout_marginTop="5dp"
+                    android:text="@string/country_example" />
+            </RelativeLayout>
+        </RelativeLayout>
+    </ScrollView>
 </RelativeLayout>

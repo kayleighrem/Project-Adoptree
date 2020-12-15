@@ -19,7 +19,7 @@ data class TreeResult (
 
 data class AssignedTree(
     val user_id: Int?,
-    val tree_id: Tree?,
+    val tree_id: Int?,
     val order_id: Int?,
     val created_at: String?,
     val expire_date: String?,

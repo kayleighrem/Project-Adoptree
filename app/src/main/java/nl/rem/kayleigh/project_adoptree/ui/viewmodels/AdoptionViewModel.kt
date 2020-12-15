@@ -11,6 +11,7 @@ import nl.rem.kayleigh.project_adoptree.model.Tree
 import nl.rem.kayleigh.project_adoptree.model.TreeResult
 import nl.rem.kayleigh.project_adoptree.repository.AdoptionRepository
 import nl.rem.kayleigh.project_adoptree.util.Resource
+import retrofit2.Response
 
 class AdoptionViewModel(private val adoptionRepository: AdoptionRepository, val context: Context) : ViewModel() {
     val trees: MutableLiveData<List<TreeResult>> = MutableLiveData()
@@ -62,8 +63,8 @@ class AdoptionViewModel(private val adoptionRepository: AdoptionRepository, val 
         try {
             _articles.postValue(Resource.Loading())
             println("test error? : ")
-//            val response: Response<List<Tree>> = adoptionRepository.getAvailableTrees()
-//            _articles.postValue(handleTreeResponse(adoptionRepository.getAvailableTrees()))
+            val response: Response<List<Tree>> = adoptionRepository.getAvailableTrees()
+            _articles.postValue(handleTreeResponse(adoptionRepository.getAvailableTrees()))
         } catch (e: Exception) {
             println("test error 2 : ")
             _articles.postValue(Resource.Error(context.getString(R.string.connection_error)))
@@ -71,20 +72,20 @@ class AdoptionViewModel(private val adoptionRepository: AdoptionRepository, val 
         }
     }
 
-    private fun handleTreeResponse(response: List<Tree>): Resource<List<Tree>> {
+    private fun handleTreeResponse(response: Response<List<Tree>>): Resource<List<Tree>> {
         println("test handle response?")
-        if (!response.isEmpty()) {
+        if (response.body()?.isEmpty() == false) {
             println("test respons is not empty")
-//            response.body()?.let { resultResponse ->
-//                if (articleResponse == null) {
-//                    articleResponse = resultResponse
-//                } else {
-//                    val oldArticles = articleResponse
-//                    val newArticles = resultResponse
-////                    oldArticles?.addAll(newArticles)
-//                }
-//                return Resource.Success(articleResponse ?: resultResponse)
-//            }
+            response.body()?.let { resultResponse ->
+                if (articleResponse == null) {
+                    articleResponse = resultResponse
+                } else {
+                    val oldArticles = articleResponse
+                    val newArticles = resultResponse
+//                    oldArticles?.addAll(newArticles)
+                }
+                return Resource.Success(articleResponse ?: resultResponse)
+            }
         }
         println("test else error? ")
         return Resource.Error("response.message()")

@@ -122,5 +122,26 @@
     <string name="home_not_logged_in_why_adoptree">Why adopting a tree, why ADOPTREE?</string>
     <string name="select_text">The foundation will take care of planting your selected tree in the desired location.</string>
     <string name="select_title">Select your tree</string>
+    <string name="available_trees">Available trees</string>
+    <string name="monitor_title">Monitor your tree</string>
+    <string name="monitor_text">You will be able to keep track of your tree growth, temperature, humidity and most importantly your CO2 reduction contribution. Your tree will be photographed and geolocated as well.</string>
+    <string name="follow_title">Follow it\'s story</string>
+    <string name="follow_text">You will be able to see your tree achievements and important milestones through the timeline.</string>
+    <string name="greener_title">Make the planet greener</string>
+    <string name="greener_text">As your tree grows, it will absorb CO2. This will mitigate climate change effects, protect the soil and wildlife, and help maintain the biodiversity.</string>
+    <string name="adopt_now_text">Contribute now by adopting a tree</string>
+    <string name="adopt_now_title">Adopt now</string>
+    <string name="hello_you">Hello you!</string>
+    <string name="log_in">Log in</string>
+    <string name="email_example">helloyou@email.com</string>
+    <string name="your_email">Your email</string>
+    <string name="your_phone">Your phone</string>
+    <string name="phone_example">+31611223344</string>
+    <string name="your_address">Your address</string>
+    <string name="address_example">Dorpsstraat 101</string>
+    <string name="your_zip">Your zip code</string>
+    <string name="zip_example">1122AB</string>
+    <string name="your_country">Your country</string>
+    <string name="country_example">Netherlands</string>
 
 </resources>
