@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -10,7 +11,7 @@
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="56dp"
+        android:layout_height="56sp"
         android:layout_alignParentStart="true"
         android:background="@color/colorWhite"
         tools:ignore="MissingConstraints">
@@ -20,8 +21,8 @@
             android:layout_height="match_parent"
             android:text="@string/title_profile"
             android:theme="@style/ToolbarTitle"
-            android:layout_marginLeft="30dp"
-            android:layout_marginRight="30dp"
+            android:layout_marginLeft="30sp"
+            android:layout_marginRight="30sp"
             android:gravity="center"
             />
     </androidx.appcompat.widget.Toolbar>
@@ -30,17 +31,25 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/toolbar"
-        android:padding="20dp">
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:paddingTop="20sp"
+        tools:ignore="MissingConstraints">
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@id/toolbar"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/toolbar"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginHorizontal="20sp"
             android:gravity="center">
 
             <RelativeLayout
                 android:id="@+id/rl_user_image"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" >
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="40sp">
                 <ImageView
                     android:id="@+id/iv_happy_tree"
                     android:layout_width="match_parent"
@@ -55,7 +64,7 @@
                     android:text="@string/hello_you"
                     android:textAllCaps="true"
                     android:gravity="center"
-                    android:textSize="30dp"
+                    android:textSize="30sp"
                     android:layout_below="@id/iv_happy_tree">
                 </TextView>
             </RelativeLayout>
@@ -65,7 +74,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/rl_user_image"
-                android:visibility="invisible"
+                android:textAlignment="viewStart"
                 tools:ignore="NotSibling">
 
                 <TextView
@@ -74,7 +83,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/rl_user_image"
                     android:background="@color/colorWhite"
-                    android:padding="10dp"
+                    android:padding="10sp"
                     android:text="@string/log_in" />
 
                 <TextView
@@ -82,93 +91,125 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/log_in"
-                    android:layout_marginTop="1dp"
+                    android:layout_marginTop="1sp"
                     android:background="@color/colorWhite"
-                    android:padding="10dp"
+                    android:padding="10sp"
                     android:text="@string/adopt_now_title" />
             </RelativeLayout>
+
             <RelativeLayout
                 android:id="@+id/rl_profile_logged_in"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/rl_user_image"
+                android:textAlignment="viewStart"
                 tools:ignore="NotSibling">
+
                 <TextView
                     android:id="@+id/your_email_title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
-                    android:text="@string/your_email"
                     android:layout_below="@id/rl_user_image"
-                    android:textColor="@color/color_redBrown" />
+                    android:layout_marginTop="15sp"
+                    android:text="@string/your_email"
+                    android:textAlignment="viewStart"
+                    android:textColor="@color/color_redBrown"
+                    android:textSize="14sp" />
+
                 <TextView
                     android:id="@+id/your_email"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/your_email_title"
-                    android:layout_marginTop="5dp"
-                    android:text="@string/email_example" />
+                    android:layout_marginTop="5sp"
+                    android:text="@string/email_example"
+                    android:textAlignment="viewStart"
+                    android:textSize="20sp" />
+
                 <TextView
                     android:id="@+id/your_phone_title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
-                    android:text="@string/your_phone"
                     android:layout_below="@id/your_email"
-                    android:textColor="@color/color_redBrown" />
+                    android:layout_marginTop="15sp"
+                    android:text="@string/your_phone"
+                    android:textAlignment="viewStart"
+                    android:textColor="@color/color_redBrown"
+                    android:textSize="14sp" />
+
                 <TextView
                     android:id="@+id/your_phone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/your_phone_title"
-                    android:layout_marginTop="5dp"
-                    android:text="@string/phone_example" />
+                    android:layout_marginTop="5sp"
+                    android:text="@string/phone_example"
+                    android:textAlignment="viewStart"
+                    android:textSize="20sp" />
+
                 <TextView
                     android:id="@+id/your_address_title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
-                    android:text="@string/your_address"
                     android:layout_below="@id/your_phone"
-                    android:textColor="@color/color_redBrown" />
+                    android:layout_marginTop="15sp"
+                    android:text="@string/your_address"
+                    android:textAlignment="viewStart"
+                    android:textColor="@color/color_redBrown"
+                    android:textSize="14sp" />
+
                 <TextView
                     android:id="@+id/your_address"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/your_address_title"
-                    android:layout_marginTop="5dp"
-                    android:text="@string/address_example" />
+                    android:layout_marginTop="5sp"
+                    android:text="@string/address_example"
+                    android:textAlignment="viewStart"
+                    android:textSize="20sp" />
+
                 <TextView
                     android:id="@+id/your_zip_title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
-                    android:text="@string/your_zip"
                     android:layout_below="@id/your_address"
-                    android:textColor="@color/color_redBrown" />
+                    android:layout_marginTop="15sp"
+                    android:text="@string/your_zip"
+                    android:textAlignment="viewStart"
+                    android:textColor="@color/color_redBrown"
+                    android:textSize="14sp" />
+
                 <TextView
                     android:id="@+id/your_zip"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/your_zip_title"
-                    android:layout_marginTop="5dp"
-                    android:text="@string/zip_example" />
+                    android:layout_marginTop="5sp"
+                    android:text="@string/zip_example"
+                    android:textAlignment="viewStart"
+                    android:textSize="20sp" />
+
                 <TextView
                     android:id="@+id/your_country_title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
-                    android:text="@string/your_country"
                     android:layout_below="@id/your_zip"
-                    android:textColor="@color/color_redBrown" />
+                    android:layout_marginTop="15sp"
+                    android:text="@string/your_country"
+                    android:textAlignment="viewStart"
+                    android:textColor="@color/color_redBrown"
+                    android:textSize="14sp" />
+
                 <TextView
                     android:id="@+id/your_country"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/your_country_title"
-                    android:layout_marginTop="5dp"
-                    android:text="@string/country_example" />
+                    android:layout_marginTop="5sp"
+                    android:text="@string/country_example"
+                    android:textAlignment="viewStart"
+                    android:textSize="20sp" />
             </RelativeLayout>
         </RelativeLayout>
     </ScrollView>
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

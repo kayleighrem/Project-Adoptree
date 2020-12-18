@@ -5,7 +5,6 @@
     android:layout_height="wrap_content"
     android:theme="@style/AppTheme"
     android:background="@color/colorBackground"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:clickable="true"
     tools:context=".ui.fragments.HomeFragment"
     android:orientation="vertical">
@@ -32,6 +31,7 @@
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="60sp"
             android:layout_below="@id/toolbar">
 
                 <LinearLayout
@@ -125,10 +125,10 @@
                                         <Button
                                             android:id="@+id/btn_available_trees"
                                             android:layout_width="wrap_content"
-                                            android:layout_height="wrap_content"
+                                            android:layout_height="56sp"
                                             android:text="@string/available_trees"
                                             android:layout_below="@id/tv_select_text"
-                                            android:layout_toRightOf="@id/iv_select_tree"
+                                            android:layout_alignParentEnd="true"
                                             android:textAlignment="center" />
                                 </RelativeLayout>
 
@@ -272,19 +272,15 @@
                                             android:layout_toRightOf="@id/iv_adopt_now"/>
                                         <Button
                                             android:id="@+id/btn_start_adopt_now"
-                                            android:layout_width="match_parent"
+                                            android:layout_width="wrap_content"
                                             android:layout_height="56dp"
                                             android:background="@drawable/rounded_corners"
                                             android:text="@string/adopt_now"
-                                            android:layout_toRightOf="@id/iv_adopt_now"
+                                            android:layout_alignParentEnd="true"
                                             android:layout_below="@id/tv_adopt_text"
                                             android:textSize="20sp" />
                                 </RelativeLayout>
-
                         </RelativeLayout>
                 </LinearLayout>
         </ScrollView>
-
-
-
 </RelativeLayout>

@@ -10,9 +10,10 @@ import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import kotlinx.android.synthetic.main.activity_main.*
 import nl.rem.kayleigh.project_adoptree.R
+import nl.rem.kayleigh.project_adoptree.ui.activities.LaunchActivity
+import nl.rem.kayleigh.project_adoptree.ui.activities.MainActivity
 
-class SplashFragment : Fragment() {
-
+class SplashFragment : Fragment(R.layout.fragment_splash) {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -30,7 +31,7 @@ class SplashFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_splash, container, false)
     }
 
-    private fun onBoardingFinished(): Boolean{
+    fun onBoardingFinished(): Boolean{
         val sharedPref = requireActivity().getSharedPreferences("onBoarding", Context.MODE_PRIVATE)
         return sharedPref.getBoolean("Finished", false)
     }

@@ -6,9 +6,15 @@ import androidx.fragment.app.Fragment
 import android.widget.LinearLayout
 import android.widget.RelativeLayout
 import androidx.cardview.widget.CardView
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_home.*
 import nl.rem.kayleigh.project_adoptree.R
 import nl.rem.kayleigh.project_adoptree.adapters.UserAdapter
+import nl.rem.kayleigh.project_adoptree.ui.activities.MainActivity
 import nl.rem.kayleigh.project_adoptree.ui.viewmodels.HomeViewModel
 import nl.rem.kayleigh.project_adoptree.util.LinearLayoutManagerWrapper
 import nl.rem.kayleigh.project_adoptree.util.SessionManager
@@ -16,32 +22,20 @@ import nl.rem.kayleigh.project_adoptree.util.SessionManager
 class HomeFragment : Fragment(R.layout.fragment_home) {
     lateinit var userAdapter: UserAdapter
     lateinit var sessionManager: SessionManager
-    lateinit var homeViewModel: HomeViewModel
-    lateinit var cardLayout: CardView
-//    lateinit var recyclerView: RecyclerView
-    lateinit var linearLayout: LinearLayout
-    lateinit var expandableLayout: RelativeLayout
-//    lateinit var not_logged_in_message: TextView
     private var authToken: String? = null
+    lateinit var bottomNavigationView: BottomNavigationView
 
     companion object {
         const val TAG = "HomeFragment"
     }
 
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        super.onCreateOptionsMenu(menu, inflater)
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-//        linearLayout = view.findViewById(R.id.cv_rl_tree_item)
-//        cardLayout = view.findViewById(R.id.cv_rl_tree_item)
-//        recyclerView = view.findViewById(R.id.recycleView)
-//        expandableLayout = view.findViewById(R.id.expandable_card_layout)
-//        not_logged_in_message = view.findViewById(R.id.tv_not_logged_in_message)
-
         sessionManager = SessionManager(view.context)
-
+        this.bottomNavigationView = (activity as MainActivity).bottomNavigationView
+        bottomNavigationView = bottomNavigationView.findViewById(R.id.bottomNavigationView)
+//        bottomNavigationView.findViewById<BottomNavigationView>(R.id.bottomNavigationView)
+        bottomNavigationView.visibility = View.VISIBLE
 
 //         If not logged in, don't show the tree cards
         if (!sessionManager.isLogin()) {
@@ -64,17 +58,6 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     ): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_home, container, false)
-
-//        card_linear_layout.setOnClickListener {
-//            if (sessionManager.isLogin()) {
-//                expandableLayout.visibility = View.VISIBLE
-////                if (article.IsLiked == true) {
-////                    likeButton.setImageResource(R.drawable.ic_baseline_favorite_24)
-////                } else {
-////                    likeButton.setImageResource(R.drawable.ic_baseline_favorite_border_24)
-////                }
-//            }
-//        }
     }
 
     private fun initializeUI() {
@@ -88,8 +71,6 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         rv_home_tree_items.apply {
             adapter = userAdapter
             layoutManager = LinearLayoutManagerWrapper(activity)
-//            addOnScrollListener(this@HomeFragment.scrollListener)
-
         }
     }
 }

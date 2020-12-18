@@ -12,26 +12,26 @@
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="56dp"
+        android:layout_height="56sp"
         android:layout_alignParentStart="true"
         android:background="@color/colorWhite"
-        app:layout_editor_absoluteX="0dp"
+        app:layout_editor_absoluteX="0sp"
         tools:ignore="MissingConstraints">
         <TextView
             android:id="@+id/tv_title"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="Feed"
+            android:text="@string/title_feed"
             android:theme="@style/ToolbarTitle"
-            android:layout_marginLeft="30dp"
-            android:layout_marginRight="30dp"
+            android:layout_marginLeft="30sp"
+            android:layout_marginRight="30sp"
             android:gravity="center"
             />
     </androidx.appcompat.widget.Toolbar>
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="0sp"
         app:layout_constraintTop_toBottomOf="@id/toolbar"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
@@ -40,12 +40,8 @@
             android:id="@+id/section_feed"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/toolbar"
-            android:layout_alignParentStart="true"
-            android:layout_gravity="start"
-            android:gravity="start"
             android:textAlignment="viewStart"
-            android:padding="20dp"
+            android:padding="20sp"
             android:orientation="vertical">
 
             <LinearLayout
@@ -55,40 +51,41 @@
                 android:orientation="vertical" >
                 <TextView
                     android:id="@+id/tv_events_title"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/events"
-                    android:textSize="25dp"
+                    android:textSize="25sp"
+                    android:textAlignment="textStart"
                     android:textAllCaps="true" />
 
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@color/colorWhite"
-                    android:padding="50dp"
-                    app:cardCornerRadius="10dp">
+                    android:padding="50sp"
+                    app:cardCornerRadius="10sp">
 
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:padding="10dp">
+                        android:padding="10sp">
                         <TextView
                             android:id="@+id/tv_guided_tour"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textSize="18dp"
+                            android:textSize="18sp"
+                            android:textAlignment="viewStart"
                             android:layout_alignParentTop="true"
                             android:layout_centerVertical="true"
-                            android:textAlignment="textStart"
                             android:text="@string/Guided_tour" />
                         <ImageButton
                             android:id="@+id/btn_add_tour"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_gravity="right"
+                            android:layout_gravity="end"
                             android:layout_alignParentEnd="true"
                             android:scaleType="fitEnd"
-                            android:layout_toRightOf="@id/tv_guided_tour"
+                            android:layout_toEndOf="@id/tv_guided_tour"
                             android:src="@drawable/ic_baseline_add_24"
                             android:background="@color/colorWhite"/>
 
@@ -96,7 +93,7 @@
                             android:id="@+id/iv_forest"
                             style="@style/round_corners"
                             android:layout_width="wrap_content"
-                            android:layout_height="101dp"
+                            android:layout_height="101sp"
                             android:layout_below="@id/tv_guided_tour"
                             android:src="@drawable/forest_image" />
 
@@ -105,18 +102,19 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/tour_text"
-                            android:layout_toRightOf="@id/iv_forest"
+                            android:layout_toEndOf="@id/iv_forest"
+                            android:textAlignment="viewStart"
                             android:layout_below="@id/tv_guided_tour"
-                            android:textSize="15dp"
-                            android:layout_margin="5dp" />
+                            android:textSize="15sp"
+                            android:layout_margin="5sp" />
                     </RelativeLayout>
                 </androidx.cardview.widget.CardView>
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rv_booked_tour"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="10sp"
                     android:layout_width="wrap_content"
-                    android:layout_height="0dp"
+                    android:layout_height="0sp"
                     tools:listitem="@layout/item_booked_tour"/>
             </LinearLayout>
 
@@ -124,15 +122,15 @@
                 android:id="@+id/section_green_ideas"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="10sp"
                 android:orientation="vertical" >
                 <TextView
                     android:id="@+id/tv_green_ideas_title"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/green_ideas"
-                    android:layout_below="@id/rv_booked_tour"
-                    android:textSize="25dp"
+                    android:textSize="25sp"
+                    android:textAlignment="textStart"
                     android:textAllCaps="true"
                     tools:ignore="NotSibling" />
 
@@ -141,19 +139,19 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@color/colorWhite"
-                    android:padding="50dp"
-                    app:cardCornerRadius="10dp">
+                    android:padding="50sp"
+                    app:cardCornerRadius="10sp">
 
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:padding="10dp">
+                        android:padding="10sp">
 
                         <ImageView
                             android:id="@+id/iv_idea"
                             style="@style/round_corners"
                             android:layout_width="wrap_content"
-                            android:layout_height="101dp"
+                            android:layout_height="101sp"
                             android:src="@drawable/green_ideas_image" />
 
                         <TextView
@@ -161,9 +159,10 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/further_reduce"
-                            android:layout_toRightOf="@id/iv_idea"
-                            android:textSize="15dp"
-                            android:layout_margin="5dp" />
+                            android:layout_toEndOf="@id/iv_idea"
+                            android:textAlignment="viewStart"
+                            android:textSize="15sp"
+                            android:layout_margin="5sp" />
                     </RelativeLayout>
                 </androidx.cardview.widget.CardView>
 
@@ -173,15 +172,15 @@
                 android:id="@+id/section_announcements"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="10sp"
                 android:orientation="vertical" >
                 <TextView
                     android:id="@+id/tv_announcements_title"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/announcements"
-                    android:layout_below="@id/cv_green_ideas"
-                    android:textSize="25dp"
+                    android:textSize="25sp"
+                    android:textAlignment="textStart"
                     android:textAllCaps="true"
                     tools:ignore="NotSibling" />
 
@@ -189,40 +188,42 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@color/colorWhite"
-                    android:padding="50dp"
-                    app:cardCornerRadius="10dp">
+                    android:padding="50sp"
+                    app:cardCornerRadius="10sp">
 
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:padding="10dp">
+                        android:padding="10sp">
 
                         <ImageView
                             android:id="@+id/iv_announcements"
                             style="@style/round_corners"
                             android:layout_width="wrap_content"
-                            android:layout_height="101dp"
+                            android:layout_height="101sp"
                             android:src="@drawable/announcements_image" />
 
                         <TextView
                             android:id="@+id/tv_announcements"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:textAlignment="viewStart"
                             android:text="@string/text_announcements"
-                            android:layout_toRightOf="@id/iv_announcements"
-                            android:textSize="15dp"
-                            android:layout_margin="5dp" />
+                            android:layout_toEndOf="@id/iv_announcements"
+                            android:textSize="15sp"
+                            android:layout_margin="5sp" />
 
                         <TextView
                             android:id="@+id/tv_announcements_date"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/text_announcements_date"
+                            android:textAlignment="viewStart"
                             android:textColor="@color/color_redBrown"
-                            android:layout_toRightOf="@id/iv_announcements"
+                            android:layout_toEndOf="@id/iv_announcements"
                             android:layout_below="@id/tv_announcements"
-                            android:textSize="15dp"
-                            android:layout_margin="5dp" />
+                            android:textSize="15sp"
+                            android:layout_margin="5sp" />
                     </RelativeLayout>
                 </androidx.cardview.widget.CardView>
 

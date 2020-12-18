@@ -87,4 +87,9 @@
         <item name="cornerRadius">20dp</item>
     </style>
 
+    <style name="SwitchText">
+        <item name="android:textSize">20sp</item>
+        <item name="android:padding">10sp</item>
+    </style>
+
 </resources>
