@@ -56,14 +56,6 @@ class AdoptionAdapter : RecyclerView.Adapter<AdoptionAdapter.ViewHolder>()  {
             if (holder.sessionManager.isLogin()) {
                 // TODO if login
             }
-//            likeButton.setOnClickListener {
-//                val pos: Int = holder.adapterPosition
-//                if (pos != RecyclerView.NO_POSITION) {
-//                    onAddButtonClickListener?.let {
-//                        it(article, pos)
-//                    }
-//                }
-//            }
             tree_name.text = tree.id.toString()
             tree_location.text = tree.forestId.toString()
             tree_age.text = LocalDateTime.parse(tree.dateSeeded).toLocalDate().format(
@@ -77,7 +69,6 @@ class AdoptionAdapter : RecyclerView.Adapter<AdoptionAdapter.ViewHolder>()  {
     }
 
     override fun getItemCount(): Int {
-        println(differ.currentList.size)
         return differ.currentList.size
     }
 

@@ -32,19 +32,4 @@ class FeedFragment : Fragment(R.layout.fragment_feed) {
             btn_add_tour.visibility = View.VISIBLE
         }
     }
-
-//    override fun onCreateView(
-//            inflater: LayoutInflater, container: ViewGroup?,
-//            savedInstanceState: Bundle?
-//    ): View? {
-//        // If not logged in, don't show the timeline
-//        if (!sessionManager.isLogin()) {
-//            btn_add_tour.visibility = View.GONE
-//        } else if (sessionManager.isLogin()) {
-//            btn_add_tour.visibility = View.VISIBLE
-//        }
-//
-//        // Inflate the layout for this fragment
-//        return inflater.inflate(R.layout.fragment_feed, container, false)
-//    }
 }

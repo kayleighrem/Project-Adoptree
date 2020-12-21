@@ -61,7 +61,6 @@ class AdoptionFragment : Fragment(R.layout.fragment_adoption) {
                     hideProgressBar()
                     if (treeList.isEmpty()) {
                         response.data?.let { treeResponse ->
-//                            treeList.add(treeResponse)
                             adoptionAdapter.differ.submitList(treeResponse.toList())
                         }
                     }
@@ -87,11 +86,9 @@ class AdoptionFragment : Fragment(R.layout.fragment_adoption) {
     private fun initializeUI() {
 //        sr_adoptionLayout.setOnRefreshListener {
 //            this.treeList = adoptionViewModel.trees.value?.data?
-           treeList == adoptionViewModel.getAvailableTrees()
-            sr_adoptionLayout.isRefreshing = false
+        treeList == adoptionViewModel.getAvailableTrees()
+        sr_adoptionLayout.isRefreshing = false
 //        }
-
-        println("test response trees: " + adoptionViewModel.trees)
 
         if (adoptionViewModel.trees.value?.data?.isEmpty() == true) {
             println("response is null/empty" + adoptionViewModel.trees)
@@ -102,11 +99,6 @@ class AdoptionFragment : Fragment(R.layout.fragment_adoption) {
                 println("tree item: " + it)
             }
         }
-
-//        if (treeList.count() == 0) {
-//            fl_no_trees_available.visibility = View.VISIBLE
-//            sr_adoptionLayout.visibility = View.GONE
-//        } else { fl_no_trees_available.visibility = View.GONE }
 
         if (sessionManager.isLogin()) {
             authToken = sessionManager.getUserDetails().AuthToken.toString()
@@ -200,28 +192,4 @@ class AdoptionFragment : Fragment(R.layout.fragment_adoption) {
         paginationProgressBar.visibility = View.VISIBLE
         isLoading = true
     }
-
-//    override fun onCreateView(
-//            inflater: LayoutInflater, container: ViewGroup?,
-//            savedInstanceState: Bundle?
-//    ): View? {
-//        // Inflate the layout for this fragment
-//        println("test onviewcreated?")
-//        val view = inflater.inflate(R.layout.fragment_adoption, container, false)
-//        println("view 2 : " + view.toString())
-//        view.tv_number_results.text = "hallo"
-//
-////        view.btn_next_step.setOnClickListener {
-////            findNavController().navigate(R.id.action_viewPagerFragment_to_loginFragment)
-////        }
-////
-////        view.btn_adopt.setOnClickListener{
-////            findNavController().navigate(R.id.action_viewPagerFragment_to_loginFragment)
-////        }
-////
-////        view.btn_info.setOnClickListener{
-////            findNavController().navigate(R.id.action_adoptionFragment_to_adoptionTreeInfoActivity)
-////        }
-//        return view
-//    }
 }

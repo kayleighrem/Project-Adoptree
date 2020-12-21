@@ -27,14 +27,10 @@ class UserAdapter : RecyclerView.Adapter<UserAdapter.TreeViewHolder>() {
     private var onItemClickListener: ((Tree) -> Unit)? = null
 
     inner class TreeViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val recyclerView: RecyclerView = itemView.findViewById(R.id.card_adoption_relative_layout)
-        val relativeLayout: RelativeLayout = itemView.findViewById(R.id.card_relative_layout)
-        var expandableLayout: RelativeLayout = itemView.findViewById(R.id.expandable_card_layout)
         var sessionManager: SessionManager = SessionManager(itemView.context)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TreeViewHolder {
-        println("test?")
         return TreeViewHolder(
                 LayoutInflater.from(parent.context).inflate(
                         R.layout.item_adoption_tree_card,
@@ -46,7 +42,6 @@ class UserAdapter : RecyclerView.Adapter<UserAdapter.TreeViewHolder>() {
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onBindViewHolder(holder: TreeViewHolder, position: Int) {
-        println("test treeadapter")
         val tree = differ.currentList[position]
         holder.itemView.apply {
 //            if (holder.sessionManager.isLogin()) {

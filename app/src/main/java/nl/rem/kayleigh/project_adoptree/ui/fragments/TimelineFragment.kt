@@ -27,21 +27,4 @@ class TimelineFragment : Fragment(R.layout.fragment_timeline) {
             fl_timeline_not_logged_in.visibility = View.GONE
         }
     }
-
-//    override fun onCreateView(
-//            inflater: LayoutInflater, container: ViewGroup?,
-//            savedInstanceState: Bundle?
-//    ): View? {
-//        sessionManager = SessionManager(view.context)
-////         If not logged in, don't show the timeline
-//        if (!sessionManager.isLogin()) {
-//            fl_not_logged_in.visibility = View.VISIBLE
-//            fl_logged_in.visibility = View.GONE
-//        } else if (sessionManager.isLogin()) {
-//            fl_logged_in.visibility = View.VISIBLE
-//            fl_not_logged_in.visibility = View.GONE
-//        }
-//        // Inflate the layout for this fragment
-//        return inflater.inflate(R.layout.fragment_timeline, container, false)
-//    }
 }

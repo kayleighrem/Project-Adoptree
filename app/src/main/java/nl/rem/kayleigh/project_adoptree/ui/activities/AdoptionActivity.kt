@@ -24,16 +24,6 @@ class AdoptionActivity : AppCompatActivity() {
         setContentView(R.layout.activity_adoption)
 
         initializeViewModels()
-//        treeRepository = TreeRepository()
-//        trees = treeRepository.getAllTrees()
-//        if (trees == null) {
-//            println("empty")
-//        }
-//        else {
-//            println(trees)
-//        }
-//        rv_adoptionRecyclerView.layoutManager = LinearLayoutManager(this)
-//        rv_adoptionRecyclerView.adapter = AdoptionAdapter(trees)
     }
 
     fun initializeViewModels() {
