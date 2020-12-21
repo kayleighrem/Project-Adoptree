@@ -34,7 +34,6 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         sessionManager = SessionManager(view.context)
         this.bottomNavigationView = (activity as MainActivity).bottomNavigationView
         bottomNavigationView = bottomNavigationView.findViewById(R.id.bottomNavigationView)
-//        bottomNavigationView.findViewById<BottomNavigationView>(R.id.bottomNavigationView)
         bottomNavigationView.visibility = View.VISIBLE
 
 //         If not logged in, don't show the tree cards

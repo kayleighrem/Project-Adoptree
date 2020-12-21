@@ -3,9 +3,7 @@ package nl.rem.kayleigh.project_adoptree.ui.fragments
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
-import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.fragment_timeline.*
-import kotlinx.android.synthetic.main.item_tree_card.*
 import nl.rem.kayleigh.project_adoptree.R
 import nl.rem.kayleigh.project_adoptree.util.SessionManager
 

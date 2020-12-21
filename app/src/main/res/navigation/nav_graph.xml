@@ -53,9 +53,6 @@
             android:id="@+id/action_loginFragment_to_adoptionFragment"
             app:destination="@id/adoptionFragment"/>
         <action
-            android:id="@+id/action_loginFragment_to_timelineFragment"
-            app:destination="@id/timelineFragment" />
-        <action
             android:id="@+id/action_loginFragment_to_forgotPasswordFragment"
             app:destination="@id/forgotPasswordFragment" />
     </fragment>

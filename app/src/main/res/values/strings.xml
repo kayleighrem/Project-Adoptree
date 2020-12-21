@@ -143,5 +143,6 @@
     <string name="zip_example">1122AB</string>
     <string name="your_country">Your country</string>
     <string name="country_example">Netherlands</string>
+    <string name="not_trees_available">No trees available at this moment</string>
 
 </resources>

@@ -1,5 +1,6 @@
 package nl.rem.kayleigh.project_adoptree.ui.fragments
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -34,7 +35,7 @@ class AdoptionFragment : Fragment(R.layout.fragment_adoption) {
     private lateinit var adoptionAdapter: AdoptionAdapter
     lateinit var adoptionViewModel: AdoptionViewModel
     private lateinit var sessionManager: SessionManager
-    var treeList: MutableList<Tree> = ArrayList()
+    var treeList: List<Tree> = ArrayList()
     private var authToken: String? = null
     var isLoading = false
     var isScrolling = false
@@ -46,17 +47,15 @@ class AdoptionFragment : Fragment(R.layout.fragment_adoption) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         adoptionViewModel = (activity as MainActivity).adoptionViewModel
-        view.tv_number_results.text = "test"
         sessionManager = SessionManager(view.context)
         setUpRecyclerView()
         initializeUI()
 
-        adoptionViewModel.articles.observe(viewLifecycleOwner, Observer { response ->
+        adoptionViewModel.trees.observe(viewLifecycleOwner, Observer { response ->
             Log.d("Response ", response.data.toString())
         })
 
-        adoptionViewModel.articles.observe(viewLifecycleOwner, Observer { response ->
-            println("test response: " + response)
+        adoptionViewModel.trees.observe(viewLifecycleOwner, Observer { response ->
             when (response) {
                 is Resource.Success -> {
                     hideProgressBar()
@@ -84,25 +83,35 @@ class AdoptionFragment : Fragment(R.layout.fragment_adoption) {
         })
     }
 
+    @SuppressLint("SetTextI18n")
     private fun initializeUI() {
-        println("test ui?")
-        sr_adoptionLayout.setOnRefreshListener {
-            println("test refresh?")
-            treeList.clear()
-//            adoptionViewModel.articles.value?.data?.treeList?.clear()
-            adoptionViewModel.getAvailableTrees()
+//        sr_adoptionLayout.setOnRefreshListener {
+//            this.treeList = adoptionViewModel.trees.value?.data?
+           treeList == adoptionViewModel.getAvailableTrees()
             sr_adoptionLayout.isRefreshing = false
+//        }
+
+        println("test response trees: " + adoptionViewModel.trees)
+
+        if (adoptionViewModel.trees.value?.data?.isEmpty() == true) {
+            println("response is null/empty" + adoptionViewModel.trees)
+        } else {
+            println("response is not empty? : " + adoptionViewModel.trees)
+            println("test data : " + adoptionViewModel.trees.value?.data)
+            adoptionViewModel.trees.value?.data?.forEach {
+                println("tree item: " + it)
+            }
         }
 
+//        if (treeList.count() == 0) {
+//            fl_no_trees_available.visibility = View.VISIBLE
+//            sr_adoptionLayout.visibility = View.GONE
+//        } else { fl_no_trees_available.visibility = View.GONE }
+
         if (sessionManager.isLogin()) {
-            println("test islogin fr?")
             authToken = sessionManager.getUserDetails().AuthToken.toString()
         }
 
-        if (treeList.isNullOrEmpty()) {
-            println("test list is null?")
-            adoptionViewModel.getAvailableTrees()
-        }
 
         btn_next_step.setOnClickListener {
             findNavController().navigate(R.id.action_adoptionFragment_to_adoptionOverviewFragment)
@@ -119,11 +128,9 @@ class AdoptionFragment : Fragment(R.layout.fragment_adoption) {
 
 
         adoptionAdapter.setOnItemClickListener {
-            println("test onitemclicklistenere?")
             val bundle = Bundle().apply {
                 putSerializable("tree", it)
             }
-            println("test click")
             findNavController().navigate(
                     R.id.action_adoptionFragment_to_adoptionTreeInfoActivity,
                     bundle
@@ -156,11 +163,8 @@ class AdoptionFragment : Fragment(R.layout.fragment_adoption) {
     }
 
     private fun setUpRecyclerView() {
-        println("setup recyclerview")
         adoptionAdapter = AdoptionAdapter()
-        adoptionAdapter.test()
         rv_adoptionRecyclerView.apply {
-            println("test apply?")
             adapter = adoptionAdapter
             layoutManager = LinearLayoutManagerWrapper(activity)
             addOnScrollListener(this@AdoptionFragment.scrollListener)
