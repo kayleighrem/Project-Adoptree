@@ -5,8 +5,8 @@
     android:layout_height="match_parent"
     android:backgroundTint="@color/colorBackground"
     app:cardBackgroundColor="@color/colorWhite"
-    app:cardCornerRadius="2dp"
-    app:cardElevation="3dp"
+    app:cardCornerRadius="2sp"
+    app:cardElevation="3sp"
     app:cardUseCompatPadding="true">
 
     <RelativeLayout
@@ -14,25 +14,25 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="left"
-        android:layout_margin="15dp">
+        android:layout_margin="15sp">
 
         <ImageView
             android:id="@+id/tree_icon"
-            android:layout_width="66dp"
-            android:layout_height="69dp"
+            android:layout_width="66sp"
+            android:layout_height="69sp"
             android:src="@drawable/tree_icon"
             app:tint="@color/colorAccentGreen" />
 
         <TextView
             android:id="@+id/tree_name"
-            android:layout_width="323dp"
-            android:layout_height="47dp"
+            android:layout_width="323sp"
+            android:layout_height="47sp"
             android:layout_alignRight="@id/tree_icon"
             android:layout_gravity="right"
-            android:layout_marginRight="-334dp"
+            android:layout_marginRight="-334sp"
             android:text="Tree name"
             android:textColor="@color/colorAccentBrown"
-            android:textSize="25dp" />
+            android:textSize="25sp" />
 
         <RelativeLayout
             android:id="@+id/expandable_card_layout"
@@ -46,86 +46,86 @@
                 android:layout_width="match_parent"
                 android:layout_height="80sp"
                 android:layout_alignParentStart="true"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="20sp"
                 android:background="@drawable/rounded_corners"
                 android:backgroundTint="@color/colorWhite"
                 android:gravity="center_horizontal"
-                android:padding="10dp"
+                android:padding="10sp"
                 android:text="Overall health"
                 android:textColor="@color/colorAccentBrown"
-                android:textSize="20dp" />
+                android:textSize="20sp" />
 
             <TextView
                 android:id="@+id/growth"
                 android:layout_width="180sp"
                 android:layout_height="180sp"
                 android:layout_below="@id/health"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="20sp"
                 android:background="@drawable/rounded_corners"
                 android:backgroundTint="@color/colorWhite"
                 android:gravity="center_horizontal"
-                android:padding="16dp"
+                android:padding="16sp"
                 android:text="Growth"
                 android:textColor="@color/colorAccentBrown"
-                android:textSize="20dp" />
+                android:textSize="20sp" />
 
             <TextView
                 android:id="@+id/co2"
-                android:layout_width="180dp"
-                android:layout_height="180dp"
+                android:layout_width="180sp"
+                android:layout_height="180sp"
                 android:layout_below="@id/health"
-                android:layout_marginLeft="15dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginRight="0dp"
+                android:layout_marginLeft="15sp"
+                android:layout_marginTop="20sp"
+                android:layout_marginRight="0sp"
                 android:layout_toRightOf="@id/growth"
                 android:background="@drawable/rounded_corners"
                 android:backgroundTint="@color/colorWhite"
                 android:gravity="center_horizontal"
-                android:padding="16dp"
+                android:padding="16sp"
                 android:text="CO2 reduction"
                 android:textColor="@color/colorAccentBrown"
-                android:textSize="20dp" />
+                android:textSize="20sp" />
 
             <TextView
                 android:id="@+id/humidity"
                 android:layout_width="180sp"
                 android:layout_height="180sp"
                 android:layout_below="@id/growth"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="20sp"
                 android:background="@drawable/rounded_corners"
                 android:backgroundTint="@color/colorWhite"
                 android:gravity="center_horizontal"
-                android:padding="16dp"
+                android:padding="16sp"
                 android:text="Humidity"
                 android:textColor="@color/colorAccentBrown"
-                android:textSize="20dp" />
+                android:textSize="20sp" />
 
             <TextView
                 android:id="@+id/temperature"
-                android:layout_width="180dp"
-                android:layout_height="180dp"
+                android:layout_width="180sp"
+                android:layout_height="180sp"
                 android:layout_below="@id/co2"
-                android:layout_marginLeft="15dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginRight="0dp"
+                android:layout_marginLeft="15sp"
+                android:layout_marginTop="20sp"
+                android:layout_marginRight="0sp"
                 android:layout_toRightOf="@id/humidity"
                 android:background="@drawable/rounded_corners"
                 android:backgroundTint="@color/colorWhite"
                 android:gravity="center_horizontal"
-                android:padding="16dp"
+                android:padding="16sp"
                 android:text="Temperature"
                 android:textColor="@color/colorAccentBrown"
-                android:textSize="20dp" />
+                android:textSize="20sp" />
 
             <!-- Divider -->
 
             <View
                 android:id="@+id/divider1"
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
+                android:layout_height="1sp"
                 android:layout_below="@id/humidity"
-                android:layout_marginTop="20dp"
-                android:layout_marginBottom="20dp"
+                android:layout_marginTop="20sp"
+                android:layout_marginBottom="20sp"
                 android:background="?android:attr/listDivider" />
 
             <!-- Photo's -->
@@ -142,10 +142,10 @@
             <View
                 android:id="@+id/divider2"
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
+                android:layout_height="1sp"
                 android:layout_below="@id/icon_photos"
-                android:layout_marginTop="20dp"
-                android:layout_marginBottom="20dp"
+                android:layout_marginTop="20sp"
+                android:layout_marginBottom="20sp"
                 android:background="?android:attr/listDivider" />
 
 <!--            Wild life -->
@@ -166,10 +166,10 @@
             <View
                 android:id="@+id/divider3"
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
+                android:layout_height="1sp"
                 android:layout_below="@id/text_wildlife"
-                android:layout_marginTop="20dp"
-                android:layout_marginBottom="20dp"
+                android:layout_marginTop="20sp"
+                android:layout_marginBottom="20sp"
                 android:background="?android:attr/listDivider" />
 
 <!--            Find tree -->

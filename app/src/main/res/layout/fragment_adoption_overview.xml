@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/colorBackground"
-    tools:context=".ui.fragments.AdoptionOverviewFragment">
+    android:background="@color/colorBackground">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="56dp"
+            android:layout_height="56sp"
             android:layout_alignParentStart="true"
             android:background="@color/colorWhite"
             tools:ignore="MissingConstraints">
@@ -21,30 +21,31 @@
                 android:layout_height="match_parent"
                 android:text="@string/title_overview"
                 android:theme="@style/ToolbarTitle"
-                android:layout_marginLeft="30dp"
-                android:layout_marginRight="30dp"
+                android:layout_marginLeft="30sp"
+                android:layout_marginRight="30sp"
                 android:gravity="center"/>
         </androidx.appcompat.widget.Toolbar>
 
     <ScrollView
         android:id="@+id/sv_recyclerview"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:layout_below="@id/toolbar"
         app:layout_constraintTop_toBottomOf="@id/toolbar"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:paddingTop="20sp">
+        android:paddingTop="20sp"
+        android:paddingBottom="56sp">
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recycler_view_overview"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="parent"
-                tools:listitem="@layout/item_adoption_tree_card_overview" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_overview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="parent"
+            tools:listitem="@layout/item_adoption_tree_card_overview" />
     </ScrollView>
 
     <LinearLayout
@@ -74,7 +75,7 @@
                 android:layout_gravity="center_vertical"
                 android:text="@string/total"
                 android:textSize="20sp"
-                android:layout_margin="10dp"/>
+                android:layout_margin="10sp"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -91,7 +92,7 @@
                     android:textAlignment="textEnd"
                     android:text="@string/euro_sign"
                     android:textSize="20sp"
-                    android:layout_margin="10dp"
+                    android:layout_margin="10sp"
                     tools:ignore="RtlCompat" />
 
                 <TextView
@@ -101,7 +102,7 @@
                     android:layout_gravity="center_vertical"
                     android:text="@string/amount_40"
                     android:textSize="20sp"
-                    android:layout_margin="10dp"
+                    android:layout_margin="10sp"
                     android:gravity="right" />
             </LinearLayout>
         </LinearLayout>
@@ -122,18 +123,18 @@
                 android:layout_height="@dimen/button_height"
                 android:layout_gravity="left"
                 android:layout_weight="1"
-                android:layout_margin="5dp"
+                android:layout_margin="5sp"
                 android:background="@drawable/rounded_corners"
                 android:text="@string/adopt_more"
                 android:theme="@style/CustomButtonStyle" />
 
             <Button
-                android:id="@+id/btn_pay"
+                android:id="@+id/btn_next_step_pay"
                 android:layout_width="180sp"
                 android:layout_height="@dimen/button_height"
                 android:layout_gravity="right"
                 android:layout_weight="1"
-                android:layout_margin="5dp"
+                android:layout_margin="5sp"
                 android:background="@drawable/rounded_corners"
                 android:text="@string/next_step"
                 android:theme="@style/CustomButtonStyle" />

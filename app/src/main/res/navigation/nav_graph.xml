@@ -60,7 +60,11 @@
     <fragment
         android:id="@+id/signUpFragment"
         android:name="nl.rem.kayleigh.project_adoptree.ui.fragments.SignUpFragment"
-        android:label="SignUpFragment" />
+        android:label="SignUpFragment" >
+        <action
+            android:id="@+id/action_signUpFragment_to_adoptionResponseFragment"
+            app:destination="@id/adoptionResponseFragment" />
+    </fragment>
     <fragment
         android:id="@+id/forgotPasswordFragment"
         android:name="nl.rem.kayleigh.project_adoptree.ui.fragments.ForgotPasswordFragment"
@@ -81,7 +85,11 @@
         android:id="@+id/adoptionTreeInfoActivity"
         android:name="nl.rem.kayleigh.project_adoptree.ui.activities.AdoptionTreeInfoActivity"
         android:label="@string/test"
-        tools:layout="@layout/activity_adoption_tree_info" />
+        tools:layout="@layout/activity_adoption_tree_info" >
+        <argument
+            android:name="product"
+            app:argType="nl.rem.kayleigh.project_adoptree.model.Product" />
+    </activity>
     <activity
         android:id="@+id/loginActivity"
         android:name="nl.rem.kayleigh.project_adoptree.ui.activities.LoginActivity"
@@ -99,6 +107,9 @@
         <action
             android:id="@+id/action_adoptionOverviewFragment_to_signUpFragment"
             app:destination="@id/signUpFragment" />
+        <action
+            android:id="@+id/action_adoptionOverviewFragment_to_adoptionFragment"
+            app:destination="@id/adoptionFragment" />
     </fragment>
     <fragment
         android:id="@+id/timelineFragment"
@@ -110,4 +121,9 @@
         android:name="nl.rem.kayleigh.project_adoptree.ui.fragments.ProfileFragment"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/adoptionResponseFragment"
+        android:name="nl.rem.kayleigh.project_adoptree.ui.fragments.AdoptionResponseFragment"
+        android:label="fragment_adoption_response"
+        tools:layout="@layout/fragment_adoption_response" />
 </navigation>

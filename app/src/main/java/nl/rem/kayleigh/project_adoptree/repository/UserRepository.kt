@@ -5,6 +5,7 @@ import nl.rem.kayleigh.project_adoptree.model.User
 import retrofit2.http.Field
 
 class UserRepository {
+    suspend fun login(username: String, password: String) = RetrofitInstance.userapi.login(username, password)
     suspend fun login(user: User) = RetrofitInstance.userapi.login(user)
     suspend fun createUser(user: User) = RetrofitInstance.userapi.createUser(user)
     suspend fun forgotpassword(username: String, email: String) = RetrofitInstance.userapi.forgotpassword(username, email)

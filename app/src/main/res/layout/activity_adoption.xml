@@ -16,8 +16,8 @@
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="56dp"
-            android:layout_marginBottom="6dp"
+            android:layout_height="56sp"
+            android:layout_marginBottom="6sp"
             android:background="@color/colorWhite">
             <TextView
                 android:id="@+id/tv_title"

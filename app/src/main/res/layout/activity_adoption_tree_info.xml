@@ -12,7 +12,7 @@
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="56dp"
+            android:layout_height="56sp"
             android:background="@color/colorWhite">
 
             <TextView
@@ -21,8 +21,8 @@
                 android:layout_height="match_parent"
                 android:text="@string/title_overview"
                 android:theme="@style/ToolbarTitle"
-                android:layout_marginLeft="30dp"
-                android:layout_marginRight="30dp"
+                android:layout_marginLeft="30sp"
+                android:layout_marginRight="30sp"
                 android:gravity="center"/>
         </androidx.appcompat.widget.Toolbar>
     </com.google.android.material.appbar.AppBarLayout>
@@ -39,10 +39,4 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-
-    <include
-        layout="@layout/toolbar_main"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        />
 </androidx.constraintlayout.widget.ConstraintLayout>

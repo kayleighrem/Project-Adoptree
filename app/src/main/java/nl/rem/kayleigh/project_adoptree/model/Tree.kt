@@ -23,31 +23,6 @@ data class AssignedTree(
     val tree_color: String?
 ) : Serializable
 
-data class Country(
-    val id: Int?,
-    val name: String?
-): Serializable
-
-data class Forest(
-    val countryId: Int?,
-    val id: Int?,
-    val latitude: String?,
-    val longitude: String?,
-    val name: String?,
-    val xLength: Int?,
-    val yLength: Int?
-): Serializable
-
-data class TreeSign(
-    val createdAt: String?,
-    val deletedAt: String?,
-    val id: Int?,
-    val order_id: Int?,
-    val product_id: Int?,
-    val sign_text: String?,
-    val tree_id: Int?
-): Serializable
-
 data class TreeSpecies(
     val treeFactorAdjustment: Double?,
     val treeProductId: Int?,
@@ -60,10 +35,4 @@ data class TreeWeightAlgorithm(
     val id: Int?,
     val sizeThreshold: Int?,
     val species: String?
-): Serializable
-
-data class Wildlife(
-    val description: String?,
-    val id: Int?,
-    val name: String?
 ): Serializable

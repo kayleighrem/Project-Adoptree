@@ -8,28 +8,29 @@
         android:id="@+id/cv_adoption_item"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="11dp"
-        android:layout_marginTop="7dp"
-        android:layout_marginRight="11dp"
-        android:layout_marginBottom="7dp"
-        app:cardCornerRadius="10dp"
-        app:cardElevation="2dp">
+        android:layout_marginLeft="11sp"
+        android:layout_marginTop="7sp"
+        android:layout_marginRight="11sp"
+        android:layout_marginBottom="7sp"
+        app:cardCornerRadius="10sp"
+        app:cardElevation="2sp">
 
         <RelativeLayout
             android:id="@+id/card_adoption_relative_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/colorWhite"
-            android:layout_margin="15dp">
+            android:layout_margin="15sp">
 
             <ImageView
                 android:id="@+id/tree_image"
-                android:layout_width="106dp"
-                android:layout_height="149dp"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginEnd="10dp"
-                android:layout_marginBottom="10dp"
+                android:layout_width="106sp"
+                android:layout_height="149sp"
+                android:layout_marginStart="10sp"
+                android:layout_marginTop="10sp"
+                android:layout_marginEnd="10sp"
+                android:layout_marginBottom="10sp"
+                android:foregroundGravity="left"
                 android:background="@drawable/rounded_corners"
                 android:src="@drawable/tree_icon"
                 app:tint="@color/colorAccentGreen" />
@@ -38,34 +39,53 @@
                 android:id="@+id/info_tree"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
+                android:layout_margin="10sp"
                 android:orientation="vertical"
+                android:gravity="start"
                 android:layout_toRightOf="@id/tree_image">
 
                 <TextView
                     android:id="@+id/tree_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="25dp"
+                    android:textSize="25sp"
+                    android:layout_gravity="start"
                     android:textAllCaps="true"
                     android:text="tree title" />
+
+                <TextView
+                    android:id="@+id/tree_age2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
 
                 <TextView
                     android:id="@+id/tree_age"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Age: 3 weeks old" />
-
-                <TextView
-                    android:id="@+id/tree_price"
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Price" />
+                    android:orientation="horizontal" >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="start"
+                        android:text="@string/euro_sign" />
+
+                    <TextView
+                        android:id="@+id/tree_price"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="left"
+                        android:text="Price" />
+                </LinearLayout>
 
                 <TextView
                     android:id="@+id/tree_location"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="left"
                     android:text="Not planted yet" />
 
             </LinearLayout>
@@ -74,7 +94,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/btn_adopt"
-                android:layout_marginStart="10dp"
+                android:layout_marginStart="10sp"
                 android:layout_toRightOf="@id/tree_image"
                 android:layout_below="@id/info_tree"/>
 
@@ -82,7 +102,7 @@
                 android:id="@+id/btn_info"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
+                android:layout_marginStart="20sp"
                 android:text="@string/btn_info"
                 android:layout_toRightOf="@id/btn_adopt"
                 android:layout_below="@id/info_tree"/>

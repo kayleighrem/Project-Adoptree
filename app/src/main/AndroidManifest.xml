@@ -15,12 +15,6 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".ui.activities.SettingsActivity"
-            android:label="@string/title_activity_settings"></activity>
-        <activity
-            android:name=".ui.activities.AdoptionTreeInfoActivity"
-            android:label="@string/title_activity_adoption_tree_info" />
-        <activity
             android:name=".ui.activities.MainActivity"
             android:theme="@style/AppThemeNoActionBar">
             <intent-filter>
@@ -28,12 +22,20 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.activities.LoginActivity" />
+        <activity
+            android:name=".ui.activities.LoginActivity"
+            android:theme="@style/AppThemeNoActionBar">
+        </activity>
         <activity
             android:name=".ui.activities.AdoptionActivity"
-            android:theme="@style/AppThemeNoActionBar" />
+            android:theme="@style/AppThemeNoActionBar">
+        </activity>
         <activity
             android:name=".ui.activities.LaunchActivity"
+            android:theme="@style/AppThemeNoActionBar">
+        </activity>
+        <activity
+            android:name=".ui.activities.AdoptionTreeInfoActivity"
             android:theme="@style/AppThemeNoActionBar">
         </activity>
     </application>

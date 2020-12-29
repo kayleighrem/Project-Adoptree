@@ -9,29 +9,29 @@
 
     <TableLayout
         android:layout_width="match_parent"
-        android:layout_height="611dp"
+        android:layout_height="611sp"
         android:layout_centerInParent="true"
-        android:padding="16dp"
+        android:padding="16sp"
         android:shrinkColumns="*"
         android:stretchColumns="*">
 
         <TableRow
-            android:layout_height="255dp"
+            android:layout_height="255sp"
             android:gravity="center"
-            android:padding="16dp">
+            android:padding="16sp">
 
             <ImageView
                 android:id="@+id/imageView2"
                 android:layout_width="match_parent"
-                android:layout_height="77dp"
+                android:layout_height="77sp"
                 android:src="@drawable/logo_adoptiebos_png" />
         </TableRow>
 
-        <TableRow android:layout_height="79dp">
+        <TableRow android:layout_height="79sp">
 
             <Space
                 android:layout_width="wrap_content"
-                android:layout_height="50dp" />
+                android:layout_height="50sp" />
         </TableRow>
 
         <TableRow>
@@ -41,15 +41,15 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="@string/introPage3_adopters_number"
-                android:textSize="60dp"
+                android:textSize="60sp"
                 android:textStyle="bold" />
 
             <TextView
-                android:layout_width="505dp"
+                android:layout_width="505sp"
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="@string/introPage3_forests_number"
-                android:textSize="60dp"
+                android:textSize="60sp"
                 android:textStyle="bold" />
         </TableRow>
 
@@ -60,7 +60,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="@string/introPage3_adopters_title"
-                android:textSize="20dp"
+                android:textSize="20sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -68,15 +68,15 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="@string/introPage3_forests_title"
-                android:textSize="20dp"
+                android:textSize="20sp"
                 android:textStyle="bold" />
         </TableRow>
 
-        <TableRow android:layout_height="79dp">
+        <TableRow android:layout_height="79sp">
 
             <Space
                 android:layout_width="wrap_content"
-                android:layout_height="80dp" />
+                android:layout_height="80sp" />
         </TableRow>
 
         <TableRow>
@@ -86,7 +86,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="@string/introPage3_treeTypes_number"
-                android:textSize="60dp"
+                android:textSize="60sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -94,7 +94,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="@string/introPage3_trees_number"
-                android:textSize="60dp"
+                android:textSize="60sp"
                 android:textStyle="bold" />
         </TableRow>
 
@@ -105,7 +105,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="@string/introPage3_treeTypes_title"
-                android:textSize="20dp"
+                android:textSize="20sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -113,7 +113,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="@string/introPage3_trees_title"
-                android:textSize="20dp"
+                android:textSize="20sp"
                 android:textStyle="bold" />
         </TableRow>
 
@@ -121,14 +121,14 @@
 
             <Space
                 android:layout_width="wrap_content"
-                android:layout_height="30dp" />
+                android:layout_height="30sp" />
         </TableRow>
 
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:padding="16dp">
+            android:padding="16sp">
 
             <Button
                 android:id="@+id/finish"

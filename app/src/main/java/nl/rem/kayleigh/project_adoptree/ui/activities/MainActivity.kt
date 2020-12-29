@@ -2,23 +2,30 @@ package nl.rem.kayleigh.project_adoptree.ui.activities
 
 import android.os.Bundle
 import android.widget.TextView
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import nl.rem.kayleigh.project_adoptree.R
+import nl.rem.kayleigh.project_adoptree.model.OrderProduct
 import nl.rem.kayleigh.project_adoptree.repository.AdoptionRepository
+import nl.rem.kayleigh.project_adoptree.repository.OrderRepository
 import nl.rem.kayleigh.project_adoptree.repository.UserRepository
 import nl.rem.kayleigh.project_adoptree.ui.fragments.*
 import nl.rem.kayleigh.project_adoptree.ui.viewmodels.AdoptionViewModel
+import nl.rem.kayleigh.project_adoptree.ui.viewmodels.OrderViewModel
 import nl.rem.kayleigh.project_adoptree.ui.viewmodels.UserViewModel
 import nl.rem.kayleigh.project_adoptree.ui.viewmodels.factory.AdoptionViewModelFactory
+import nl.rem.kayleigh.project_adoptree.ui.viewmodels.factory.OrderViewModelFactory
 import nl.rem.kayleigh.project_adoptree.ui.viewmodels.factory.UserViewModelProviderFactory
 import nl.rem.kayleigh.project_adoptree.util.SessionManager
 
 class MainActivity : AppCompatActivity() {
     lateinit var adoptionViewModel: AdoptionViewModel
+    lateinit var orderViewModel: OrderViewModel
     lateinit var userViewModel: UserViewModel
     lateinit var sessionManager: SessionManager
     lateinit var bottomNavigationView: BottomNavigationView
@@ -35,7 +42,6 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         bottomNavigationView = findViewById(R.id.bottomNavigationView)
-        sessionManager = SessionManager(this)
 
         homeFragment = HomeFragment()
         timeLineFragment = TimelineFragment()
@@ -66,6 +72,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initializeViewModels() {
+        val orderRepository = OrderRepository()
+        val orderViewModelFactory = OrderViewModelFactory.OrderViewModelFactory(orderRepository, this)
+        orderViewModel = ViewModelProvider(this, orderViewModelFactory).get(OrderViewModel::class.java)
+
         val adoptionRepository = AdoptionRepository()
         val adoptionViewModelFactory = AdoptionViewModelFactory(adoptionRepository, this)
         adoptionViewModel = ViewModelProvider(this, adoptionViewModelFactory).get(AdoptionViewModel::class.java)

@@ -144,5 +144,10 @@
     <string name="your_country">Your country</string>
     <string name="country_example">Netherlands</string>
     <string name="not_trees_available">No trees available at this moment</string>
+    <string name="successfully_added">Added to your shopping cart</string>
+    <string name="amount">Amount</string>
+    <string name="personal_sign">Personal sign</string>
+    <string name="personal_sign_helper_text">You can add a personal sign any time you want</string>
+    <string name="price">000</string>
 
 </resources>

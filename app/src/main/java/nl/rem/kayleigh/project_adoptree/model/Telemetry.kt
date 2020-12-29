@@ -8,10 +8,3 @@ data class Telemetry(
     val treeId: String?
 ): Serializable
 
-data class Report(
-    val humidity: Double?,
-    val reportedOn: String?,
-    val temperature: Double?,
-    val treeDiameter: Double?,
-    val treeLength: Double?
-): Serializable

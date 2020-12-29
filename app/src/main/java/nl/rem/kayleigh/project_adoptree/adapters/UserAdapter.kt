@@ -56,11 +56,11 @@ class UserAdapter : RecyclerView.Adapter<UserAdapter.TreeViewHolder>() {
 //                crossfade(true)
 //                placeholder(R.drawable.ic_baseline_image_24)
 //            }
-            tree_name.text = tree.id.toString()
-            tree_location.text = tree.forestId.toString()
-            tree_age.text = LocalDateTime.parse(tree.dateSeeded).toLocalDate().format(
-                    DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG).withLocale(Locale.getDefault())
-            ).toString()
+//            tree_name.text = tree.id.toString()
+//            tree_location.text = tree.forestId.toString()
+//            tree_age.text = LocalDateTime.parse(tree.dateSeeded).toLocalDate().format(
+//                    DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG).withLocale(Locale.getDefault())
+//            ).toString()
 
         }
     }

@@ -8,18 +8,18 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/colorWhite"
-        android:padding="50dp"
-        app:cardCornerRadius="10dp">
+        android:padding="50sp"
+        app:cardCornerRadius="10sp">
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="10dp">
+            android:padding="10sp">
             <TextView
                 android:id="@+id/tv_personal_tour"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="18dp"
+                android:textSize="18sp"
                 android:layout_alignParentTop="true"
                 android:layout_centerVertical="true"
                 android:textAlignment="textStart"
@@ -40,7 +40,7 @@
                 android:id="@+id/iv_forest"
                 style="@style/round_corners"
                 android:layout_width="wrap_content"
-                android:layout_height="101dp"
+                android:layout_height="101sp"
                 android:layout_below="@id/tv_personal_tour"
                 android:src="@drawable/forest_image" />
 
@@ -52,8 +52,8 @@
                 android:layout_toRightOf="@id/iv_forest"
                 android:layout_below="@id/tv_personal_tour"
                 android:textColor="@color/color_redBrown"
-                android:textSize="15dp"
-                android:layout_margin="5dp" />
+                android:textSize="15sp"
+                android:layout_margin="5sp" />
 
             <TextView
                 android:id="@+id/tv_location_title"
@@ -62,8 +62,8 @@
                 android:text="@string/tour_location_title"
                 android:layout_toRightOf="@id/iv_forest"
                 android:layout_below="@id/tv_date"
-                android:textSize="15dp"
-                android:layout_marginLeft="5dp" />
+                android:textSize="15sp"
+                android:layout_marginLeft="5sp" />
             <TextView
                 android:id="@+id/tv_location"
                 android:layout_width="wrap_content"
@@ -71,8 +71,8 @@
                 android:text="@string/tour_location"
                 android:layout_toRightOf="@id/tv_location_title"
                 android:layout_below="@id/tv_date"
-                android:textSize="15dp"
-                android:layout_marginLeft="5dp" />
+                android:textSize="15sp"
+                android:layout_marginLeft="5sp" />
             <TextView
                 android:id="@+id/tv_visitors_title"
                 android:layout_width="wrap_content"
@@ -80,8 +80,8 @@
                 android:text="@string/tour_visitors_title"
                 android:layout_toRightOf="@id/iv_forest"
                 android:layout_below="@id/tv_location_title"
-                android:textSize="15dp"
-                android:layout_marginLeft="5dp" />
+                android:textSize="15sp"
+                android:layout_marginLeft="5sp" />
             <TextView
                 android:id="@+id/tv_visitors"
                 android:layout_width="wrap_content"
@@ -89,8 +89,8 @@
                 android:text="@string/tour_visitors_amount"
                 android:layout_toRightOf="@id/tv_visitors_title"
                 android:layout_below="@id/tv_location"
-                android:textSize="15dp"
-                android:layout_marginLeft="5dp" />
+                android:textSize="15sp"
+                android:layout_marginLeft="5sp" />
             <TextView
                 android:id="@+id/tv_guide_title"
                 android:layout_width="wrap_content"
@@ -98,8 +98,8 @@
                 android:text="@string/tour_guide_title"
                 android:layout_toRightOf="@id/iv_forest"
                 android:layout_below="@id/tv_visitors_title"
-                android:textSize="15dp"
-                android:layout_marginLeft="5dp" />
+                android:textSize="15sp"
+                android:layout_marginLeft="5sp" />
             <TextView
                 android:id="@+id/tv_guide"
                 android:layout_width="wrap_content"
@@ -107,8 +107,8 @@
                 android:text="@string/tour_guide"
                 android:layout_toRightOf="@id/tv_guide_title"
                 android:layout_below="@id/tv_visitors"
-                android:textSize="15dp"
-                android:layout_marginLeft="5dp" />
+                android:textSize="15sp"
+                android:layout_marginLeft="5sp" />
         </RelativeLayout>
     </androidx.cardview.widget.CardView>
 </androidx.cardview.widget.CardView>

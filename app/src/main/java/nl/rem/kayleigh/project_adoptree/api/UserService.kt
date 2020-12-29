@@ -1,8 +1,10 @@
 package nl.rem.kayleigh.project_adoptree.api
 
+import nl.rem.kayleigh.project_adoptree.model.LoginResponse
 import nl.rem.kayleigh.project_adoptree.model.User
 import nl.rem.kayleigh.project_adoptree.model.UserResponse
 import nl.rem.kayleigh.project_adoptree.model.UserResponseRegister
+import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.*
 
@@ -10,6 +12,12 @@ interface UserService {
     @Headers("Content-Type: application/json")
     @POST("Users/register")
     suspend fun createUser(@Body user: User): Response<UserResponseRegister>
+
+    @GET("user")
+    suspend fun login(
+        @Field("UserName") username: String,
+        @Field("Password") password: String
+    ): Call<LoginResponse>
 
     @Headers("Content-Type: application/json")
     @POST("user/login")
@@ -48,7 +56,7 @@ interface UserService {
         @Field("lastname") lastname: String,
         @Field("username") username: String,
         @Field("email") email: String,
-       @Field("password") password: String
+        @Field("password") password: String
     )
 
 

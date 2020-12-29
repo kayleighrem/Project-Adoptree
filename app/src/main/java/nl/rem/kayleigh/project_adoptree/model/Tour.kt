@@ -14,11 +14,3 @@ data class Tour(
     val slots: Int?
 ): Serializable
 
-data class BookedTour(
-    val bookedDateTime: String?,
-    val id: Int?,
-    val tourId: Int?,
-    val userEmail: String?,
-    val userId: Int?,
-    val userName: String?
-): Serializable

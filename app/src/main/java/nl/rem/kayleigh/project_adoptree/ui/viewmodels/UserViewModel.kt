@@ -32,16 +32,16 @@ class UserViewModel(private val userRepository: UserRepository, val context: Con
         const val TAG = "UserViewModel"
     }
 
-    fun login(user: User) = viewModelScope.launch {
-        try {
-            _loginResponse.value = handleLoginResponse(userRepository.login(user))
-        } catch (e: Exception) {
-            _loginResponse.postValue(Resource.Error(context.getString(R.string.connection_error)))
-            Log.e(
-                TAG,
-                "${context.getString(R.string.error_log)} ${e.message}"
-            )
-        }
+    fun login(user: User, username: String, password: String) = viewModelScope.launch {
+//        try {
+//            _loginResponse.value = handleLoginResponse(userRepository.login(username, password))
+//        } catch (e: Exception) {
+//            _loginResponse.postValue(Resource.Error(context.getString(R.string.connection_error)))
+//            Log.e(
+//                TAG,
+//                "${context.getString(R.string.error_log)} ${e.message}"
+//            )
+//        }
     }
 
     fun createUser(user: User) = viewModelScope.launch {

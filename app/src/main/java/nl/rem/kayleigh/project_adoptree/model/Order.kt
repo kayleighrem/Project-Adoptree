@@ -2,50 +2,26 @@ package nl.rem.kayleigh.project_adoptree.model
 
 import java.io.Serializable
 
-data class Product(
-    val categoryId: Int?,
-    val createdAt: String?,
-    val description: String?,
-    val id: Int?,
-    val isUpForAdoption: Boolean?,
-    val name: String?,
-    val price: Double?,
-    val stock: Int?,
-    val vatRateId: Int?
-): Serializable
-
-data class Category(
-    val description: String?,
-    val id: Int?,
-    val name: String?
-): Serializable
-
 data class Order(
     val createdAt: String?,
     val id: Int?,
     val orderLines: List<OrderLine>?,
     val orderStatus: OrderStatusEnum?,
+    val paymentRedirectLink: String?,
     val paymentStatus: PaymentStatusEnum?,
     val userId: Int?
 ): Serializable
 
 data class OrderLine(
-    val id: Int?,
-    val orderId: Int?,
-    val price: Double?,
-    val productId: Int?,
-    val quantity: Int?,
-    val vat: Int?
+        val id: Int?,
+        val orderId: Int?,
+        val price: Double?,
+        var productId: Int?,
+        val quantity: Int?,
+        val vat: Int?
 ): Serializable
 
-data class VatRate(
-    val countryId: Int?,
-    val id: Int?,
-    val rate: Int?,
-    val type: String?
-): Serializable
-
-data class OrderCreate(
+data class OrderResponse(
     val id: Int?,
     val paymentLink: String?
 ): Serializable

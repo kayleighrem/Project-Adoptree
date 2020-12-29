@@ -8,16 +8,31 @@ import retrofit2.http.*
 
 interface AdoptreeService {
 
-    @GET("user/{id}/tree")
-    suspend fun getTrees(@Header("x-authtoken") authToken: String?): Response<Tree>
-
-    @DELETE("user/{id}/like")
-    suspend fun unlikeAnArticle(
-            @Path("id") id: Int,
-            @Header("x-authtoken") authToken: String
-    ): Response<Unit>
-
     @Headers("Content-Type: application/json")
     @GET("tree")
-    suspend fun getAvailableTrees() : Response<List<Tree>>
+    suspend fun getTrees() : Response<List<Tree>>
+
+    @Headers("Content-Type: application/json")
+    @GET("product")
+    suspend fun getProducts(
+            @Query("isUpForAdoption") isUpForAdoption: Boolean = true,
+            @Query("categoryId") categoryId: Int = 1
+    ) : Response<List<Product>>
+
+    @Headers("Content-Type: application/json")
+    @GET("category")
+    suspend fun getCategories() : Response<List<Category>>
+
+    @Headers("Content-Type: application/json")
+    @GET("order/{id}")
+    suspend fun getOrderById() : Response<Order>
+
+    @Headers("Content-Type: application/json")
+    @POST("order")
+    suspend fun createOrder(@Body order: Order)
+
+    @Headers("Content-Type: application/json")
+    @PUT("order")
+    suspend fun updateOrder()
+
 }

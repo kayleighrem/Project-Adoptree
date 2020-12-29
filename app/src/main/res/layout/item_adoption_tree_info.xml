@@ -1,48 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:background="@color/colorBackground"
+    android:orientation="vertical">
 
-    <com.google.android.material.appbar.AppBarLayout
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:background="@color/colorBackground"
-        android:layout_height="match_parent">
-
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="56dp"
-            android:background="@color/colorWhite">
-
-            <TextView
-                android:id="@+id/tv_title"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="@string/title_overview"
-                android:theme="@style/ToolbarTitle"
-                android:layout_marginLeft="30dp"
-                android:layout_marginRight="30dp"
-                android:gravity="center"/>
-        </androidx.appcompat.widget.Toolbar>
-    </com.google.android.material.appbar.AppBarLayout>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="56sp"
+        android:layout_alignParentStart="true"
+        android:background="@color/colorWhite"
+        tools:ignore="MissingConstraints">
         <TextView
+            android:id="@+id/tv_title2"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:textAlignment="center"
-            android:gravity="center"
-            android:text="@string/test" />
+            android:theme="@style/ToolbarTitle"
+            android:text="@string/test"
+            android:layout_marginLeft="30sp"
+            android:layout_marginRight="30sp"
+            android:gravity="center" />
+    </androidx.appcompat.widget.Toolbar>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-    <include
-        layout="@layout/toolbar_main"
+    <FrameLayout
+        android:id="@+id/fl_description"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        android:layout_height="match_parent"
+        android:layout_below="@id/toolbar"
+        android:padding="20sp" >
+        <TextView
+            android:id="@+id/tv_tree_item_description"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/test"
+            android:textSize="20sp"
+            android:layout_gravity="start"
+            android:gravity="left"/>
+    </FrameLayout>
+
+</RelativeLayout>
