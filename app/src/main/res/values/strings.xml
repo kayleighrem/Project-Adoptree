@@ -153,7 +153,6 @@
     <string name="thank_you">Thank you for your adoption</string>
     <string name="thank_you_text">With your contribution CO2 emissions can be  reduced and wildlife and biodiversity will further thrive.</string>
     <string name="find_my_tree">Find my tree</string>
-    <string name="growth">Growth</string>
     <string name="photos">Photo\'s</string>
     <string name="pictures">Pictures</string>
     <string name="wildlife">Wildlife</string>
@@ -169,7 +168,6 @@
     <string name="temperature">Temperature</string>
     <string name="co2_reduction">CO2 Reduction</string>
     <string name="co2_reduction_tips">CO2 Reduction tips</string>
-    <string name="events">Events</string>
     <string name="example_timeline_event_context">See monthly results</string>
     <string name="example_timeline_event_date">10th</string>
     <string name="example_timeline_month">January 2021</string>
