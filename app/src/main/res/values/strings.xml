@@ -163,5 +163,15 @@
     <string name="temperature_value">20°C</string>
     <string name="overall_health">Overall health</string>
     <string name="log_out">Log out</string>
+    <string name="home_no_trees">"It looks like you have not adopted any trees yet.. "</string>
+    <string name="growth">Growth</string>
+    <string name="humidity">Humidity</string>
+    <string name="temperature">Temperature</string>
+    <string name="co2_reduction">CO2 Reduction</string>
+    <string name="co2_reduction_tips">CO2 Reduction tips</string>
+    <string name="events">Events</string>
+    <string name="example_timeline_event_context">See monthly results</string>
+    <string name="example_timeline_event_date">10th</string>
+    <string name="example_timeline_month">January 2021</string>
 
 </resources>

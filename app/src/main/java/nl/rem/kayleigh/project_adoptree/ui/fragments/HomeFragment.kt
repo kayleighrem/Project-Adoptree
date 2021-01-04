@@ -3,25 +3,24 @@ package nl.rem.kayleigh.project_adoptree.ui.fragments
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
-import android.widget.LinearLayout
-import android.widget.RelativeLayout
-import androidx.cardview.widget.CardView
-import androidx.navigation.NavController
-import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_home.*
 import nl.rem.kayleigh.project_adoptree.R
 import nl.rem.kayleigh.project_adoptree.adapters.UserAdapter
+import nl.rem.kayleigh.project_adoptree.model.Tree
+import nl.rem.kayleigh.project_adoptree.repository.UserRepository
 import nl.rem.kayleigh.project_adoptree.ui.activities.MainActivity
 import nl.rem.kayleigh.project_adoptree.ui.viewmodels.HomeViewModel
+import nl.rem.kayleigh.project_adoptree.ui.viewmodels.UserViewModel
 import nl.rem.kayleigh.project_adoptree.util.LinearLayoutManagerWrapper
 import nl.rem.kayleigh.project_adoptree.util.SessionManager
 
 class HomeFragment : Fragment(R.layout.fragment_home) {
     lateinit var userAdapter: UserAdapter
     lateinit var sessionManager: SessionManager
+    lateinit var userViewModel: UserViewModel
+    lateinit var homeViewModel: HomeViewModel
     private var authToken: String? = null
     lateinit var bottomNavigationView: BottomNavigationView
 
@@ -35,18 +34,25 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         this.bottomNavigationView = (activity as MainActivity).bottomNavigationView
         bottomNavigationView = bottomNavigationView.findViewById(R.id.bottomNavigationView)
         bottomNavigationView.visibility = View.VISIBLE
+        homeViewModel = HomeViewModel(userRepository = UserRepository(), requireContext())
         initializeUI()
 
         if (!sessionManager.isLogin()) { // if not logged in
             rl_home_not_logged_in.visibility = View.VISIBLE
-            fl_home_logged_in.visibility = View.GONE
+            rl_home_logged_in.visibility = View.GONE
+            ll_home_logged_in_no_trees.visibility = View.GONE
 
         } else if (sessionManager.isLogin()) { // if logged in
             rl_home_not_logged_in.visibility = View.GONE
-            fl_home_logged_in.visibility = View.VISIBLE
-            setUpRecyclerView()
+            if (homeViewModel.trees != emptyList<Tree>() ) {
+                rl_home_logged_in.visibility = View.VISIBLE
+                ll_home_logged_in_no_trees.visibility = View.GONE
+                setUpRecyclerView()
+            }
+//            rl_home_logged_in.visibility = View.VISIBLE
+//            setUpRecyclerView()
         }
-        setUpRecyclerView()
+//        setUpRecyclerView()
     }
 
     override fun onCreateView(
@@ -61,12 +67,16 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         if (sessionManager.isLogin()) {
 //            authToken = sessionManager.getUserDetails().AuthToken.toString()
             authToken = sessionManager.getUserDetails().accessToken.toString()
+//            if (homeViewModel.getTrees(sessionManager.getUserDetails().userId.toInt()) == null)
+            btn_logged_in_adopt_more.setOnClickListener {
+                findNavController().navigate(R.id.action_homeFragment_to_adoptionFragment)
+            }
         }
 
-        btn_adopt_now.setOnClickListener {
+        btn_guest_adopt_now.setOnClickListener {
             findNavController().navigate(R.id.action_homeFragment_to_adoptionFragment)
         }
-        btn_start_adopt_now.setOnClickListener {
+        btn_guest_start_adopt_now.setOnClickListener {
             findNavController().navigate(R.id.action_homeFragment_to_adoptionFragment)
         }
     }

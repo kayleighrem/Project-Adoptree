@@ -36,3 +36,8 @@ data class TreeWeightAlgorithm(
     val sizeThreshold: Int?,
     val species: String?
 ): Serializable
+
+data class TreeImage(
+    val tree_id: Int,
+    val images: List<Image>
+)

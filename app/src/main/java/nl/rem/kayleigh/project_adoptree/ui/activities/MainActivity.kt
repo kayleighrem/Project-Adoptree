@@ -17,6 +17,7 @@ import nl.rem.kayleigh.project_adoptree.repository.OrderRepository
 import nl.rem.kayleigh.project_adoptree.repository.UserRepository
 import nl.rem.kayleigh.project_adoptree.ui.fragments.*
 import nl.rem.kayleigh.project_adoptree.ui.viewmodels.AdoptionViewModel
+import nl.rem.kayleigh.project_adoptree.ui.viewmodels.HomeViewModel
 import nl.rem.kayleigh.project_adoptree.ui.viewmodels.OrderViewModel
 import nl.rem.kayleigh.project_adoptree.ui.viewmodels.UserViewModel
 import nl.rem.kayleigh.project_adoptree.ui.viewmodels.factory.AdoptionViewModelFactory
@@ -28,6 +29,7 @@ class MainActivity : AppCompatActivity() {
     lateinit var adoptionViewModel: AdoptionViewModel
     lateinit var orderViewModel: OrderViewModel
     lateinit var userViewModel: UserViewModel
+    lateinit var homeViewModel: HomeViewModel
     lateinit var sessionManager: SessionManager
     lateinit var bottomNavigationView: BottomNavigationView
 

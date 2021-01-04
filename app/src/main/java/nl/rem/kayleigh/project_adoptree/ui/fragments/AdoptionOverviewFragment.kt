@@ -2,26 +2,18 @@ package nl.rem.kayleigh.project_adoptree.ui.fragments
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.renderscript.ScriptGroup
 import androidx.fragment.app.Fragment
 import android.view.View
 import android.widget.Toast
-import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
-import com.google.android.material.snackbar.Snackbar
-import kotlinx.android.synthetic.main.fragment_adoption.*
 import kotlinx.android.synthetic.main.fragment_adoption_overview.*
 import kotlinx.android.synthetic.main.fragment_adoption_overview.rv_overview
-import kotlinx.android.synthetic.main.fragment_adoption_overview.view.*
 import nl.rem.kayleigh.project_adoptree.R
 import nl.rem.kayleigh.project_adoptree.adapters.OrderAdapter
 import nl.rem.kayleigh.project_adoptree.model.OrderProduct
-import nl.rem.kayleigh.project_adoptree.model.Product
 import nl.rem.kayleigh.project_adoptree.ui.activities.MainActivity
 import nl.rem.kayleigh.project_adoptree.ui.viewmodels.OrderViewModel
 import nl.rem.kayleigh.project_adoptree.util.LinearLayoutManagerWrapper
-import nl.rem.kayleigh.project_adoptree.util.Resource
 import nl.rem.kayleigh.project_adoptree.util.SessionManager
 
 class AdoptionOverviewFragment : Fragment(R.layout.fragment_adoption_overview) {
@@ -48,7 +40,7 @@ class AdoptionOverviewFragment : Fragment(R.layout.fragment_adoption_overview) {
             }
         }
 
-        btn_adopt_more.setOnClickListener {
+        btn_logged_in_adopt_more.setOnClickListener {
             findNavController().navigate(R.id.action_adoptionOverviewFragment_to_adoptionFragment)
         }
 

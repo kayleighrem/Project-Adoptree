@@ -4,4 +4,5 @@ import nl.rem.kayleigh.project_adoptree.api.RetrofitInstance
 
 class TreeRepository {
     suspend fun getAllTrees() = RetrofitInstance.api.getTrees()
+    suspend fun getImagesByTreeId(id: Int) = RetrofitInstance.treeapi.getImagesByTreeId(id)
 }

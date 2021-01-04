@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/colorBackground"
     tools:context=".ui.fragments.SettingsFragment">
@@ -14,7 +15,7 @@
         android:layout_height="56sp"
         android:layout_alignParentStart="true"
         android:background="@color/colorWhite"
-        tools:ignore="MissingConstraints">
+        tools:ignore="MissingConstraints,ObsoleteLayoutParam">
         <TextView
             android:id="@+id/tv_title"
             android:layout_width="match_parent"
@@ -29,7 +30,7 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="0sp"
+        android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/toolbar"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_marginBottom="60sp"
@@ -58,7 +59,7 @@
                     android:checked="true"
                     android:theme="@style/SwitchText"
                     style="@style/SettingsSwitchItems"
-                    android:text="Growth"
+                    android:text="@string/growth"
                     android:textAlignment="viewStart"
                     tools:layout_editor_absoluteX="309sp"
                     tools:layout_editor_absoluteY="82sp"
@@ -68,7 +69,7 @@
                     android:layout_height="wrap_content"
                     android:checked="true"
                     android:theme="@style/SwitchText"
-                    android:text="Humidity"
+                    android:text="@string/humidity"
                     style="@style/SettingsSwitchItems"
                     tools:layout_editor_absoluteX="309sp"
                     tools:layout_editor_absoluteY="82sp"
@@ -78,7 +79,7 @@
                     android:layout_height="wrap_content"
                     android:checked="true"
                     android:theme="@style/SwitchText"
-                    android:text="Temperature"
+                    android:text="@string/temperature"
                     tools:layout_editor_absoluteX="309sp"
                     tools:layout_editor_absoluteY="82sp"
                     style="@style/SettingsSwitchItems"
@@ -88,7 +89,7 @@
                     android:layout_height="wrap_content"
                     android:checked="true"
                     android:theme="@style/SwitchText"
-                    android:text="CO2 Reduction"
+                    android:text="@string/co2_reduction"
                     tools:layout_editor_absoluteX="309sp"
                     tools:layout_editor_absoluteY="82sp"
                     style="@style/SettingsSwitchItems"
@@ -98,7 +99,7 @@
                     android:layout_height="wrap_content"
                     android:checked="true"
                     android:theme="@style/SwitchText"
-                    android:text="CO2 Reduction tips"
+                    android:text="@string/co2_reduction_tips"
                     tools:layout_editor_absoluteX="309sp"
                     tools:layout_editor_absoluteY="82sp"
                     style="@style/SettingsSwitchItems"
@@ -108,7 +109,7 @@
                     android:layout_height="wrap_content"
                     android:checked="true"
                     android:theme="@style/SwitchText"
-                    android:text="Events"
+                    android:text="@string/events"
                     tools:layout_editor_absoluteX="309sp"
                     tools:layout_editor_absoluteY="82sp"
                     style="@style/SettingsSwitchItems"
@@ -141,9 +142,10 @@
                         android:layout_height="wrap_content"
                         style="@style/SettingsItemsText"
                         android:text="@string/log_out" />
-                    <ImageView
+                    <ImageButton
                         android:id="@+id/action_settings_logout"
                         android:src="@drawable/ic_baseline_keyboard_arrow_right_24"
+                        android:backgroundTint="@color/colorTransparent"
                         android:layout_height="wrap_content"
                         android:layout_width="wrap_content" />
                 </LinearLayout>

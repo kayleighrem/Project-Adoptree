@@ -108,7 +108,7 @@
             app:layout_constraintStart_toStartOf="@id/section_total"
             android:orientation="horizontal">
 
-            <Button android:id="@+id/btn_adopt_more"
+            <Button android:id="@+id/btn_logged_in_adopt_more"
                 android:layout_width="180sp"
                 android:layout_height="@dimen/button_height"
                 android:layout_gravity="left"

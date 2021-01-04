@@ -78,8 +78,7 @@
                             android:layout_alignParentTop="true"
                             android:layout_centerVertical="true"
                             android:text="@string/Guided_tour" />
-                        <ImageButton
-                            android:id="@+id/btn_add_tour"
+                        <ImageButton android:id="@+id/btn_add_tour"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="end"
@@ -110,22 +109,19 @@
                     </RelativeLayout>
                 </androidx.cardview.widget.CardView>
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rv_booked_tour"
+                <androidx.recyclerview.widget.RecyclerView android:id="@+id/rv_booked_tour"
                     android:layout_marginTop="10sp"
                     android:layout_width="wrap_content"
                     android:layout_height="0sp"
                     tools:listitem="@layout/item_booked_tour"/>
             </LinearLayout>
 
-            <LinearLayout
-                android:id="@+id/section_green_ideas"
+            <LinearLayout android:id="@+id/section_green_ideas"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10sp"
                 android:orientation="vertical" >
-                <TextView
-                    android:id="@+id/tv_green_ideas_title"
+                <TextView android:id="@+id/tv_green_ideas_title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/green_ideas"

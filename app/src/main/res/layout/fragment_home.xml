@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:theme="@style/AppTheme"
     android:background="@color/colorBackground"
     android:clickable="true"
@@ -35,11 +36,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textAlignment="viewStart"
-                    android:layout_marginHorizontal="20sp"
-                    android:layout_marginTop="20sp"
+                    android:layout_marginHorizontal="10sp"
+                    android:layout_marginTop="15sp"
                     android:layout_marginBottom="80sp"
                     android:orientation="vertical">
-                        <FrameLayout android:id="@+id/fl_home_logged_in"
+                        <RelativeLayout android:id="@+id/rl_home_logged_in"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_below="@id/toolbar">
@@ -48,17 +49,52 @@
                                     android:layout_height="match_parent"
                                     android:clipToPadding="false"
                                     android:paddingBottom="50sp"
-                                    android:scrollbars="vertical"
                                     android:visibility="visible"
                                     tools:listitem="@layout/item_tree_card" />
-                        </FrameLayout>
+                        </RelativeLayout>
 
+                        <LinearLayout android:id="@+id/ll_home_logged_in_no_trees"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                                android:orientation="vertical">
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_gravity="center"
+                                    android:gravity="center"
+                                    android:orientation="vertical"
+                                    android:layout_margin="30sp"
+                                    tools:ignore="MissingConstraints">
+                                        <ImageView
+                                            android:id="@+id/iv_no_trees"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:src="@drawable/no_trees_image"
+                                            android:layout_gravity="center"/>
+                                        <TextView android:id="@+id/tv_home_no_trees"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:text="@string/home_no_trees"
+                                            android:gravity="center"
+                                            android:textSize="20sp"
+                                            android:textAlignment="center"
+                                            android:layout_margin="30sp" />
+                                        <Button android:id="@+id/btn_logged_in_adopt_more"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="56sp"
+                                            android:background="@drawable/rounded_corners"
+                                            android:text="@string/adopt_now"
+                                            android:gravity="center"
+                                            android:layout_gravity="center"
+                                            android:textSize="20sp" />
+                                </LinearLayout>
+                        </LinearLayout>
                         <RelativeLayout android:id="@+id/rl_home_not_logged_in"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_marginBottom="60dp"
                             android:padding="20sp">
-                                <Button android:id="@+id/btn_adopt_now"
+                                <Button android:id="@+id/btn_guest_adopt_now"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:background="@drawable/rounded_corners"
@@ -72,11 +108,10 @@
                                     android:text="@string/home_not_logged_in_why_adoptree"
                                     android:background="@drawable/rounded_corners"
                                     android:backgroundTint="@color/colorWhite"
-                                    android:layout_below="@id/btn_adopt_now"
+                                    android:layout_below="@id/btn_guest_adopt_now"
                                     android:textAlignment="center"
                                     android:textSize="25sp"
                                     android:padding="25sp" />
-
                                 <RelativeLayout android:id="@+id/rl_select_tree"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
@@ -111,7 +146,6 @@
                                             android:layout_alignParentEnd="true"
                                             android:textAlignment="center" />
                                 </RelativeLayout>
-
                                 <RelativeLayout android:id="@+id/rl_monitor_tree"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
@@ -139,7 +173,6 @@
                                             android:layout_below="@id/tv_monitor"
                                             android:layout_toRightOf="@id/iv_monitor"/>
                                 </RelativeLayout>
-
                                 <RelativeLayout android:id="@+id/rl_follow_story"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
@@ -167,7 +200,6 @@
                                             android:layout_below="@id/tv_follow"
                                             android:layout_toRightOf="@id/iv_follow"/>
                                 </RelativeLayout>
-
                                 <RelativeLayout android:id="@+id/rl_make_planter_greener"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
@@ -195,7 +227,6 @@
                                             android:layout_below="@id/tv_greener"
                                             android:layout_toRightOf="@id/iv_greener"/>
                                 </RelativeLayout>
-
                                 <RelativeLayout android:id="@+id/rl_adopt_now"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
@@ -222,7 +253,7 @@
                                             android:textAlignment="viewStart"
                                             android:layout_below="@id/tv_adopt"
                                             android:layout_toRightOf="@id/iv_adopt_now"/>
-                                        <Button android:id="@+id/btn_start_adopt_now"
+                                        <Button android:id="@+id/btn_guest_start_adopt_now"
                                             android:layout_width="wrap_content"
                                             android:layout_height="56sp"
                                             android:background="@drawable/rounded_corners"

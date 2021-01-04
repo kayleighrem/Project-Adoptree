@@ -26,10 +26,14 @@ class HomeViewModel(private val userRepository: UserRepository, val context: Con
         const val TAG ="HomeViewModel"
     }
 
-    fun getTrees(user: User) = viewModelScope.launch {
+//    fun checkIfUserHasTrees(id: Int) {
+//        this.trees = getTrees(id)
+//    }
+
+    fun getTrees(id: Int) = viewModelScope.launch {
         try {
             _trees.postValue(Resource.Loading())
-            val response = userRepository.getTreesByUser(user.id!!)
+            val response = userRepository.getTreesByUser(id!!)
 //            _trees.postValue(handleTreesResponse(response))
         } catch (e: Exception) {
             _trees.postValue(Resource.Error(context.getString(R.string.connection_error)))
@@ -51,8 +55,8 @@ class HomeViewModel(private val userRepository: UserRepository, val context: Con
     private fun handleTreesResponse(response: Response<List<Tree>>): Resource<Tree> {
         if (response.isSuccessful) {
 //            response.body()?.let { resultResponse ->
-//                if (treeResponse == null) {
-//                    treeResponse = resultResponse
+//                if (trees == null) {
+//                    _trees = resultResponse
 //                } else {
 //                    val oldArticles = treeResponse?.Results
 //                    val newArticles = resultResponse.Results

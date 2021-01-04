@@ -29,5 +29,13 @@ class RetrofitInstance {
         val userapi: UserService by lazy {
             retrofit.create(UserService::class.java)
         }
+
+        val treeapi: TreeService by lazy {
+            retrofit.create(TreeService::class.java)
+        }
+
+        val contentapi: ContentService by lazy {
+            retrofit.create(ContentService::class.java)
+        }
     }
 }
