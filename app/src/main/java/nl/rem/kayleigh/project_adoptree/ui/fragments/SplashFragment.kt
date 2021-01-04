@@ -12,16 +12,23 @@ import kotlinx.android.synthetic.main.activity_main.*
 import nl.rem.kayleigh.project_adoptree.R
 import nl.rem.kayleigh.project_adoptree.ui.activities.LaunchActivity
 import nl.rem.kayleigh.project_adoptree.ui.activities.MainActivity
+import nl.rem.kayleigh.project_adoptree.util.SessionManager
 
 class SplashFragment : Fragment(R.layout.fragment_splash) {
+    private lateinit var sessionManager: SessionManager
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        sessionManager = SessionManager(requireContext())
         Handler().postDelayed({
             if(onBoardingFinished()){
-                findNavController().navigate(R.id.action_splashFragment_to_loginFragment)
-//                findNavController().navigate(R.id.action_splashFragment_to_homeFragment)
+                if (sessionManager.isLogin()) {
+                    findNavController().navigate(R.id.action_splashFragment_to_homeFragment)
+                } else {
+                    findNavController().navigate(R.id.action_splashFragment_to_loginFragment)
+                }
             }else{
                 findNavController().navigate(R.id.action_splashFragment_to_viewPagerFragment)
             }

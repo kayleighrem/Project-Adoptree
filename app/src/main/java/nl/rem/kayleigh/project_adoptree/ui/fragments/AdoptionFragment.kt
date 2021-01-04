@@ -53,11 +53,11 @@ class AdoptionFragment : Fragment(R.layout.fragment_adoption) {
         initializeUI()
 
         adoptionViewModel.trees.observe(viewLifecycleOwner, Observer { response ->
-            Log.d("Response ", response.data.toString())
+            Log.d("Response trees: ", response.data.toString())
         })
 
         adoptionViewModel.products.observe(viewLifecycleOwner, Observer { response ->
-            Log.d("Response product ", response.data.toString())
+            Log.d("Response products: ", response.data.toString())
         })
 
         adoptionViewModel.products.observe(viewLifecycleOwner, Observer { response ->
@@ -93,7 +93,8 @@ class AdoptionFragment : Fragment(R.layout.fragment_adoption) {
         sr_adoptionLayout.isRefreshing = false
 
         if (sessionManager.isLogin()) {
-            authToken = sessionManager.getUserDetails().AuthToken.toString()
+//            authToken = sessionManager.getUserDetails().AuthToken.toString()
+            authToken = sessionManager.getUserDetails().accessToken.toString()
         }
 
         if (adoptionViewModel.products.value?.data?.isNullOrEmpty() == true) {
@@ -142,10 +143,10 @@ class AdoptionFragment : Fragment(R.layout.fragment_adoption) {
             val layoutManager = recyclerView.layoutManager as LinearLayoutManager
             val totalItemCount = layoutManager.itemCount;
             val lastVisibleItem = layoutManager.findLastVisibleItemPosition();
-//            if (!isLoading && isScrolling && totalItemCount <= (lastVisibleItem + 1)) {
-//                adoptionViewModel.getNextArticles(authToken)
-//                isScrolling = false
-//            }
+            if (!isLoading && isScrolling && totalItemCount <= (lastVisibleItem + 1)) {
+//                adoptionViewModel.getProducts(authToken)
+                isScrolling = false
+            }
         }
 
         override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {

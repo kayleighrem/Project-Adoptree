@@ -92,4 +92,42 @@
         <item name="android:padding">10sp</item>
     </style>
 
+    <style name="SettingsItemsText">
+        <item name="android:layout_weight">0.7</item>
+        <item name="android:textAlignment">viewStart</item>
+        <item name="android:textSize">19sp</item>
+    </style>
+
+    <style name="SettingsItemsBackground">
+        <item name="android:background">@color/colorWhite</item>
+        <item name="android:paddingStart">30sp</item>
+        <item name="android:paddingEnd">30sp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_marginBottom">2sp</item>
+    </style>
+
+    <style name="SettingsSwitchItems">
+        <item name="android:background">@color/colorWhite</item>
+        <item name="android:paddingStart">20sp</item>
+        <item name="android:paddingEnd">20sp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_marginBottom">2sp</item>
+        <item name="android:textAlignment">viewStart</item>
+        <item name="android:textSize">19sp</item>
+    </style>
+
+
+    <style name="HomeNotLoggedInCards" >
+        <item name="android:layout_marginTop">20sp</item>
+        <item name="android:background">@drawable/rounded_corners</item>
+        <item name="android:backgroundTint">@color/colorWhite</item>
+        <item name="android:padding">10sp</item>
+    </style>
+
+    <style name="HomeTreeCardsValue">
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">40sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/colorAccentBrown</item>
+    </style>
 </resources>

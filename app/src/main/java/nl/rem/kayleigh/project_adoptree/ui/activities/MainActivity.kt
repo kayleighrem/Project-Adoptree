@@ -1,6 +1,7 @@
 package nl.rem.kayleigh.project_adoptree.ui.activities
 
 import android.os.Bundle
+import android.widget.FrameLayout
 import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -29,7 +30,9 @@ class MainActivity : AppCompatActivity() {
     lateinit var userViewModel: UserViewModel
     lateinit var sessionManager: SessionManager
     lateinit var bottomNavigationView: BottomNavigationView
-    lateinit var tv_not_logged_in_message: TextView
+
+    lateinit var adoptionFragment: AdoptionFragment
+    lateinit var loginFragment: LoginFragment
 
     lateinit var homeFragment: HomeFragment
     lateinit var timeLineFragment: TimelineFragment
@@ -37,11 +40,19 @@ class MainActivity : AppCompatActivity() {
     lateinit var profileFragment: ProfileFragment
     lateinit var settingsFragment: SettingsFragment
 
+    private companion object {
+        const val DEFAULT_LAYOUT = "fl_fragment"
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        val defaultlayout: FrameLayout = findViewById(R.id.fl_fragment)
         bottomNavigationView = findViewById(R.id.bottomNavigationView)
+
+        adoptionFragment = AdoptionFragment()
+        loginFragment = LoginFragment()
 
         homeFragment = HomeFragment()
         timeLineFragment = TimelineFragment()
@@ -51,7 +62,7 @@ class MainActivity : AppCompatActivity() {
 
         bottomNavigationView.setOnNavigationItemSelectedListener{
             when (it.itemId) {
-                R.id.nav_home -> navigateToFragment(homeFragment)
+                R.id.nav_home -> navigateToFragment(defaultlayout.id, homeFragment)
                 R.id.nav_timeline -> navigateToFragment(timeLineFragment)
                 R.id.nav_feed -> navigateToFragment(feedFragment)
                 R.id.nav_profile -> navigateToFragment(profileFragment)
@@ -65,9 +76,15 @@ class MainActivity : AppCompatActivity() {
         sessionManager = SessionManager(this)
     }
 
-    private fun navigateToFragment(fragment: Fragment) {
+    fun navigateToFragment(fragment: Fragment) {
         val transaction: FragmentTransaction = supportFragmentManager.beginTransaction()
         transaction.replace(R.id.fl_fragment, fragment)
+        transaction.commit()
+    }
+
+    fun navigateToFragment(layout: Int, fragment: Fragment) {
+        val transaction: FragmentTransaction = supportFragmentManager.beginTransaction()
+        transaction.replace(layout, fragment)
         transaction.commit()
     }
 

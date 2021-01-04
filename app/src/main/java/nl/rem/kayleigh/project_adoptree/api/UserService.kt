@@ -1,27 +1,23 @@
 package nl.rem.kayleigh.project_adoptree.api
 
-import nl.rem.kayleigh.project_adoptree.model.LoginResponse
-import nl.rem.kayleigh.project_adoptree.model.User
-import nl.rem.kayleigh.project_adoptree.model.UserResponse
-import nl.rem.kayleigh.project_adoptree.model.UserResponseRegister
-import retrofit2.Call
+import nl.rem.kayleigh.project_adoptree.model.*
 import retrofit2.Response
 import retrofit2.http.*
 
 interface UserService {
     @Headers("Content-Type: application/json")
-    @POST("Users/register")
-    suspend fun createUser(@Body user: User): Response<UserResponseRegister>
-
-    @GET("user")
-    suspend fun login(
-        @Field("UserName") username: String,
-        @Field("Password") password: String
-    ): Call<LoginResponse>
+    @POST("auth/register")
+    suspend fun register(@Body user: User) : Response<UserResponseRegister>
 
     @Headers("Content-Type: application/json")
-    @POST("user/login")
-    suspend fun login(@Body user: User): Response<UserResponse>
+    @POST("auth/logout")
+    suspend fun logout(@Body user: User)
+
+    @Headers("Content-Type: application/json")
+    @POST("auth/login")
+    suspend fun login(
+            @Body user: UserLogin
+    ) : Response<LoginResponse>
 
     @POST("user/forgetpassword")
     suspend fun forgotpassword(

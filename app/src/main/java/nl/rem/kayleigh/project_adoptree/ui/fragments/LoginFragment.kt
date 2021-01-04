@@ -2,24 +2,32 @@ package nl.rem.kayleigh.project_adoptree.ui.fragments
 
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.View
+import android.view.inputmethod.EditorInfo
+import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentTransaction
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
-import com.google.android.material.bottomnavigation.BottomNavigationView
-import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_login.*
 import nl.rem.kayleigh.project_adoptree.R
 import nl.rem.kayleigh.project_adoptree.model.User
+import nl.rem.kayleigh.project_adoptree.model.UserLogin
+import nl.rem.kayleigh.project_adoptree.repository.UserRepository
 import nl.rem.kayleigh.project_adoptree.ui.activities.MainActivity
+import nl.rem.kayleigh.project_adoptree.ui.viewmodels.HomeViewModel
 import nl.rem.kayleigh.project_adoptree.ui.viewmodels.UserViewModel
+import nl.rem.kayleigh.project_adoptree.util.Resource
 import nl.rem.kayleigh.project_adoptree.util.SessionManager
 
 class LoginFragment : Fragment(R.layout.fragment_login) {
+    lateinit var homeViewModel: HomeViewModel
     lateinit var viewModel: UserViewModel
+    lateinit var userRepository: UserRepository
     lateinit var sessionManager: SessionManager
     lateinit var user: User
+    lateinit var userLogin: UserLogin
     lateinit var mainActivity: MainActivity
 
     companion object {
@@ -29,9 +37,52 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        userRepository = UserRepository()
+        viewModel = UserViewModel(userRepository, requireContext())
+        homeViewModel = HomeViewModel(userRepository, requireContext())
 
         sessionManager = SessionManager(view.context)
         initializeUI()
+
+        viewModel.loginResponse.observe(viewLifecycleOwner, Observer { response ->
+            loading.visibility = View.GONE
+            when (response) {
+                is Resource.Success -> {
+                    et_password.onEditorAction(EditorInfo.IME_ACTION_DONE)
+                    try {
+                        response.data?.accessToken?.let {
+                            sessionManager.createSession(
+                                    it,
+                                    response.data.refreshToken!!,
+                                    response.data.userId!!
+                            )
+                        }
+                        println("session? " + sessionManager.isLogin())
+                        findNavController().navigate(
+                                R.id.action_loginFragment_to_homeFragment
+                        )
+                        Toast.makeText(
+                                requireContext(),
+                                "${getString(R.string.test)} ${userLogin.username}",
+                                Toast.LENGTH_LONG
+                        ).show()
+//                        homeViewModel.getTrees(sessionManager.getUserDetails().accessToken.toString())
+                    } catch (e: Exception) {
+                        Log.e(TAG, "${getString(R.string.error_log)} ${e.message}")
+                    }
+                }
+                is Resource.Error -> {
+                    Toast.makeText(
+                            requireContext(),
+                            R.string.wrong_credentials,
+                            Toast.LENGTH_LONG
+                    ).show()
+                    response.message?.let { message ->
+                        Log.e(TAG, "${getString(R.string.error_log)} $message")
+                    }
+                }
+            }
+        })
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -45,17 +96,20 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
         }
 
         btn_login.setOnClickListener {
-            findNavController().navigate(R.id.action_loginFragment_to_homeFragment) // DUMMY ACTION
             // TODO: login button
-//            val username = username.text.toString().trim()
-//            val uPassword = password.text.toString().trim()
-//            if (isPasswordValid(uPassword)) {
-//                user = User(username, uPassword)
-//                loading.visibility = View.VISIBLE
-//                viewModel.login(user)
-//            } else {
-//                password.error = getString(R.string.error_password_length)
-//            }
+            val username = et_username.text.toString().trim()
+            val password = et_password.text.toString().trim()
+            if (isPasswordValid(password)) {
+                userLogin = UserLogin(username, password)
+                loading.visibility = View.VISIBLE
+                try {
+                    viewModel.login(userLogin)
+                } catch (e: java.lang.Exception) {
+                    Log.e(TAG, "${getString(R.string.error_log)} ${e.message}")
+                }
+            } else {
+                et_password.error = getString(R.string.error_password_length)
+            }
         }
 
         btn_not_now.setOnClickListener {
@@ -63,7 +117,7 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
         }
     }
 
-    private fun isPasswordValid(password: String): Boolean {
+    fun isPasswordValid(password: String): Boolean {
         return password.length > 5
     }
 }

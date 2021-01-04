@@ -117,21 +117,14 @@ class OrderAdapter : RecyclerView.Adapter<OrderAdapter.ViewHolder>()  {
                         }
                 val alert = builder.create()
                 alert.show()
-//                if (pos != RecyclerView.NO_POSITION) {
-//                    onRemoveButtonClickListener?.let {
-//                        it(product, pos)
-//                    }
-//                }
             }
 
 
             cb_personal_sign.setOnClickListener {
                 if (cb_personal_sign.isChecked) {
-                    println("cb checked")
                     product.isSignActivated = true
                 }
                 if (!cb_personal_sign.isChecked) {
-                    println("cb not checked")
                     product.isSignActivated = false
                 }
             }

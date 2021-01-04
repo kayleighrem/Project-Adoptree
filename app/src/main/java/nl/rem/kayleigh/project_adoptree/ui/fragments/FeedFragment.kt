@@ -25,10 +25,9 @@ class FeedFragment : Fragment(R.layout.fragment_feed) {
         sessionManager = SessionManager(view.context)
         mainActivity = MainActivity()
 
-        // If not logged in, don't show the timeline
-        if (!sessionManager.isLogin()) {
+        if (!sessionManager.isLogin()) { // if not logged in, don't show the 'add' button for booking a new tour
             btn_add_tour.visibility = View.GONE
-        } else if (sessionManager.isLogin()) {
+        } else if (sessionManager.isLogin()) { // if logged in, show the button for booking a new tour
             btn_add_tour.visibility = View.VISIBLE
         }
     }

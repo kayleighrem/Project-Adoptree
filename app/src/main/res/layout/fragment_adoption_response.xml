@@ -3,6 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:backgroundTint="@color/colorBackground"
+    android:background="@color/colorBackground"
     tools:context=".ui.fragments.AdoptionResponseFragment">
 
     <RelativeLayout
@@ -12,21 +14,35 @@
         android:gravity="center"
         android:layout_margin="30sp"
         tools:ignore="MissingConstraints">
-        <ImageView
-            android:id="@+id/iv_no_trees"
+        <TextView android:id="@+id/tv_thanks"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:src="@drawable/no_trees_image"
+            android:text="@string/thank_you"
+            android:textStyle="bold"
+            android:textSize="25sp"
+            android:gravity="center" />
+        <ImageView android:id="@+id/iv_no_trees"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_thanks"
+            android:src="@drawable/happy_tree_adopted_image"
             android:layout_gravity="center"/>
-        <TextView
+        <TextView android:id="@+id/tv_thank_you_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/test"
+            android:text="@string/thank_you_text"
             android:layout_below="@id/iv_no_trees"
             android:gravity="center"
             android:textSize="20sp"
             android:textAlignment="center"
-            android:layout_margin="30sp"
-            />
+            android:layout_margin="30sp" />
+        <Button android:id="@+id/btn_monitor"
+            android:layout_width="wrap_content"
+            android:layout_height="60sp"
+            android:background="@drawable/rounded_corners"
+            style="@style/CustomButtonStyle"
+            android:layout_below="@id/tv_thank_you_text"
+            android:layout_centerHorizontal="true"
+            android:text="@string/monitor_title" />
     </RelativeLayout>
 </FrameLayout>

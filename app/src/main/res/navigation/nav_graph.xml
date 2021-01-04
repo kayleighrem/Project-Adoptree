@@ -5,6 +5,15 @@
     android:id="@+id/nav_graph"
     app:startDestination="@id/splashFragment">
 
+    <activity
+        android:id="@+id/loginActivity"
+        android:name="nl.rem.kayleigh.project_adoptree.ui.activities.LoginActivity"
+        android:label="LoginActivity" />
+    <activity
+        android:id="@+id/adoptionActivity"
+        android:name="nl.rem.kayleigh.project_adoptree.ui.activities.AdoptionActivity"
+        android:label="activity_adoption"
+        tools:layout="@layout/activity_adoption" />
     <fragment
         android:id="@+id/splashFragment"
         android:name="nl.rem.kayleigh.project_adoptree.ui.fragments.SplashFragment"
@@ -16,7 +25,10 @@
         <action
             android:id="@+id/action_splashFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
-<!--        <action-->
+        <action
+            android:id="@+id/action_splashFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+        <!--        <action-->
 <!--            android:id="@+id/action_splashFragment_to_homeFragment"-->
 <!--            app:destination="@id/homeFragment"-->
     </fragment>
@@ -39,7 +51,11 @@
         android:id="@+id/homeFragment"
         android:name="nl.rem.kayleigh.project_adoptree.ui.fragments.HomeFragment"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_adoptionFragment"
+            app:destination="@id/adoptionFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/loginFragment"
@@ -90,15 +106,6 @@
             android:name="product"
             app:argType="nl.rem.kayleigh.project_adoptree.model.Product" />
     </activity>
-    <activity
-        android:id="@+id/loginActivity"
-        android:name="nl.rem.kayleigh.project_adoptree.ui.activities.LoginActivity"
-        android:label="LoginActivity" />
-    <activity
-        android:id="@+id/adoptionActivity"
-        android:name="nl.rem.kayleigh.project_adoptree.ui.activities.AdoptionActivity"
-        android:label="activity_adoption"
-        tools:layout="@layout/activity_adoption" />
     <fragment
         android:id="@+id/adoptionOverviewFragment"
         android:name="nl.rem.kayleigh.project_adoptree.ui.fragments.AdoptionOverviewFragment"
@@ -120,10 +127,38 @@
         android:id="@+id/profileFragment"
         android:name="nl.rem.kayleigh.project_adoptree.ui.fragments.ProfileFragment"
         android:label="fragment_profile"
-        tools:layout="@layout/fragment_profile" />
+        tools:layout="@layout/fragment_profile" >
+        <action
+            android:id="@+id/action_profileFragment_to_adoptionFragment"
+            app:destination="@id/adoptionFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
     <fragment
         android:id="@+id/adoptionResponseFragment"
         android:name="nl.rem.kayleigh.project_adoptree.ui.fragments.AdoptionResponseFragment"
         android:label="fragment_adoption_response"
-        tools:layout="@layout/fragment_adoption_response" />
+        tools:layout="@layout/fragment_adoption_response" >
+        <action
+            android:id="@+id/action_adoptionResponseFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/feedFragment"
+        android:name="nl.rem.kayleigh.project_adoptree.ui.fragments.FeedFragment"
+        android:label="fragment_feed"
+        tools:layout="@layout/fragment_feed" />
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="nl.rem.kayleigh.project_adoptree.ui.fragments.SettingsFragment"
+        android:label="fragment_settings"
+        tools:layout="@layout/fragment_settings" >
+        <action
+            android:id="@+id/action_settingsFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_settingsFragment_to_splashFragment"
+            app:destination="@id/splashFragment" />
+    </fragment>
 </navigation>

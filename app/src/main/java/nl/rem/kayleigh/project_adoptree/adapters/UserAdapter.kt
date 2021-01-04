@@ -44,24 +44,11 @@ class UserAdapter : RecyclerView.Adapter<UserAdapter.TreeViewHolder>() {
     override fun onBindViewHolder(holder: TreeViewHolder, position: Int) {
         val tree = differ.currentList[position]
         holder.itemView.apply {
-//            if (holder.sessionManager.isLogin()) {
-//                likeButton.visibility = View.VISIBLE
-//                if (article.IsLiked == true) {
-//                    likeButton.setImageResource(R.drawable.ic_baseline_favorite_24)
-//                } else {
-//                    likeButton.setImageResource(R.drawable.ic_baseline_favorite_border_24)
-//                }
-//            }
-//            imageCard.load(article.Image) {
-//                crossfade(true)
-//                placeholder(R.drawable.ic_baseline_image_24)
-//            }
-//            tree_name.text = tree.id.toString()
-//            tree_location.text = tree.forestId.toString()
-//            tree_age.text = LocalDateTime.parse(tree.dateSeeded).toLocalDate().format(
-//                    DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG).withLocale(Locale.getDefault())
-//            ).toString()
-
+            tree_name.text = tree.id.toString()
+            tree_location.text = tree.forestId.toString()
+            tree_age.text = LocalDateTime.parse(tree.dateSeeded).toLocalDate().format(
+                    DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG).withLocale(Locale.getDefault())
+            ).toString()
         }
     }
 

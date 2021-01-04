@@ -15,15 +15,13 @@
         android:background="@color/colorBackground"
         tools:ignore="MissingConstraints">
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
+        <androidx.appcompat.widget.Toolbar android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="56sp"
             android:layout_alignParentStart="true"
             android:background="@color/colorWhite">
 
-            <TextView
-                android:id="@+id/tv_title"
+            <TextView android:id="@+id/tv_title"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:text="@string/title_adopt_a_tree"
@@ -33,27 +31,21 @@
                 android:gravity="center"/>
         </androidx.appcompat.widget.Toolbar>
 
-        <LinearLayout
-            android:id="@+id/filter_section"
+        <LinearLayout android:id="@+id/filter_section"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:padding="20sp">
 
-            <ImageView
-                android:id="@+id/icon_filter"
+            <ImageView android:id="@+id/icon_filter"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingRight="10sp"
                 android:src="@drawable/ic_baseline_filter_list_24" />
-
-            <TextView
-                android:id="@+id/tv_filter"
+            <TextView android:id="@+id/tv_filter"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/label_filter" />
-
-            <TextView
-                android:id="@+id/tv_number_results"
+            <TextView android:id="@+id/tv_number_results"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/results"
@@ -61,8 +53,7 @@
         </LinearLayout>
     </com.google.android.material.appbar.AppBarLayout>
 
-    <FrameLayout
-        android:id="@+id/fl_no_trees_available"
+    <FrameLayout android:id="@+id/fl_no_trees_available"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/toolbar"
@@ -72,8 +63,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_margin="30sp">
-            <ImageView
-                android:id="@+id/iv_no_trees"
+            <ImageView android:id="@+id/iv_no_trees"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:src="@drawable/no_trees_image"
@@ -90,8 +80,7 @@
                 />
         </RelativeLayout>
     </FrameLayout>
-    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-        android:id="@+id/sr_adoptionLayout"
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout android:id="@+id/sr_adoptionLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="120sp"
@@ -111,20 +100,19 @@
             android:scrollbars="vertical"
             android:backgroundTint="@color/colorBackground"
             android:background="@color/colorBackground"
-            tools:listitem="@layout/item_adoption_tree_card">
-        </androidx.recyclerview.widget.RecyclerView>
+            tools:listitem="@layout/item_adoption_tree_card" />
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
-    <LinearLayout
-        android:id="@+id/button_section"
+    <LinearLayout android:id="@+id/button_section"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
+        android:backgroundTint="@color/colorBackground"
+        android:background="@color/colorBackground"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
-        <Button
-            android:id="@+id/btn_next_step"
+        <Button android:id="@+id/btn_next_step"
             android:layout_width="180sp"
             android:layout_height="@dimen/button_height"
             android:layout_gravity="right"
@@ -135,8 +123,7 @@
             tools:ignore="MissingConstraints" />
     </LinearLayout>
 
-    <ProgressBar
-        android:id="@+id/paginationProgressBar"
+    <ProgressBar android:id="@+id/paginationProgressBar"
         style="?attr/progressBarStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

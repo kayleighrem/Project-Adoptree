@@ -7,69 +7,58 @@
     android:background="@color/colorBackground"
     android:clickable="true"
     tools:context=".ui.fragments.HomeFragment"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:focusable="true">
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
+        <androidx.appcompat.widget.Toolbar android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="56sp"
             android:layout_alignParentStart="true"
             android:background="@color/colorWhite"
             tools:ignore="MissingConstraints">
-                <TextView
-                    android:id="@+id/tv_title"
+                <TextView android:id="@+id/tv_title"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:text="@string/title_home"
                     android:theme="@style/ToolbarTitle"
                     android:layout_marginLeft="30sp"
                     android:layout_marginRight="30sp"
-                    android:gravity="center"
-                    />
+                    android:gravity="center" />
         </androidx.appcompat.widget.Toolbar>
 
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="60sp"
             android:layout_below="@id/toolbar">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textAlignment="viewStart"
+                    android:layout_marginHorizontal="20sp"
+                    android:layout_marginTop="20sp"
+                    android:layout_marginBottom="80sp"
                     android:orientation="vertical">
-                        <FrameLayout
-                            android:id="@+id/fl_home_logged_in"
+                        <FrameLayout android:id="@+id/fl_home_logged_in"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:layout_below="@id/toolbar"
-                            android:visibility="gone">
-
-                                <androidx.recyclerview.widget.RecyclerView
-                                    android:id="@+id/rv_home_tree_items"
+                            android:layout_below="@id/toolbar">
+                                <androidx.recyclerview.widget.RecyclerView android:id="@+id/rv_home_tree_items"
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
                                     android:clipToPadding="false"
                                     android:paddingBottom="50sp"
                                     android:scrollbars="vertical"
                                     android:visibility="visible"
-                                    tools:listitem="@layout/item_tree_card"></androidx.recyclerview.widget.RecyclerView>
-
-                                <FrameLayout
-                                    android:id="@+id/home_main_frame"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"></FrameLayout>
+                                    tools:listitem="@layout/item_tree_card" />
                         </FrameLayout>
 
-                        <RelativeLayout
-                            android:id="@+id/rl_home_not_logged_in"
+                        <RelativeLayout android:id="@+id/rl_home_not_logged_in"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:padding="20sp"
-                            android:layout_below="@id/toolbar">
-                                <Button
-                                    android:id="@+id/btn_adopt_now"
+                            android:layout_marginBottom="60dp"
+                            android:padding="20sp">
+                                <Button android:id="@+id/btn_adopt_now"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:background="@drawable/rounded_corners"
@@ -77,8 +66,7 @@
                                     android:padding="25sp"
                                     android:layout_marginBottom="20sp"
                                     android:textSize="20sp" />
-                                <TextView
-                                    android:id="@+id/tv_why_adoptree"
+                                <TextView android:id="@+id/tv_why_adoptree"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:text="@string/home_not_logged_in_why_adoptree"
@@ -89,23 +77,17 @@
                                     android:textSize="25sp"
                                     android:padding="25sp" />
 
-                                <RelativeLayout
-                                    android:id="@+id/rl_select_tree"
+                                <RelativeLayout android:id="@+id/rl_select_tree"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_below="@id/tv_why_adoptree"
-                                    android:layout_marginTop="20sp"
-                                    android:background="@drawable/rounded_corners"
-                                    android:backgroundTint="@color/colorWhite"
-                                    android:padding="10sp">
-                                        <ImageView
-                                            android:id="@+id/iv_select_tree"
+                                    style="@style/HomeNotLoggedInCards">
+                                        <ImageView android:id="@+id/iv_select_tree"
                                             android:layout_width="110sp"
                                             android:layout_height="160sp"
                                             android:layout_marginRight="10sp"
                                             android:src="@drawable/select_tree_image"/>
-                                        <TextView
-                                            android:id="@+id/tv_select"
+                                        <TextView android:id="@+id/tv_select"
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:text="@string/select_title"
@@ -113,8 +95,7 @@
                                             android:textSize="18sp"
                                             android:textAlignment="viewStart"
                                             android:layout_toRightOf="@id/iv_select_tree"/>
-                                        <TextView
-                                            android:id="@+id/tv_select_text"
+                                        <TextView android:id="@+id/tv_select_text"
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:text="@string/select_text"
@@ -122,8 +103,7 @@
                                             android:textSize="18sp"
                                             android:textAlignment="viewStart"
                                             android:layout_toRightOf="@id/iv_select_tree"/>
-                                        <Button
-                                            android:id="@+id/btn_available_trees"
+                                        <Button android:id="@+id/btn_available_trees"
                                             android:layout_width="wrap_content"
                                             android:layout_height="56sp"
                                             android:text="@string/available_trees"
@@ -132,23 +112,17 @@
                                             android:textAlignment="center" />
                                 </RelativeLayout>
 
-                                <RelativeLayout
-                                    android:id="@+id/rl_monitor_tree"
+                                <RelativeLayout android:id="@+id/rl_monitor_tree"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_below="@id/rl_select_tree"
-                                    android:layout_marginTop="20sp"
-                                    android:background="@drawable/rounded_corners"
-                                    android:backgroundTint="@color/colorWhite"
-                                    android:padding="10sp">
-                                        <ImageView
-                                            android:id="@+id/iv_monitor"
+                                    style="@style/HomeNotLoggedInCards">
+                                        <ImageView android:id="@+id/iv_monitor"
                                             android:layout_width="110sp"
                                             android:layout_height="160sp"
                                             android:layout_marginRight="10sp"
                                             android:src="@drawable/monitor_tree_image"/>
-                                        <TextView
-                                            android:id="@+id/tv_monitor"
+                                        <TextView android:id="@+id/tv_monitor"
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:text="@string/monitor_title"
@@ -156,8 +130,7 @@
                                             android:textSize="18sp"
                                             android:textAlignment="viewStart"
                                             android:layout_toRightOf="@id/iv_monitor"/>
-                                        <TextView
-                                            android:id="@+id/tv_monitor_text"
+                                        <TextView android:id="@+id/tv_monitor_text"
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:text="@string/monitor_text"
@@ -167,23 +140,17 @@
                                             android:layout_toRightOf="@id/iv_monitor"/>
                                 </RelativeLayout>
 
-                                <RelativeLayout
-                                    android:id="@+id/rl_follow_story"
+                                <RelativeLayout android:id="@+id/rl_follow_story"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_below="@id/rl_monitor_tree"
-                                    android:layout_marginTop="20sp"
-                                    android:background="@drawable/rounded_corners"
-                                    android:backgroundTint="@color/colorWhite"
-                                    android:padding="10sp">
-                                        <ImageView
-                                            android:id="@+id/iv_follow"
+                                    style="@style/HomeNotLoggedInCards">
+                                        <ImageView android:id="@+id/iv_follow"
                                             android:layout_width="110sp"
                                             android:layout_height="160sp"
                                             android:layout_marginRight="10sp"
                                             android:src="@drawable/follow_story_image"/>
-                                        <TextView
-                                            android:id="@+id/tv_follow"
+                                        <TextView android:id="@+id/tv_follow"
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:text="@string/follow_title"
@@ -191,8 +158,7 @@
                                             android:textSize="18sp"
                                             android:textAlignment="viewStart"
                                             android:layout_toRightOf="@id/iv_follow"/>
-                                        <TextView
-                                            android:id="@+id/tv_follow_text"
+                                        <TextView android:id="@+id/tv_follow_text"
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:text="@string/follow_text"
@@ -202,23 +168,17 @@
                                             android:layout_toRightOf="@id/iv_follow"/>
                                 </RelativeLayout>
 
-                                <RelativeLayout
-                                    android:id="@+id/rl_make_planter_greener"
+                                <RelativeLayout android:id="@+id/rl_make_planter_greener"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_below="@id/rl_follow_story"
-                                    android:layout_marginTop="20sp"
-                                    android:background="@drawable/rounded_corners"
-                                    android:backgroundTint="@color/colorWhite"
-                                    android:padding="10sp">
-                                        <ImageView
-                                            android:id="@+id/iv_greener"
+                                    style="@style/HomeNotLoggedInCards">
+                                        <ImageView android:id="@+id/iv_greener"
                                             android:layout_width="110sp"
                                             android:layout_height="160sp"
                                             android:layout_marginRight="10sp"
                                             android:src="@drawable/make_world_greener_image"/>
-                                        <TextView
-                                            android:id="@+id/tv_greener"
+                                        <TextView android:id="@+id/tv_greener"
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:text="@string/greener_title"
@@ -226,8 +186,7 @@
                                             android:textSize="18sp"
                                             android:textAlignment="viewStart"
                                             android:layout_toRightOf="@id/iv_greener"/>
-                                        <TextView
-                                            android:id="@+id/tv_greener_text"
+                                        <TextView android:id="@+id/tv_greener_text"
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:text="@string/greener_text"
@@ -237,23 +196,17 @@
                                             android:layout_toRightOf="@id/iv_greener"/>
                                 </RelativeLayout>
 
-                                <RelativeLayout
-                                    android:id="@+id/rl_adopt_now"
+                                <RelativeLayout android:id="@+id/rl_adopt_now"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_below="@id/rl_make_planter_greener"
-                                    android:layout_marginTop="20sp"
-                                    android:background="@drawable/rounded_corners"
-                                    android:backgroundTint="@color/colorWhite"
-                                    android:padding="10sp">
-                                        <ImageView
-                                            android:id="@+id/iv_adopt_now"
+                                    style="@style/HomeNotLoggedInCards">
+                                        <ImageView android:id="@+id/iv_adopt_now"
                                             android:layout_width="110sp"
                                             android:layout_height="160sp"
                                             android:layout_marginRight="10sp"
                                             android:src="@drawable/adopt_now_image"/>
-                                        <TextView
-                                            android:id="@+id/tv_adopt"
+                                        <TextView android:id="@+id/tv_adopt"
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:text="@string/adopt_now_title"
@@ -261,8 +214,7 @@
                                             android:textSize="18sp"
                                             android:textAlignment="viewStart"
                                             android:layout_toRightOf="@id/iv_adopt_now"/>
-                                        <TextView
-                                            android:id="@+id/tv_adopt_text"
+                                        <TextView android:id="@+id/tv_adopt_text"
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:text="@string/adopt_now_text"
@@ -270,8 +222,7 @@
                                             android:textAlignment="viewStart"
                                             android:layout_below="@id/tv_adopt"
                                             android:layout_toRightOf="@id/iv_adopt_now"/>
-                                        <Button
-                                            android:id="@+id/btn_start_adopt_now"
+                                        <Button android:id="@+id/btn_start_adopt_now"
                                             android:layout_width="wrap_content"
                                             android:layout_height="56sp"
                                             android:background="@drawable/rounded_corners"

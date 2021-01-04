@@ -8,5 +8,8 @@ class Constants {
         const val LOGIN: String = "IS_LOGIN"
         const val USERNAME: String = "USERNAME"
         const val AUTH: String = "AUTH"
+        const val ACCESSTOKEN: String = "Access key"
+        const val REFRESHTOKEN: String = "Refresh token"
+        const val USERID: String = "UserId"
     }
 }

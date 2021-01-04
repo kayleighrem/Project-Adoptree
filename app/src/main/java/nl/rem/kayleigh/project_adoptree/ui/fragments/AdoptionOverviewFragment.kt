@@ -41,15 +41,8 @@ class AdoptionOverviewFragment : Fragment(R.layout.fragment_adoption_overview) {
         sessionManager = SessionManager(view.context)
         initializeUI()
 
-//        if (orderViewModel.products.isNullOrEmpty()) {
-//            productList = orderViewModel.getCart()
-//            println("get cart: " + orderViewModel.getCart())
-//        } else {
-//            productList = orderViewModel.getCart()
-//            println("get cart else (not null) : " + orderViewModel.getCart())
-//        }
-
         btn_next_step_pay.setOnClickListener {
+            println("session is logged in? " + sessionManager.isLogin())
             if (!sessionManager.isLogin()) {
                 findNavController().navigate(R.id.action_adoptionOverviewFragment_to_signUpFragment)
             }
@@ -67,7 +60,6 @@ class AdoptionOverviewFragment : Fragment(R.layout.fragment_adoption_overview) {
         } else {
             println("else 1: " + orderViewModel.products)
         }
-
         total_euro.text = orderViewModel.totalPrice.toString()
     }
 
@@ -96,6 +88,7 @@ class AdoptionOverviewFragment : Fragment(R.layout.fragment_adoption_overview) {
             orderViewModel.remove(product.product!!)
             total_euro.text = orderViewModel.totalPrice.toString()
             setUpRecyclerView()
+            orderAdapter.notifyDataSetChanged()
         }
     }
 

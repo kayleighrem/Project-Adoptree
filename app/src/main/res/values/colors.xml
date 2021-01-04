@@ -36,4 +36,7 @@
     <color name="color_redBrown">#A67004</color>
 
     <color name="colorButtonGreen">#87B62C</color>
+
+    <color name="colorTransparent">#00000000</color>
+    <color name="colorGreyTreeCard">#F9F9F9</color>
 </resources>

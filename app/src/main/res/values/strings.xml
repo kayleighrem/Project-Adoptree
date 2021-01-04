@@ -149,5 +149,19 @@
     <string name="personal_sign">Personal sign</string>
     <string name="personal_sign_helper_text">You can add a personal sign any time you want</string>
     <string name="price">000</string>
+    <string name="v1_0">1.0</string>
+    <string name="thank_you">Thank you for your adoption</string>
+    <string name="thank_you_text">With your contribution CO2 emissions can be  reduced and wildlife and biodiversity will further thrive.</string>
+    <string name="find_my_tree">Find my tree</string>
+    <string name="growth">Growth</string>
+    <string name="photos">Photo\'s</string>
+    <string name="pictures">Pictures</string>
+    <string name="wildlife">Wildlife</string>
+    <string name="growth_value">3 m</string>
+    <string name="co2reduction_value">100 g</string>
+    <string name="humidity_value">40 %</string>
+    <string name="temperature_value">20°C</string>
+    <string name="overall_health">Overall health</string>
+    <string name="log_out">Log out</string>
 
 </resources>

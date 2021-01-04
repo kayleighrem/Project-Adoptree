@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cv_adoption_item"
+    <androidx.cardview.widget.CardView android:id="@+id/cv_adoption_item"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="11sp"
@@ -15,15 +15,13 @@
         app:cardCornerRadius="10sp"
         app:cardElevation="2sp">
 
-        <RelativeLayout
-            android:id="@+id/card_adoption_relative_layout"
+        <RelativeLayout android:id="@+id/card_adoption_relative_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/colorWhite"
             android:layout_margin="15sp">
 
-            <ImageView
-                android:id="@+id/tree_image"
+            <ImageView android:id="@+id/tree_image"
                 android:layout_width="106sp"
                 android:layout_height="149sp"
                 android:layout_marginStart="10sp"
@@ -35,8 +33,7 @@
                 android:src="@drawable/tree_icon"
                 app:tint="@color/colorAccentGreen" />
 
-            <LinearLayout
-                android:id="@+id/info_tree"
+            <LinearLayout android:id="@+id/info_tree"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="10sp"
@@ -44,62 +41,52 @@
                 android:gravity="start"
                 android:layout_toRightOf="@id/tree_image">
 
-                <TextView
-                    android:id="@+id/tree_name"
+                <TextView android:id="@+id/tree_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="25sp"
                     android:layout_gravity="start"
                     android:textAllCaps="true"
                     android:text="tree title" />
-
-                <TextView
-                    android:id="@+id/tree_age2"
+                <TextView android:id="@+id/tree_age2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
-
-                <TextView
-                    android:id="@+id/tree_age"
+                <TextView android:id="@+id/tree_age"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Age: 3 weeks old" />
+
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal" >
-                    <TextView
+                    <TextView android:id="@+id/tv_euro_sign"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="start"
                         android:text="@string/euro_sign" />
-
-                    <TextView
-                        android:id="@+id/tree_price"
+                    <TextView android:id="@+id/tree_price"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="left"
                         android:text="Price" />
                 </LinearLayout>
 
-                <TextView
-                    android:id="@+id/tree_location"
+                <TextView android:id="@+id/tree_location"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="left"
                     android:text="Not planted yet" />
-
             </LinearLayout>
-            <Button
-                android:id="@+id/btn_adopt"
+
+            <Button android:id="@+id/btn_adopt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/btn_adopt"
                 android:layout_marginStart="10sp"
                 android:layout_toRightOf="@id/tree_image"
                 android:layout_below="@id/info_tree"/>
-
-            <Button
-                android:id="@+id/btn_info"
+            <Button android:id="@+id/btn_info"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20sp"

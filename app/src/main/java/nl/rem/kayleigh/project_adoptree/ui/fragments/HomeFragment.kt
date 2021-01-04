@@ -35,19 +35,17 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         this.bottomNavigationView = (activity as MainActivity).bottomNavigationView
         bottomNavigationView = bottomNavigationView.findViewById(R.id.bottomNavigationView)
         bottomNavigationView.visibility = View.VISIBLE
+        initializeUI()
 
-//         If not logged in, don't show the tree cards
-        if (!sessionManager.isLogin()) {
+        if (!sessionManager.isLogin()) { // if not logged in
             rl_home_not_logged_in.visibility = View.VISIBLE
             fl_home_logged_in.visibility = View.GONE
 
-        } else if (sessionManager.isLogin()) {
+        } else if (sessionManager.isLogin()) { // if logged in
             rl_home_not_logged_in.visibility = View.GONE
             fl_home_logged_in.visibility = View.VISIBLE
             setUpRecyclerView()
         }
-
-        initializeUI()
         setUpRecyclerView()
     }
 
@@ -61,7 +59,15 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
     private fun initializeUI() {
         if (sessionManager.isLogin()) {
-            authToken = sessionManager.getUserDetails().AuthToken.toString()
+//            authToken = sessionManager.getUserDetails().AuthToken.toString()
+            authToken = sessionManager.getUserDetails().accessToken.toString()
+        }
+
+        btn_adopt_now.setOnClickListener {
+            findNavController().navigate(R.id.action_homeFragment_to_adoptionFragment)
+        }
+        btn_start_adopt_now.setOnClickListener {
+            findNavController().navigate(R.id.action_homeFragment_to_adoptionFragment)
         }
     }
 

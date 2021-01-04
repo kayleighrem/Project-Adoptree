@@ -15,8 +15,8 @@ interface AdoptreeService {
     @Headers("Content-Type: application/json")
     @GET("product")
     suspend fun getProducts(
-            @Query("isUpForAdoption") isUpForAdoption: Boolean = true,
-            @Query("categoryId") categoryId: Int = 1
+//            @Query("isUpForAdoption") isUpForAdoption: Boolean = true,
+//            @Query("categoryId") categoryId: Int = 1
     ) : Response<List<Product>>
 
     @Headers("Content-Type: application/json")

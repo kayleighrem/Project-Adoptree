@@ -12,7 +12,6 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import kotlinx.android.synthetic.main.fragment_sign_up.*
 import nl.rem.kayleigh.project_adoptree.R
-import nl.rem.kayleigh.project_adoptree.model.RoleEnum
 import nl.rem.kayleigh.project_adoptree.model.User
 import nl.rem.kayleigh.project_adoptree.repository.UserRepository
 import nl.rem.kayleigh.project_adoptree.ui.activities.MainActivity
@@ -40,13 +39,12 @@ class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
         initializeUI()
 
         viewModel.signUpResponse.observe(viewLifecycleOwner, Observer { response ->
-            // TODO: response is error
             loading.visibility = View.GONE
             when (response) {
                 is Resource.Success -> {
                     confirmPasswordText.onEditorAction(EditorInfo.IME_ACTION_DONE)
                     findNavController().navigate(
-                        R.id.action_signUpFragment_to_adoptionResponseFragment
+                            R.id.action_signUpFragment_to_adoptionResponseFragment
                     )
                 }
                 is Resource.Error -> {
@@ -57,27 +55,45 @@ class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
                 }
             }
         })
+
+//        viewModel.signUpResponse.observe(viewLifecycleOwner, Observer { response ->
+//            // TODO: response is error
+//            loading.visibility = View.GONE
+//            when (response) {
+//                is Resource.Success -> {
+//                    confirmPasswordText.onEditorAction(EditorInfo.IME_ACTION_DONE)
+//                    findNavController().navigate(
+//                        R.id.action_signUpFragment_to_adoptionResponseFragment
+//                    )
+//                }
+//                is Resource.Error -> {
+//                    Toast.makeText(requireContext(), response.message, Toast.LENGTH_LONG).show()
+//                    response.message?.let { message ->
+//                        Log.e(TAG, "${getString(R.string.error_log)} $message")
+//                    }
+//                }
+//            }
+//        })
     }
 
     private fun initializeUI() {
         signUp.setOnClickListener {
-            val firstname = firstnameText.text.toString().trim()
-            val lastname = lastnameText.text.toString().trim()
-            val username = usernameText.text.toString().trim()
-            val email = emailText.text.toString().trim()
-            val password = passwordText.text.toString().trim()
+            val firstname = et_firstname.text.toString().trim()
+            val lastname = et_lastname.text.toString().trim()
+            val username = et_username.text.toString().trim()
+            val email = et_email.text.toString().trim()
+            val password = et_password.text.toString().trim()
             val confirmPassword = confirmPasswordText.text.toString().trim()
             if (isPasswordValid(password) && isPasswordMatching(password, confirmPassword)) {
-                user = User(firstname = firstname, lastname = lastname, username = username, email = email, password = password, role = null, createdAt = null, forgetToken = null, id = null)
+                user = User(firstname = firstname, lastname = lastname, username = username, email = email, password = password, role = null, createdAt = null, forgetToken = null, id = null, salt = null)
                 loading.visibility = View.VISIBLE
-//                viewModel.createUser(user)
                 try {
-                    viewModel.createUser(user)
+                    viewModel.register(user)
                 } catch (e: Exception) {
                     Log.e(e.toString(), "Something went wrong")
                 }
             } else if (!isPasswordValid(password)) {
-                passwordText.error = getString(R.string.error_password_length)
+                et_password.error = getString(R.string.error_password_length)
             } else {
                 confirmPasswordText.error = getString(R.string.error_password_no_match)
             }

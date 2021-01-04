@@ -8,12 +8,14 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
 import nl.rem.kayleigh.project_adoptree.R
 import nl.rem.kayleigh.project_adoptree.model.Tree
+import nl.rem.kayleigh.project_adoptree.model.User
 import nl.rem.kayleigh.project_adoptree.repository.TreeRepository
+import nl.rem.kayleigh.project_adoptree.repository.UserRepository
 import nl.rem.kayleigh.project_adoptree.util.Resource
 import retrofit2.Response
 import java.lang.StringBuilder
 
-class HomeViewModel(private val treeRepository: TreeRepository, val context: Context) : ViewModel() {
+class HomeViewModel(private val userRepository: UserRepository, val context: Context) : ViewModel() {
 
     private val _trees: MutableLiveData<Resource<Tree>> = MutableLiveData()
     val trees: MutableLiveData<Resource<Tree>>
@@ -24,10 +26,21 @@ class HomeViewModel(private val treeRepository: TreeRepository, val context: Con
         const val TAG ="HomeViewModel"
     }
 
-    fun getTrees(authToken: String?) = viewModelScope.launch {
+    fun getTrees(user: User) = viewModelScope.launch {
         try {
             _trees.postValue(Resource.Loading())
-            val response = treeRepository.getAllTrees()
+            val response = userRepository.getTreesByUser(user.id!!)
+//            _trees.postValue(handleTreesResponse(response))
+        } catch (e: Exception) {
+            _trees.postValue(Resource.Error(context.getString(R.string.connection_error)))
+            Log.e(TAG, "${context.getString(R.string.error_log)} ${e.message}")
+        }
+    }
+
+    fun getTrees(authToken: String) = viewModelScope.launch {
+        try {
+            _trees.postValue(Resource.Loading())
+//            val response = userRepository.getTreesByUser(authToken)
 //            _trees.postValue(handleTreesResponse(response))
         } catch (e: Exception) {
             _trees.postValue(Resource.Error(context.getString(R.string.connection_error)))
