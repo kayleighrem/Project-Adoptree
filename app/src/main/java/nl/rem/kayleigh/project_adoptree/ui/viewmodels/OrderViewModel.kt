@@ -13,6 +13,7 @@ import nl.rem.kayleigh.project_adoptree.model.*
 import nl.rem.kayleigh.project_adoptree.repository.OrderRepository
 import nl.rem.kayleigh.project_adoptree.util.Constants.Companion.MOLLIE_PAYMENT_REDIRECT_LINK
 import nl.rem.kayleigh.project_adoptree.util.Resource
+import nl.rem.kayleigh.project_adoptree.util.SessionManager
 import okhttp3.MultipartBody
 import okhttp3.OkHttpClient
 import okhttp3.Request
@@ -22,12 +23,13 @@ import java.io.IOException
 import java.lang.Exception
 
 class OrderViewModel(private val orderRepository: OrderRepository, val context: Context) : ViewModel() {
-    private val mutableCart: MutableLiveData<List<OrderLine>> = MutableLiveData()
     var products: MutableList<OrderProduct> = mutableListOf<OrderProduct>()
     lateinit var availableProducts: List<Product>
     var treeSign: Product? = null
     lateinit var categories: List<Category>
     var totalPrice: Double = 0.0
+
+    var sessionManager: SessionManager = SessionManager(context)
 //    var orderResponse: OrderResponse? = null
     lateinit var order: Order
     var orderLines: MutableList<OrderLine> = mutableListOf<OrderLine>()
@@ -95,9 +97,7 @@ class OrderViewModel(private val orderRepository: OrderRepository, val context: 
         } catch (e: Exception ) { }
     }
 
-//    fun createOrderObject(userId: Int?) : Order {
     fun createOrderObject() : Order {
-//        var orderLines: List<OrderLine>
         products.forEach { orderProduct ->
             if (orderProduct.isSignActivated == true) {
                 if (treeSign == treeSign) {
@@ -105,22 +105,20 @@ class OrderViewModel(private val orderRepository: OrderRepository, val context: 
                 }
             }
             val orderline = OrderLine(id = null, orderId = null, productId = orderProduct.product?.id, price = null, vat = null, quantity = orderProduct.quantity, orderLineStatus = null)
-            println("orderline? = " + orderline)
             orderLines.add(orderline)
-            println("[orderlines] 1 = " + orderLines.size)
             orderLines.plus(OrderLine(id = null, orderId = null, productId = orderProduct.product?.id, price = null, vat = null, quantity = orderProduct.quantity, orderLineStatus = null))
-            println("[orderlines] 2 = " + orderLines)
         }
         println("orderlines is being made???? " + orderLines)
-//        println("return value of order = " + Order(id = null, paymentRedirectLink = MOLLIE_PAYMENT_REDIRECT_LINK, paymentStatus = null, orderStatus = null, userId = userId, createdAt = null, orderLines = orderLines))
-//        return Order(id = null, paymentRedirectLink = MOLLIE_PAYMENT_REDIRECT_LINK, paymentStatus = null, orderStatus = null, userId = userId, createdAt = null, orderLines = orderLines) // TODO: this should work
+        println("order returned: " + Order(id = null, paymentRedirectLink = MOLLIE_PAYMENT_REDIRECT_LINK, paymentStatus = null, orderStatus = null, userId = null, createdAt = null, orderLines = orderLines))
         return Order(id = null, paymentRedirectLink = MOLLIE_PAYMENT_REDIRECT_LINK, paymentStatus = null, orderStatus = null, userId = null, createdAt = null, orderLines = orderLines)
     }
 
-    fun createOrder(order: Order, userId: Int) = viewModelScope.launch  {
+    fun createOrder(order: Order, userId: Int, token: String) = viewModelScope.launch  {
         try {
+            val tokenstring = "Bearer $token"
             order.userId = userId
-            _orderResponse.value = handleOrderResponse(orderRepository.createOrder(order))
+            println("test if create order is called")
+            _orderResponse.value = handleOrderResponse(orderRepository.createOrder(order, tokenstring))
         } catch (e: Exception) {
             _orderResponse.postValue(Resource.Error(context.getString(R.string.connection_error)))
             Log.e(

@@ -2,17 +2,22 @@ package nl.rem.kayleigh.project_adoptree.ui.fragments
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import kotlinx.android.synthetic.main.fragment_profile.*
 import nl.rem.kayleigh.project_adoptree.R
 import nl.rem.kayleigh.project_adoptree.model.User
 import nl.rem.kayleigh.project_adoptree.ui.activities.MainActivity
 import nl.rem.kayleigh.project_adoptree.ui.viewmodels.UserViewModel
+import nl.rem.kayleigh.project_adoptree.util.Resource
 import nl.rem.kayleigh.project_adoptree.util.SessionManager
+import java.lang.Exception
 
 class ProfileFragment : Fragment(R.layout.fragment_profile) {
     lateinit var mainActivity: MainActivity
@@ -58,18 +63,42 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
     private fun initializeUI() {
         if (sessionManager.isLogin()) {
             // TODO
-                val user: User = userViewModel.loggedinUserResponse.value!!.data!!
-            tv_username.text = "Hi ${user.firstname} !"
-            your_email.text = user.email
+            println("session access token = " + sessionManager.getUserDetails().accessToken)
+            userViewModel.getLoggedInUser(sessionManager.getUserDetails().accessToken)
 
+            userViewModel.loggedinUserResponse.observe(viewLifecycleOwner, Observer { response ->
+                println("response ? 70 " + response.data)
+                when (response) {
+                    is Resource.Success -> {
+                        println("response ==== " + response)
+                        try {
+                            println("logged in user? profilefragment 64: " + userViewModel.loggedinUserResponse.value?.data)
+                            val user: User = userViewModel.loggedinUserResponse.value!!.data!!
+                            tv_username.text = "Hi ${user.firstname} !"
+                            your_email.text = user.email
+                        } catch (e: Exception) {
+                            Log.e(TAG, "${getString(R.string.error_log)} ${e.message}")
+                        }
+                    }
+                    is Resource.Error -> {
+                        println("response = " + response)
+                        Toast.makeText(
+                                requireContext(),
+                                R.string.something_went_wrong,
+                                Toast.LENGTH_LONG
+                        ).show()
+                        response.message?.let { message ->
+                            Log.e(TAG, "${getString(R.string.error_log)} $message")
+                        }
+                    }
+                }
+            })
         } else {
             ll_login.setOnClickListener {
                 mainActivity.navigateToFragment(loginFragment)
             }
 
             ll_adopt.setOnClickListener {
-                println("action clicked ")
-//                findNavController().navigate(R.id.action_profileFragment_to_loginFragment)
                 mainActivity.navigateToFragment(adoptionFragment)
             }
         }

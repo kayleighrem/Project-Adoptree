@@ -34,6 +34,13 @@ class SessionManager(context: Context) {
         editor.apply()
     }
 
+    fun updateSession(accesstoken: String, refreshtoken: String) {
+        editor.putBoolean(LOGIN, true)
+        editor.putString(ACCESSTOKEN, accesstoken)
+        editor.putString(REFRESHTOKEN, refreshtoken)
+        editor.apply()
+    }
+
     fun isLogin(): Boolean {
         return shared.getBoolean(LOGIN, false)
     }

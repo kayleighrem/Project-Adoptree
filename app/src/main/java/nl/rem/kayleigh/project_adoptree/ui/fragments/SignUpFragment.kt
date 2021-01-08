@@ -77,7 +77,7 @@ class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
                                         userViewModel.getLoggedInUser(sessionManager.getUserDetails().accessToken)
                                         try { // Try to create an order with the logged in user id
                                             order.userId = userViewModel.loggedinUserResponse.value?.data?.id
-                                            mainActivity.orderViewModel.createOrder(order, mainActivity.userViewModel.loggedinUserResponse.value!!.data!!.id!!)
+                                            mainActivity.orderViewModel.createOrder(order, mainActivity.userViewModel.loggedinUserResponse.value!!.data!!.id!!, sessionManager.getUserDetails().accessToken)
                                         } catch (e: Exception) { // Catch if the order was not being made
 
                                         }

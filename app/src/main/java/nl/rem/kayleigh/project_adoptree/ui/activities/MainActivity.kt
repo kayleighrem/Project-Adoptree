@@ -3,9 +3,11 @@ package nl.rem.kayleigh.project_adoptree.ui.activities
 import android.animation.TimeAnimator
 import android.annotation.SuppressLint
 import android.bluetooth.BluetoothClass
+import android.nfc.Tag
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import android.widget.FrameLayout
 import android.widget.TextView
 import androidx.activity.viewModels
@@ -82,6 +84,7 @@ class MainActivity : AppCompatActivity() {
     var privacyPolicyFragment: PrivacyPolicyFragment = PrivacyPolicyFragment()
 
     private companion object {
+        const val TAG = "Main Activity"
         const val DEFAULT_LAYOUT = "fl_fragment"
     }
 
@@ -117,8 +120,6 @@ class MainActivity : AppCompatActivity() {
         initializeViewModels()
 
         sessionManager = SessionManager(this)
-
-
     }
 
     fun navigateToFragment(fragment: Fragment) {
@@ -151,7 +152,7 @@ class MainActivity : AppCompatActivity() {
 //        })
 
         Handler().postDelayed({
-            getToken()
+//            getToken()
         }, 1000) // TODO: should be 1200002
     }
 
@@ -162,10 +163,20 @@ class MainActivity : AppCompatActivity() {
         try {
             println("old access token: " + sessionManager.getUserDetails().accessToken)
             println("old refresh token: " + sessionManager.getUserDetails().refreshToken)
+            userViewModel.refreshToken(sessionManager.getUserDetails().accessToken)
+            println("test ")
             userViewModel.getLoggedInUser(sessionManager.getUserDetails().accessToken)
             println("loggedin user? " + userViewModel.loggedinUserResponse.value!!.data!!.username)
-            userViewModel.refreshToken(sessionManager.getUserDetails().accessToken)
-        } catch (e: Exception) { }
+
+            println("new access token: " + sessionManager.getUserDetails().accessToken)
+            println("new refresh token: " + sessionManager.getUserDetails().refreshToken)
+        } catch (e: Exception) {
+//            println("get logged in user by catch? " + userViewModel.loggedinUserResponse.value!!.data)
+            Log.e(
+                TAG,
+                "${e.message}"
+            )
+        }
 
         println("test token every minute " + currentDate)
     }

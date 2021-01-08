@@ -8,7 +8,8 @@ import retrofit2.http.*
 interface OrderService {
     @Headers("Content-Type: application/json")
     @POST("order")
-    suspend fun createOrder(@Body order: Order) : Response<OrderResponse>
+    suspend fun createOrder(@Body order: Order,
+                            @Header("Authorization") token: String) : Response<OrderResponse>
 
     @Headers("Content-Type: application/json")
     @GET("order/{id}")

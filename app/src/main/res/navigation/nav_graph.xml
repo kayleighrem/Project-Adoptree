@@ -188,7 +188,7 @@
         tools:layout="@layout/fragment_about_app" />
     <fragment
         android:id="@+id/FirstFragment"
-        android:name="nl.rem.kayleigh.project_adoptree.ui.activities.FirstFragment"
+        android:name="nl.rem.kayleigh.project_adoptree.ui.fragments.screens.FirstFragment"
         android:label="@string/first_fragment_label"
         tools:layout="@layout/fragment_first">
 
@@ -198,7 +198,7 @@
     </fragment>
     <fragment
         android:id="@+id/SecondFragment"
-        android:name="nl.rem.kayleigh.project_adoptree.ui.activities.SecondFragment"
+        android:name="nl.rem.kayleigh.project_adoptree.ui.fragments.screens.SecondFragment"
         android:label="@string/second_fragment_label"
         tools:layout="@layout/fragment_second">
 

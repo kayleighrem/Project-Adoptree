@@ -1,11 +1,12 @@
 package nl.rem.kayleigh.project_adoptree.ui.fragments
 
 import android.annotation.SuppressLint
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.View
-import android.view.inputmethod.EditorInfo
 import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.lifecycle.Observer
@@ -35,6 +36,7 @@ class AdoptionOverviewFragment : Fragment(R.layout.fragment_adoption_overview) {
         const val TAG = "AdoptionOverviewFragment"
     }
 
+    @SuppressLint("LongLogTag")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         orderViewModel = (activity as MainActivity).orderViewModel
@@ -57,9 +59,11 @@ class AdoptionOverviewFragment : Fragment(R.layout.fragment_adoption_overview) {
 //                    }
 //            }
         orderViewModel.orderResponse.observe(viewLifecycleOwner, Observer { response ->
+            println("response orderresponse? " + response.data)
             when (response) {
                 is Resource.Success -> {
                     try {
+                        // TODO: go to payment url
 //                        findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
                         Toast.makeText(
                                 requireContext(),
@@ -67,7 +71,7 @@ class AdoptionOverviewFragment : Fragment(R.layout.fragment_adoption_overview) {
                                 Toast.LENGTH_LONG
                         ).show()
                     } catch (e: Exception) {
-                        Log.e(LoginFragment.TAG, "${getString(R.string.error_log)} ${e.message}")
+                        Log.e(TAG, "${getString(R.string.error_log)} ${e.message}")
                     }
                 }
                 is Resource.Error -> {
@@ -77,7 +81,7 @@ class AdoptionOverviewFragment : Fragment(R.layout.fragment_adoption_overview) {
                             Toast.LENGTH_LONG
                     ).show()
                     response.message?.let { message ->
-                        Log.e(LoginFragment.TAG, "${getString(R.string.error_log)} $message")
+                        Log.e(TAG, "${getString(R.string.error_log)} $message")
                     }
                 }
             }
@@ -98,21 +102,44 @@ class AdoptionOverviewFragment : Fragment(R.layout.fragment_adoption_overview) {
     private fun initializeUI() {
         btn_next_step_pay.setOnClickListener {
             try { // try to create an order
-                mainActivity.activateHandler()
+
+//                mainActivity.getToken()
 //                val order = orderViewModel.createOrderObject(loggedinuser.value?.data?.id) // TODO: userid ???
                 val order = orderViewModel.createOrderObject() // TODO: userid ???
 //                orderViewModel.createOrder(order) // TODO: this should work
 
-                val bundle = bundleOf("order" to order)
+//                val bundle = bundleOf("order" to order)
                 if (sessionManager.isLogin()) { // if user is logged in, go to mollie
                     // TODO
-                    orderViewModel.createOrder(order, userViewModel.loggedinUserResponse.value!!.data!!.id!!)
+                        userViewModel.getLoggedInUser(sessionManager.getUserDetails().accessToken)
+                    println("logged in user response: " + userViewModel.loggedinUserResponse.value!!.data)
+
+                    println("test if still here")
+                    try {
+                        orderViewModel.createOrder(order, userViewModel.loggedinUserResponse.value!!.data!!.id!!, sessionManager.getUserDetails().accessToken)
+                        orderViewModel.orderResponse.observe(viewLifecycleOwner, Observer { response ->
+                            println("response orderresponse? " + response.data)
+                            when (response) {
+                                is Resource.Success -> {
+                                    try {
+                                        pay(response.data!!.paymentLink)
+                                    } catch (e: Exception) {
+                                        Log.e(TAG, "${getString(R.string.error_log)} ${getString(R.string.test)} \${getString(R.string.test)} ${e.message}")
+                                    }
+                                }
+                            }
+                        })
+                    } catch (e: Exception) {
+                        Log.e(TAG, "${getString(R.string.error_log)} ${getString(R.string.test)} \${getString(R.string.test)} ${e.message}")
+                    }
+
                 } else { // if user is not logged in, sign up first
 //                    mainActivity.navigateToFragment(mainActivity.signUpFragment)
+                    val bundle = bundleOf("order" to order)
                     findNavController().navigate(R.id.action_adoptionOverviewFragment_to_signUpFragment, bundle)
                 }
-            } catch (e: java.lang.Exception) {
-                Log.e(TAG, "${getString(R.string.error_log)} ${e.message}")
+            } catch (e: Exception) {
+                Log.e(TAG, "${getString(R.string.error_log)} ${getString(R.string.test)} ${e.message}")
             }
         }
 
@@ -153,5 +180,11 @@ class AdoptionOverviewFragment : Fragment(R.layout.fragment_adoption_overview) {
             adapter = orderAdapter
             layoutManager = LinearLayoutManagerWrapper(activity)
         }
+    }
+
+    fun pay(url: String?) {
+            val intent = Intent(Intent.ACTION_VIEW)
+            intent.data = Uri.parse(url)
+            startActivity(intent)
     }
 }

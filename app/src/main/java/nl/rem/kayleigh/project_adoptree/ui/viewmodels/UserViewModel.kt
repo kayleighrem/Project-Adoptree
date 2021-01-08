@@ -19,7 +19,7 @@ class UserViewModel(private val userRepository: UserRepository, val context: Con
     var isAuthenticated: Boolean = false
     var accessTokenKey: String = "accessToken"
 
-    lateinit var sessionManager: SessionManager
+    var sessionManager: SessionManager = SessionManager(context)
 
     private val _loginResponse: MutableLiveData<Resource<LoginResponse>> =
             MutableLiveData()
@@ -35,23 +35,36 @@ class UserViewModel(private val userRepository: UserRepository, val context: Con
     val signUpResponse: LiveData<Resource<UserResponseRegister>>
         get() = _signUpResponse
 
+    private val _refreshTokenResponse: MutableLiveData<Resource<RefreshTokenResponse>> =
+        MutableLiveData()
+    val refreshTokenResponse: LiveData<Resource<RefreshTokenResponse>>
+        get() = _refreshTokenResponse
+
     companion object {
         const val TAG = "UserViewModel"
     }
 
     init {
-        sessionManager = SessionManager(context)
         isAuthenticated = accessTokenKey != null
     }
 
     fun getLoggedInUser(accesstoken: String) = viewModelScope.launch {
         try {
-            val tokenstring: String = "Bearer $accesstoken"
-            _loggedinUserResponse.value = handleLoggedInUserResponse(userRepository.getLoggedInUser(tokenstring))
+            val tokenstring = "Bearer $accesstoken"
+            println("tokenstring: " + tokenstring)
+            println("logginuserresponse = " + loggedinUserResponse.value?.data)
+//            handleLoggedInUserResponse(userRepository.getLoggedInUser(tokenstring))
+            try {
+                _loggedinUserResponse.value = handleLoggedInUserResponse(userRepository.getLoggedInUser(tokenstring))
+            } catch (e: java.lang.Exception) {
+                refreshToken(accesstoken)
+            }
+
         } catch (e: java.lang.Exception) {
+//            refreshToken(accesstoken)
             Log.e(
                     TAG,
-                    "${context.getString(R.string.error_log)} ${e.message}"
+                    "${context.getString(R.string.error_log)} ${R.string.test} ${e.message}"
             )
         }
     }
@@ -59,7 +72,15 @@ class UserViewModel(private val userRepository: UserRepository, val context: Con
     fun refreshToken(token: String) = viewModelScope.launch {
         try {
             val tokenstring = "Bearer $token"
-            handleRefreshTokenResponse(userRepository.newTokens(tokenstring))
+            println("test 1")
+            val refresh = userRepository.newTokens(tokenstring)
+            println("test 2 ")
+            _refreshTokenResponse.value = handleRefreshTokenResponse(refresh)
+            println("refresh token response value = " + refreshTokenResponse.value!!.data!!.refreshToken)
+            println("access token response value = " + refreshTokenResponse.value!!.data!!.accessToken)
+            sessionManager.updateSession(refreshTokenResponse.value!!.data!!.accessToken, refreshTokenResponse.value!!.data!!.refreshToken)
+
+//            handleRefreshTokenResponse(userRepository.newTokens(tokenstring))
 //            _loggedinUserResponse.value = handleLoginUserResponse(userRepository.newTokens(tokenstring))
         } catch (e: java.lang.Exception) {
             println("refresh token function")
@@ -132,20 +153,34 @@ class UserViewModel(private val userRepository: UserRepository, val context: Con
         return Resource.Error(response.message())
     }
 
-    private fun handleLoggedInUserResponse(response: Response<User>) : Resource<User> {
+    fun handleLoggedInUserResponse(response: Response<User>) : Resource<User> {
         println("response logged in user? " + response)
-        if (response.code() in 200..299) {
-            println("not null body" + response.body())
-            response.body()!!.let {
-                return Resource.Success(it)
+        when (response.code()) {
+            in 200..299 -> {
+                println("test response when code is good")
+                response.body()!!.let {
+                    return Resource.Success(it)
+                }
             }
-        }
-        if (response.isSuccessful && response.body() != null) {
-            response.body()!!.let {
-                return Resource.Success(it)
+            in 400..404 -> {
+                println("test response when code is error")
+                refreshToken(loginResponse.value?.data?.accessToken!!)
+                return Resource.Error(response.message())
             }
+            else -> return Resource.Error(response.message())
         }
-        return Resource.Error(response.message())
+//        if (response.code() in 200..299) {
+//            println("not null body" + response.body())
+//            response.body()!!.let {
+//                return Resource.Success(it)
+//            }
+//        }
+//        if (response.isSuccessful && response.body() != null) {
+//            response.body()!!.let {
+//                return Resource.Success(it)
+//            }
+//        }
+//        return Resource.Error(response.message())
     }
 
     private fun handleRefreshTokenResponse(response: Response<RefreshTokenResponse>) : Resource<RefreshTokenResponse> {
@@ -153,17 +188,23 @@ class UserViewModel(private val userRepository: UserRepository, val context: Con
         println("response refresh token? " + response.body()!!.refreshToken)
 
         if (response.code() in 200..299) {
-            sessionManager.getUserDetails().accessToken = response.body()!!.accessToken
-            sessionManager.getUserDetails().refreshToken = response.body()!!.refreshToken
-            response.body()!!.let {
-                return Resource.Success(it)
+            try {
+                sessionManager.updateSession(response.body()!!.accessToken, response.body()!!.refreshToken)
+//            sessionManager.getUserDetails().accessToken = response.body()!!.accessToken
+//            sessionManager.getUserDetails().refreshToken = response.body()!!.refreshToken
+                response.body()!!.let {
+                    return Resource.Success(it)
+                }
+            } catch (e: java.lang.Exception) {
+                println("dit werkt niet?.... :( ")
             }
+
         }
-        if (response.isSuccessful && response.body() != null) {
-            response.body()!!.let {
-                return Resource.Success(it)
-            }
-        }
+//        if (response.isSuccessful && response.body() != null) {
+//            response.body()!!.let {
+//                return Resource.Success(it)
+//            }
+//        }
         return Resource.Error(response.message())
     }
 }
