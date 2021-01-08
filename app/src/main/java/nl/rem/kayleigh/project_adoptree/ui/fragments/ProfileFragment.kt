@@ -6,24 +6,30 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.FragmentManager
-import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
-import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_profile.*
-import kotlinx.android.synthetic.main.fragment_timeline.*
 import nl.rem.kayleigh.project_adoptree.R
+import nl.rem.kayleigh.project_adoptree.model.User
 import nl.rem.kayleigh.project_adoptree.ui.activities.MainActivity
+import nl.rem.kayleigh.project_adoptree.ui.viewmodels.UserViewModel
 import nl.rem.kayleigh.project_adoptree.util.SessionManager
 
 class ProfileFragment : Fragment(R.layout.fragment_profile) {
     lateinit var mainActivity: MainActivity
     lateinit var sessionManager: SessionManager
     lateinit var loginFragment: LoginFragment
+    lateinit var userViewModel: UserViewModel
     lateinit var adoptionFragment: AdoptionFragment
 
     companion object {
         const val TAG = "ProfileFragment"
+    }
+    override fun onCreateView(
+            inflater: LayoutInflater, container: ViewGroup?,
+            savedInstanceState: Bundle?
+    ): View? {
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_profile, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -31,47 +37,40 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
         sessionManager = SessionManager(view.context)
         mainActivity = (activity as MainActivity)
         (activity as MainActivity).profileFragment
+        userViewModel = (activity as MainActivity).userViewModel
         loginFragment = (activity as MainActivity).loginFragment
         adoptionFragment = AdoptionFragment()
 
+        println("session? " + sessionManager.isLogin())
+        initializeUI()
+
         if (!sessionManager.isLogin()) { // if not logged in, don't show user details
-            rl_profile_not_logged_in.visibility = View.VISIBLE
+            ll_profile_not_logged_in.visibility = View.VISIBLE
             rl_profile_logged_in.visibility = View.GONE
         } else if (sessionManager.isLogin()) { // if logged in, show user
             rl_profile_logged_in.visibility = View.VISIBLE
-            rl_profile_not_logged_in.visibility = View.GONE
+            ll_profile_not_logged_in.visibility = View.GONE
+
         }
-        initializeUI()
     }
 
-    @SuppressLint("ResourceType")
+    @SuppressLint("SetTextI18n")
     private fun initializeUI() {
-        log_in.setOnClickListener {
-            mainActivity.navigateToFragment(R.layout.fragment_profile, loginFragment)
-//            findNavController().navigate(R.id.action_profileFragment_to_loginFragment)
-        }
-        adopt_now.setOnClickListener {
-//            mainActivity.navigateToFragment(adoptionFragment)
-            findNavController().navigate(R.id.action_profileFragment_to_adoptionFragment)
-        }
-    }
+        if (sessionManager.isLogin()) {
+            // TODO
+                val user: User = userViewModel.loggedinUserResponse.value!!.data!!
+            tv_username.text = "Hi ${user.firstname} !"
+            your_email.text = user.email
 
-    private fun navigateToSelectedFragment(fragmentName: String) {
-        val fragment =
-                if (fragmentName == "LoginFragment") R.id.loginFragment else R.id.adoptionFragment
+        } else {
+            ll_login.setOnClickListener {
+                mainActivity.navigateToFragment(loginFragment)
+            }
 
-        val isFragmentAlreadyThere =
-                NavHostFragment.findNavController(navHostFragment).currentDestination?.label?.equals(
-                        fragmentName
-                )
-
-        isFragmentAlreadyThere?.let {
-            if (!it) {
-                NavHostFragment.findNavController(navHostFragment)
-                        .navigate(fragment, null)
-            } else {
-                NavHostFragment.findNavController(navHostFragment)
-                        .popBackStack(fragment, true)
+            ll_adopt.setOnClickListener {
+                println("action clicked ")
+//                findNavController().navigate(R.id.action_profileFragment_to_loginFragment)
+                mainActivity.navigateToFragment(adoptionFragment)
             }
         }
     }

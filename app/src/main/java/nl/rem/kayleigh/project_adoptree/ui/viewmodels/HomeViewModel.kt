@@ -17,8 +17,8 @@ import java.lang.StringBuilder
 
 class HomeViewModel(private val userRepository: UserRepository, val context: Context) : ViewModel() {
 
-    private val _trees: MutableLiveData<Resource<Tree>> = MutableLiveData()
-    val trees: MutableLiveData<Resource<Tree>>
+    private val _trees: MutableLiveData<Resource<List<Tree>>> = MutableLiveData()
+    val trees: MutableLiveData<Resource<List<Tree>>>
         get() = _trees
     val notassigned: String = "null"
 
@@ -30,41 +30,39 @@ class HomeViewModel(private val userRepository: UserRepository, val context: Con
 //        this.trees = getTrees(id)
 //    }
 
-    fun getTrees(id: Int) = viewModelScope.launch {
+    fun getTrees(token: String) = viewModelScope.launch {
         try {
-            _trees.postValue(Resource.Loading())
-            val response = userRepository.getTreesByUser(id!!)
+            val tokenstring = "Bearer $token"
+//            _trees.postValue(Resource.Loading())
+//            val response = userRepository.getTreesByUser()
 //            _trees.postValue(handleTreesResponse(response))
+            _trees.value = handleTreesResponse(userRepository.getTreesByUser(tokenstring))
         } catch (e: Exception) {
             _trees.postValue(Resource.Error(context.getString(R.string.connection_error)))
             Log.e(TAG, "${context.getString(R.string.error_log)} ${e.message}")
         }
     }
 
-    fun getTrees(authToken: String) = viewModelScope.launch {
-        try {
-            _trees.postValue(Resource.Loading())
-//            val response = userRepository.getTreesByUser(authToken)
-//            _trees.postValue(handleTreesResponse(response))
-        } catch (e: Exception) {
-            _trees.postValue(Resource.Error(context.getString(R.string.connection_error)))
-            Log.e(TAG, "${context.getString(R.string.error_log)} ${e.message}")
-        }
-    }
+//    fun getTrees(authToken: String) = viewModelScope.launch {
+//        try {
+//            _trees.postValue(Resource.Loading())
+////            val response = userRepository.getTreesByUser(authToken)
+////            _trees.postValue(handleTreesResponse(response))
+//        } catch (e: Exception) {
+//            _trees.postValue(Resource.Error(context.getString(R.string.connection_error)))
+//            Log.e(TAG, "${context.getString(R.string.error_log)} ${e.message}")
+//        }
+//    }
 
-    private fun handleTreesResponse(response: Response<List<Tree>>): Resource<Tree> {
-        if (response.isSuccessful) {
-//            response.body()?.let { resultResponse ->
-//                if (trees == null) {
-//                    _trees = resultResponse
-//                } else {
-//                    val oldArticles = treeResponse?.Results
-//                    val newArticles = resultResponse.Results
-//                    oldArticles?.addAll(newArticles)
-//                }
-//                return Resource.Success(treeResponse ?: resultResponse)
-//            }
+    private fun handleTreesResponse(response: Response<List<Tree>>): Resource<List<Tree>> {
+        if (response.isSuccessful && response.body() != null) {
+            response.body()?.let {
+                this.trees == it
+                println("response successfull? ")
+                return Resource.Success(it)
+            }
         }
-        return Resource.Error(response.message())
+        println("response error ")
+        return Resource.Error(response.body()?.toString()!!)
     }
 }

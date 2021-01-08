@@ -3,19 +3,20 @@ package nl.rem.kayleigh.project_adoptree.model
 import java.io.Serializable
 
 data class Order(
-    val createdAt: String?,
-    val id: Int?,
-    val orderLines: List<OrderLine>?,
-    val orderStatus: OrderStatusEnum?,
-    val paymentRedirectLink: String?,
-    val paymentStatus: PaymentStatusEnum?,
-    val userId: Int?
+        val createdAt: String?,
+        val id: Int?,
+        val orderLines: List<OrderLine>?,
+        val orderStatus: OrderStatusEnum?,
+        val paymentRedirectLink: String?, // redirect link for after mollie payment
+        val paymentStatus: PaymentStatusEnum?,
+        var userId: Int?
 ): Serializable
 
 data class OrderLine(
         val id: Int?,
         val orderId: Int?,
         val price: Double?,
+        val orderLineStatus: OrderStatusEnum?,
         var productId: Int?,
         val quantity: Int?,
         val vat: Int?
@@ -23,7 +24,7 @@ data class OrderLine(
 
 data class OrderResponse(
     val id: Int?,
-    val paymentLink: String?
+    val paymentLink: String? // link to mollie
 ): Serializable
 
 enum class PaymentStatusEnum(

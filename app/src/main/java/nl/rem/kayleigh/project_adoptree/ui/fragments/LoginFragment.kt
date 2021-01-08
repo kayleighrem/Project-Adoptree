@@ -10,6 +10,7 @@ import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.fragment_login.*
 import nl.rem.kayleigh.project_adoptree.R
 import nl.rem.kayleigh.project_adoptree.model.User
@@ -29,6 +30,7 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
     lateinit var user: User
     lateinit var userLogin: UserLogin
     lateinit var mainActivity: MainActivity
+    lateinit var bottomNavigationView: BottomNavigationView
 
     companion object {
         const val TAG = "LoginFragment"
@@ -40,6 +42,12 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
         userRepository = UserRepository()
         viewModel = UserViewModel(userRepository, requireContext())
         homeViewModel = HomeViewModel(userRepository, requireContext())
+
+        mainActivity = (activity as MainActivity)
+
+        this.bottomNavigationView = (activity as MainActivity).bottomNavigationView
+        bottomNavigationView = bottomNavigationView.findViewById(R.id.bottomNavigationView)
+        bottomNavigationView.visibility = View.GONE
 
         sessionManager = SessionManager(view.context)
         initializeUI()
@@ -53,20 +61,18 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
                         response.data?.accessToken?.let {
                             sessionManager.createSession(
                                     it,
-                                    response.data.refreshToken!!,
-                                    response.data.userId!!
+                                    response.data.refreshToken!!
                             )
+                            mainActivity.activateHandler()
                         }
-                        println("session? " + sessionManager.isLogin())
-                        findNavController().navigate(
-                                R.id.action_loginFragment_to_homeFragment
-                        )
+
+                        mainActivity.navigateToFragment(mainActivity.homeFragment)
+//                        findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
                         Toast.makeText(
                                 requireContext(),
                                 "${getString(R.string.test)} ${userLogin.username}",
                                 Toast.LENGTH_LONG
                         ).show()
-//                        homeViewModel.getTrees(sessionManager.getUserDetails().accessToken.toString())
                     } catch (e: Exception) {
                         Log.e(TAG, "${getString(R.string.error_log)} ${e.message}")
                     }

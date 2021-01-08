@@ -1,5 +1,6 @@
 package nl.rem.kayleigh.project_adoptree.api
 
+import nl.rem.kayleigh.project_adoptree.model.Order
 import java.util.concurrent.TimeUnit
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -36,6 +37,10 @@ class RetrofitInstance {
 
         val contentapi: ContentService by lazy {
             retrofit.create(ContentService::class.java)
+        }
+
+        val orderapi: OrderService by lazy {
+            retrofit.create(OrderService::class.java)
         }
     }
 }

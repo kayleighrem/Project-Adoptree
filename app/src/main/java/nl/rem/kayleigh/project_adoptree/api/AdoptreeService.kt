@@ -22,17 +22,4 @@ interface AdoptreeService {
     @Headers("Content-Type: application/json")
     @GET("category")
     suspend fun getCategories() : Response<List<Category>>
-
-    @Headers("Content-Type: application/json")
-    @GET("order/{id}")
-    suspend fun getOrderById() : Response<Order>
-
-    @Headers("Content-Type: application/json")
-    @POST("order")
-    suspend fun createOrder(@Body order: Order)
-
-    @Headers("Content-Type: application/json")
-    @PUT("order")
-    suspend fun updateOrder()
-
 }

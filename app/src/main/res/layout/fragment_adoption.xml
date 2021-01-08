@@ -6,7 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:backgroundTint="@color/colorBackground"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context=".ui.activities.AdoptionActivity">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/top_toolbar"

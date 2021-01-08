@@ -9,11 +9,10 @@ import androidx.navigation.fragment.findNavController
 import kotlinx.android.synthetic.main.fragment_adoption_response.*
 import nl.rem.kayleigh.project_adoptree.R
 
-class AdoptionResponseFragment : Fragment() {
+class AdoptionResponseFragment : Fragment(R.layout.fragment_adoption_response) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        InitializeUI()
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -22,9 +21,14 @@ class AdoptionResponseFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_adoption_response, container, false)
     }
 
-    private fun InitializeUI() {
+    private fun initializeUI() {
         btn_monitor.setOnClickListener {
             findNavController().navigate(R.id.action_adoptionResponseFragment_to_homeFragment)
         }
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        initializeUI()
     }
 }

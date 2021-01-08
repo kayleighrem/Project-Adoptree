@@ -22,8 +22,6 @@ import kotlin.collections.ArrayList
 
 class UserAdapter : RecyclerView.Adapter<UserAdapter.TreeViewHolder>() {
     private val treeList = ArrayList<Fragment>()
-    lateinit var relativeLayout: RelativeLayout
-    lateinit var expandableLayout: RelativeLayout
     private var onItemClickListener: ((Tree) -> Unit)? = null
 
     inner class TreeViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

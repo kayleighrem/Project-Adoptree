@@ -18,13 +18,18 @@ class TimelineFragment : Fragment(R.layout.fragment_timeline) {
         super.onViewCreated(view, savedInstanceState)
         sessionManager = SessionManager(view.context)
 
-        //         If not logged in, don't show the timeline
-        if (!sessionManager.isLogin()) {
+        if (!sessionManager.isLogin()) { // if not logged in
+            sv_timeline_logged_in.visibility = View.GONE
+            sv_timeline_not_logged_in.visibility = View.VISIBLE
+
             fl_timeline_not_logged_in.visibility = View.VISIBLE
             fl_timeline_logged_in.visibility = View.GONE
-        } else if (sessionManager.isLogin()) {
+        } else if (sessionManager.isLogin()) { // if logged in
             fl_timeline_logged_in.visibility = View.VISIBLE
             fl_timeline_not_logged_in.visibility = View.GONE
+
+            sv_timeline_logged_in.visibility = View.VISIBLE
+            sv_timeline_not_logged_in.visibility = View.GONE
         }
     }
 }

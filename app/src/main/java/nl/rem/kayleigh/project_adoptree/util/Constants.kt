@@ -11,5 +11,6 @@ class Constants {
         const val ACCESSTOKEN: String = "Access key"
         const val REFRESHTOKEN: String = "Refresh token"
         const val USERID: String = "UserId"
+        const val MOLLIE_PAYMENT_REDIRECT_LINK = "mollie-app//payment-return"
     }
 }

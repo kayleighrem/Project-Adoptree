@@ -12,6 +12,7 @@ import androidx.navigation.fragment.findNavController
 import kotlinx.android.synthetic.main.fragment_adoption_overview.*
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.fragment_adoption.*
 import kotlinx.android.synthetic.main.fragment_adoption.view.*
@@ -32,11 +33,13 @@ import nl.rem.kayleigh.project_adoptree.util.SessionManager
 
 class AdoptionFragment : Fragment(R.layout.fragment_adoption) {
     private lateinit var adoptionAdapter: AdoptionAdapter
+    lateinit var mainActivity: MainActivity
     lateinit var orderViewModel: OrderViewModel
     lateinit var adoptionViewModel: AdoptionViewModel
     private lateinit var sessionManager: SessionManager
     var productList: List<Product> = ArrayList()
     private var authToken: String? = null
+    lateinit var bottomNavigationView: BottomNavigationView
     var isLoading = false
     var isScrolling = false
 
@@ -49,6 +52,14 @@ class AdoptionFragment : Fragment(R.layout.fragment_adoption) {
         orderViewModel = (activity as MainActivity).orderViewModel
         adoptionViewModel = (activity as MainActivity).adoptionViewModel
         sessionManager = SessionManager(view.context)
+
+        mainActivity = (activity as MainActivity)
+
+        this.bottomNavigationView = (activity as MainActivity).bottomNavigationView
+        bottomNavigationView = bottomNavigationView.findViewById(R.id.bottomNavigationView)
+        bottomNavigationView.visibility = View.GONE
+
+
         setUpRecyclerView()
         initializeUI()
 
@@ -105,7 +116,8 @@ class AdoptionFragment : Fragment(R.layout.fragment_adoption) {
         }
 
         btn_next_step.setOnClickListener {
-            findNavController().navigate(R.id.action_adoptionFragment_to_adoptionOverviewFragment)
+            mainActivity.navigateToFragment(mainActivity.adoptionOverviewFragment)
+//            findNavController().navigate(R.id.action_adoptionFragment_to_adoptionOverviewFragment)
         }
 
         adoptionAdapter.setOnInfoButtonClickListener { product, i ->

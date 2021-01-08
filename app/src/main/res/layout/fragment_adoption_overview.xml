@@ -124,7 +124,7 @@
                 android:layout_weight="1"
                 android:layout_margin="5sp"
                 android:background="@drawable/rounded_corners"
-                android:text="@string/next_step"
+                android:text="@string/pay"
                 android:theme="@style/CustomButtonStyle" />
         </LinearLayout>
     </LinearLayout>

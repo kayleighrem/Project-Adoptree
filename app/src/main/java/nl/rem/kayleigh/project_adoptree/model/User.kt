@@ -43,7 +43,7 @@ data class User(
         val password: String?,
         val salt: String?,
         val forgetToken: String?,
-        val role: RoleEnum?,
+        val role: String?,
         val createdAt: String?,
 ): Serializable
 

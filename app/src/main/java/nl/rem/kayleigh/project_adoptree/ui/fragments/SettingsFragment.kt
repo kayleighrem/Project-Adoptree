@@ -1,10 +1,12 @@
 package nl.rem.kayleigh.project_adoptree.ui.fragments
 
+import android.os.Build
 import android.os.Bundle
 import android.preference.PreferenceActivity
 import android.preference.PreferenceFragment
 import android.util.Log
 import android.view.View
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
@@ -19,13 +21,17 @@ import kotlinx.android.synthetic.main.fragment_profile.rl_profile_logged_in
 import kotlinx.android.synthetic.main.fragment_settings.*
 import nl.rem.kayleigh.project_adoptree.R
 import nl.rem.kayleigh.project_adoptree.repository.UserRepository
+import nl.rem.kayleigh.project_adoptree.ui.activities.MainActivity
 import nl.rem.kayleigh.project_adoptree.ui.viewmodels.AdoptionViewModel
+import nl.rem.kayleigh.project_adoptree.ui.viewmodels.UserViewModel
 import nl.rem.kayleigh.project_adoptree.util.SessionManager
 import java.lang.Exception
 
 class SettingsFragment : Fragment(R.layout.fragment_settings) {
     lateinit var sessionManager: SessionManager
+    lateinit var userViewModel: UserViewModel
     lateinit var userRepository: UserRepository
+    lateinit var mainActivity: MainActivity
 
     companion object {
         const val TAG = "SettingsFragment"
@@ -35,18 +41,19 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
         super.onCreate(savedInstanceState)
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         sessionManager = SessionManager(view.context)
         userRepository = UserRepository()
-        val navController: NavController? = this.activity?.let { Navigation.findNavController(it, R.id.navHostFragment) }
+
+        mainActivity = (activity as MainActivity)
+
+        userViewModel = (activity as MainActivity).userViewModel
+//        val navController: NavController? = this.activity?.let { Navigation.findNavController(it, R.id.navHostFragment) }
 
         initializeUI()
 
-        println("printing some values: ")
-        println("activity = " + this.activity)
-        println("context = "+this.context)
-        println("navigation = " + navController)
 
         if (!sessionManager.isLogin()) { // if not logged in, don't show user details
             ll_settings_not_logged_in.visibility = View.VISIBLE
@@ -57,13 +64,16 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
         }
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     private fun initializeUI() {
         ll_logout.setOnClickListener {
             // TODO: log out user thru call
-//                userRepository.logout(this.sessionManager.getUserDetails())
+
             try {
+                userViewModel.logout()
                 sessionManager.clearUserDetails()
-                findNavController().navigate(R.id.action_settingsFragment_to_splashFragment)
+                mainActivity.navigateToFragment(mainActivity.loginFragment)
+//                findNavController().navigate(R.id.action_settingsFragment_to_splashFragment)
             } catch (e: Exception) {
                 Log.e(TAG, "${context?.getString(R.string.error_log)} ${e.message}")
             }
@@ -72,16 +82,27 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
 
         action_settings_logout.setOnClickListener {
             try {
+                userViewModel.logout()
                 sessionManager.clearUserDetails()
-                findNavController().navigate(R.id.action_settingsFragment_to_splashFragment)
+                mainActivity.navigateToFragment(mainActivity.loginFragment)
+//                findNavController().navigate(R.id.action_settingsFragment_to_splashFragment)
             } catch (e: Exception) {
                 Log.e(TAG, "${context?.getString(R.string.error_log)} ${e.message}")
             }
         }
         action_settings_language.setOnClickListener {  }
-        action_settings_contract_information.setOnClickListener {  }
-        action_settings_privacy_policy.setOnClickListener {  }
-        action_settings_about_app.setOnClickListener {  }
+        ll_contract.setOnClickListener {
+            mainActivity.navigateToFragment(mainActivity.contractInformationFragment)
+//            findNavController().navigate(R.id.action_settingsFragment_to_contractInformationFragment)
+        }
+        action_settings_privacy_policy.setOnClickListener {
+            mainActivity.navigateToFragment(mainActivity.privacyPolicyFragment)
+//            findNavController().navigate(R.id.action_settingsFragment_to_privacyPolicyFragment)
+        }
+        action_settings_about_app.setOnClickListener {
+            mainActivity.navigateToFragment(mainActivity.aboutAppFragment)
+//            findNavController().navigate(R.id.action_settingsFragment_to_aboutAppFragment)
+        }
         action_settings_share_app.setOnClickListener {  }
         action_settings_rate_app.setOnClickListener {  }
         action_settings_contact.setOnClickListener {  }

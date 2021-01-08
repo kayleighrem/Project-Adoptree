@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
+    app:defaultNavHost="true"
     app:startDestination="@id/splashFragment">
 
     <activity
@@ -18,7 +19,7 @@
         android:id="@+id/splashFragment"
         android:name="nl.rem.kayleigh.project_adoptree.ui.fragments.SplashFragment"
         android:label="fragment_splash"
-        tools:layout="@layout/fragment_splash" >
+        tools:layout="@layout/fragment_splash">
         <action
             android:id="@+id/action_splashFragment_to_viewPagerFragment"
             app:destination="@id/viewPagerFragment" />
@@ -28,20 +29,17 @@
         <action
             android:id="@+id/action_splashFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
-        <!--        <action-->
-<!--            android:id="@+id/action_splashFragment_to_homeFragment"-->
-<!--            app:destination="@id/homeFragment"-->
     </fragment>
     <fragment
         android:id="@+id/viewPagerFragment"
         android:name="nl.rem.kayleigh.project_adoptree.ui.fragments.IntroViewPagerFragment"
         android:label="fragment_view_pager"
-        tools:layout="@layout/fragment_intro_view_pager" >
-<!--        <action-->
-<!--            android:id="@+id/action_viewPagerFragment_to_homeFragment"-->
-<!--            app:destination="@id/homeFragment"-->
-<!--            app:popUpTo="@id/viewPagerFragment"-->
-<!--            app:popUpToInclusive="true" />-->
+        tools:layout="@layout/fragment_intro_view_pager">
+        <!--        <action-->
+        <!--            android:id="@+id/action_viewPagerFragment_to_homeFragment"-->
+        <!--            app:destination="@id/homeFragment"-->
+        <!--            app:popUpTo="@id/viewPagerFragment"-->
+        <!--            app:popUpToInclusive="true" />-->
         <action
             android:id="@+id/action_viewPagerFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
@@ -51,7 +49,7 @@
         android:id="@+id/homeFragment"
         android:name="nl.rem.kayleigh.project_adoptree.ui.fragments.HomeFragment"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home" >
+        tools:layout="@layout/fragment_home">
         <action
             android:id="@+id/action_homeFragment_to_adoptionFragment"
             app:destination="@id/adoptionFragment" />
@@ -64,10 +62,10 @@
         tools:layout="@layout/fragment_login">
         <action
             android:id="@+id/action_loginFragment_to_homeFragment"
-            app:destination="@id/homeFragment"/>
+            app:destination="@id/homeFragment" />
         <action
             android:id="@+id/action_loginFragment_to_adoptionFragment"
-            app:destination="@id/adoptionFragment"/>
+            app:destination="@id/adoptionFragment" />
         <action
             android:id="@+id/action_loginFragment_to_forgotPasswordFragment"
             app:destination="@id/forgotPasswordFragment" />
@@ -76,7 +74,7 @@
     <fragment
         android:id="@+id/signUpFragment"
         android:name="nl.rem.kayleigh.project_adoptree.ui.fragments.SignUpFragment"
-        android:label="SignUpFragment" >
+        android:label="SignUpFragment">
         <action
             android:id="@+id/action_signUpFragment_to_adoptionResponseFragment"
             app:destination="@id/adoptionResponseFragment" />
@@ -101,7 +99,7 @@
         android:id="@+id/adoptionTreeInfoActivity"
         android:name="nl.rem.kayleigh.project_adoptree.ui.activities.AdoptionTreeInfoActivity"
         android:label="@string/test"
-        tools:layout="@layout/activity_adoption_tree_info" >
+        tools:layout="@layout/activity_adoption_tree_info">
         <argument
             android:name="product"
             app:argType="nl.rem.kayleigh.project_adoptree.model.Product" />
@@ -110,10 +108,14 @@
         android:id="@+id/adoptionOverviewFragment"
         android:name="nl.rem.kayleigh.project_adoptree.ui.fragments.AdoptionOverviewFragment"
         android:label="fragment_adoption_overview"
-        tools:layout="@layout/fragment_adoption_overview" >
+        tools:layout="@layout/fragment_adoption_overview">
         <action
             android:id="@+id/action_adoptionOverviewFragment_to_signUpFragment"
-            app:destination="@id/signUpFragment" />
+            app:destination="@id/signUpFragment">
+            <argument
+                android:name="order"
+                app:argType="nl.rem.kayleigh.project_adoptree.model.Order" />
+        </action>
         <action
             android:id="@+id/action_adoptionOverviewFragment_to_adoptionFragment"
             app:destination="@id/adoptionFragment" />
@@ -127,7 +129,7 @@
         android:id="@+id/profileFragment"
         android:name="nl.rem.kayleigh.project_adoptree.ui.fragments.ProfileFragment"
         android:label="fragment_profile"
-        tools:layout="@layout/fragment_profile" >
+        tools:layout="@layout/fragment_profile">
         <action
             android:id="@+id/action_profileFragment_to_adoptionFragment"
             app:destination="@id/adoptionFragment" />
@@ -139,7 +141,7 @@
         android:id="@+id/adoptionResponseFragment"
         android:name="nl.rem.kayleigh.project_adoptree.ui.fragments.AdoptionResponseFragment"
         android:label="fragment_adoption_response"
-        tools:layout="@layout/fragment_adoption_response" >
+        tools:layout="@layout/fragment_adoption_response">
         <action
             android:id="@+id/action_adoptionResponseFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
@@ -153,12 +155,55 @@
         android:id="@+id/settingsFragment"
         android:name="nl.rem.kayleigh.project_adoptree.ui.fragments.SettingsFragment"
         android:label="fragment_settings"
-        tools:layout="@layout/fragment_settings" >
+        tools:layout="@layout/fragment_settings">
         <action
             android:id="@+id/action_settingsFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
         <action
             android:id="@+id/action_settingsFragment_to_splashFragment"
             app:destination="@id/splashFragment" />
+        <action
+            android:id="@+id/action_settingsFragment_to_contractInformationFragment"
+            app:destination="@id/contractInformationFragment" />
+        <action
+            android:id="@+id/action_settingsFragment_to_privacyPolicyFragment"
+            app:destination="@id/privacyPolicyFragment" />
+        <action
+            android:id="@+id/action_settingsFragment_to_aboutAppFragment"
+            app:destination="@id/aboutAppFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/contractInformationFragment"
+        android:name="nl.rem.kayleigh.project_adoptree.ui.fragments.screens.ContractInformationFragment"
+        android:label="fragment_contract_information"
+        tools:layout="@layout/fragment_contract_information" />
+    <fragment
+        android:id="@+id/privacyPolicyFragment"
+        android:name="nl.rem.kayleigh.project_adoptree.ui.fragments.screens.PrivacyPolicyFragment"
+        android:label="PrivacyPolicyFragment" />
+    <fragment
+        android:id="@+id/aboutAppFragment"
+        android:name="nl.rem.kayleigh.project_adoptree.ui.fragments.screens.AboutAppFragment"
+        android:label="fragment_about_app"
+        tools:layout="@layout/fragment_about_app" />
+    <fragment
+        android:id="@+id/FirstFragment"
+        android:name="nl.rem.kayleigh.project_adoptree.ui.activities.FirstFragment"
+        android:label="@string/first_fragment_label"
+        tools:layout="@layout/fragment_first">
+
+        <action
+            android:id="@+id/action_FirstFragment_to_SecondFragment"
+            app:destination="@id/SecondFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/SecondFragment"
+        android:name="nl.rem.kayleigh.project_adoptree.ui.activities.SecondFragment"
+        android:label="@string/second_fragment_label"
+        tools:layout="@layout/fragment_second">
+
+        <action
+            android:id="@+id/action_SecondFragment_to_FirstFragment"
+            app:destination="@id/FirstFragment" />
     </fragment>
 </navigation>

@@ -51,7 +51,6 @@ class AdoptionAdapter :
     private var onNextButtonClickListener: ((Product, Int) -> Unit)? = null
 
 
-    //    @SuppressLint("SetTextI18n")
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val product = differ.currentList[position]
@@ -72,7 +71,6 @@ class AdoptionAdapter :
 //            )
 
             btn_info.setOnClickListener {
-                println("info clicked :) ")
                 val pos: Int = holder.adapterPosition
                 if (pos != RecyclerView.NO_POSITION) {
                     onInfoButtonClickListener?.let {
@@ -82,7 +80,6 @@ class AdoptionAdapter :
             }
 
             btn_adopt.setOnClickListener {
-                println("adopt clicked :) ")
                 val pos: Int = holder.adapterPosition
                 if (pos != RecyclerView.NO_POSITION) {
                     onAdoptButtonClickListener?.let {
@@ -103,9 +100,5 @@ class AdoptionAdapter :
 
     fun setOnInfoButtonClickListener(listener: (Product, Int) -> Unit) {
         onInfoButtonClickListener = listener
-    }
-
-    fun setOnNextButtonClickListener(listener: (Product, Int) -> Unit) {
-        onNextButtonClickListener = listener
     }
 }

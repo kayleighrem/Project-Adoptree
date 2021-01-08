@@ -1,12 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:theme="@style/AppTheme"
     android:background="@color/colorBackground"
-    tools:context=".ui.fragments.ProfileFragment">
+    android:clickable="true"
+    tools:context=".ui.fragments.ProfileFragment"
+    android:orientation="vertical"
+    app:navGraph="@navigation/nav_graph"
+    android:focusable="true">
 
     <androidx.appcompat.widget.Toolbar android:id="@+id/toolbar"
         android:layout_width="match_parent"
@@ -34,7 +38,8 @@
         android:paddingTop="20sp"
         android:layout_marginBottom="50sp"
         tools:ignore="MissingConstraints">
-        <RelativeLayout
+        <LinearLayout
+            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/toolbar"
@@ -65,37 +70,57 @@
                 </TextView>
             </RelativeLayout>
 
-            <RelativeLayout android:id="@+id/rl_profile_not_logged_in"
+            <LinearLayout android:id="@+id/ll_profile_not_logged_in"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/rl_user_image"
                 android:textAlignment="viewStart"
+                android:orientation="vertical"
                 tools:ignore="NotSibling">
-
-                <TextView android:id="@+id/log_in"
+                <LinearLayout android:id="@+id/ll_login"
                     android:layout_width="match_parent"
                     android:layout_height="60sp"
-                    android:layout_below="@id/rl_user_image"
-                    android:background="@color/colorWhite"
-                    style="@style/SettingsSwitchItems"
-                    android:padding="10sp"
-                    android:text="@string/log_in" />
-                <TextView android:id="@+id/adopt_now"
+                    style="@style/SettingsItemsBackground"
+                    android:orientation="horizontal"
+                    tools:ignore="UseCompoundDrawables">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        style="@style/SettingsItemsText"
+                        android:text="@string/log_in" />
+                    <ImageButton
+                        android:id="@+id/action_profile_login"
+                        android:src="@drawable/ic_baseline_keyboard_arrow_right_24"
+                        android:backgroundTint="@color/colorTransparent"
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content" />
+                </LinearLayout>
+                <LinearLayout android:id="@+id/ll_adopt"
                     android:layout_width="match_parent"
                     android:layout_height="60sp"
-                    android:layout_below="@id/log_in"
-                    android:layout_marginTop="1sp"
-                    android:background="@color/colorWhite"
-                    style="@style/SettingsSwitchItems"
-                    android:padding="10sp"
-                    android:text="@string/adopt_now_title" />
-            </RelativeLayout>
+                    style="@style/SettingsItemsBackground"
+                    android:orientation="horizontal"
+                    tools:ignore="UseCompoundDrawables">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        style="@style/SettingsItemsText"
+                        android:text="@string/adopt_now_title" />
+                    <ImageButton
+                        android:id="@+id/action_profile_adopt"
+                        android:src="@drawable/ic_baseline_keyboard_arrow_right_24"
+                        android:backgroundTint="@color/colorTransparent"
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content" />
+                </LinearLayout>
+            </LinearLayout>
 
-            <RelativeLayout android:id="@+id/rl_profile_logged_in"
+            <LinearLayout android:id="@+id/rl_profile_logged_in"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/rl_user_image"
                 android:textAlignment="viewStart"
+                android:orientation="vertical"
                 android:layout_marginHorizontal="20sp"
                 tools:ignore="NotSibling">
 
@@ -184,7 +209,7 @@
                     android:text="@string/country_example"
                     android:textAlignment="viewStart"
                     android:textSize="20sp" />
-            </RelativeLayout>
-        </RelativeLayout>
+            </LinearLayout>
+        </LinearLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

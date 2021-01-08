@@ -46,7 +46,6 @@
     <ScrollView android:id="@+id/sv_timeline_not_logged_in"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="gone"
         android:layout_below="@id/toolbar">
         <FrameLayout
             android:id="@+id/fl_timeline_not_logged_in"

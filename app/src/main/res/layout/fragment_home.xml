@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:navGraph="@navigation/nav_graph"
     android:theme="@style/AppTheme"
     android:background="@color/colorBackground"
     android:clickable="true"
@@ -29,7 +30,7 @@
 
         <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_below="@id/toolbar">
 
                 <LinearLayout
@@ -49,14 +50,13 @@
                                     android:layout_height="match_parent"
                                     android:clipToPadding="false"
                                     android:paddingBottom="50sp"
-                                    android:visibility="visible"
                                     tools:listitem="@layout/item_tree_card" />
                         </RelativeLayout>
 
                         <LinearLayout android:id="@+id/ll_home_logged_in_no_trees"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                                android:orientation="vertical">
+                            android:orientation="vertical">
                                 <LinearLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
@@ -89,9 +89,10 @@
                                             android:textSize="20sp" />
                                 </LinearLayout>
                         </LinearLayout>
-                        <RelativeLayout android:id="@+id/rl_home_not_logged_in"
+                        <LinearLayout android:id="@+id/rl_home_not_logged_in"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
+                            android:orientation="vertical"
                             android:layout_marginBottom="60dp"
                             android:padding="20sp">
                                 <Button android:id="@+id/btn_guest_adopt_now"
@@ -262,7 +263,7 @@
                                             android:layout_below="@id/tv_adopt_text"
                                             android:textSize="20sp" />
                                 </RelativeLayout>
-                        </RelativeLayout>
+                        </LinearLayout>
                 </LinearLayout>
         </ScrollView>
 </RelativeLayout>

@@ -21,6 +21,7 @@ import kotlinx.android.synthetic.main.item_adoption_tree_card_overview.view.*
 import nl.rem.kayleigh.project_adoptree.R
 import nl.rem.kayleigh.project_adoptree.model.OrderProduct
 import nl.rem.kayleigh.project_adoptree.model.Product
+import nl.rem.kayleigh.project_adoptree.ui.activities.MainActivity
 import nl.rem.kayleigh.project_adoptree.ui.viewmodels.OrderViewModel
 import nl.rem.kayleigh.project_adoptree.util.SessionManager
 import java.time.LocalDateTime
@@ -110,6 +111,7 @@ class OrderAdapter : RecyclerView.Adapter<OrderAdapter.ViewHolder>()  {
                                 }
                             }
                             notifyDataSetChanged()
+                            return@setPositiveButton
                         }
                         .setNegativeButton("No") { dialog, id ->
                             // Dismiss the dialog
@@ -119,16 +121,14 @@ class OrderAdapter : RecyclerView.Adapter<OrderAdapter.ViewHolder>()  {
                 alert.show()
             }
 
-
             cb_personal_sign.setOnClickListener {
-                if (cb_personal_sign.isChecked) {
+                if (cb_personal_sign.isChecked) { // If the user wants a personal sign
                     product.isSignActivated = true
                 }
-                if (!cb_personal_sign.isChecked) {
+                if (!cb_personal_sign.isChecked) { // If the user doesn't want a personal sign anymore
                     product.isSignActivated = false
                 }
             }
-
         }
     }
 
