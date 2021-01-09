@@ -17,8 +17,7 @@ import java.time.format.DateTimeFormatter
 import java.time.format.FormatStyle
 import java.util.*
 
-class AdoptionAdapter :
-        RecyclerView.Adapter<AdoptionAdapter.ViewHolder>()  {
+class AdoptionAdapter : RecyclerView.Adapter<AdoptionAdapter.ViewHolder>()  {
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var sessionManager: SessionManager = SessionManager(itemView.context)

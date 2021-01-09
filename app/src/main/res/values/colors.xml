@@ -39,4 +39,15 @@
 
     <color name="colorTransparent">#00000000</color>
     <color name="colorGreyTreeCard">#F9F9F9</color>
+
+    <color name="test">#E91E63</color>
+    
+    
+    
+    
+    <color name="colorPersonalizeTree_red">#FF5722</color>
+    <color name="colorPersonalizeTree_blue">#2196F3</color>
+    <color name="colorPersonalizeTree_green">#4CAF50</color>
+    <color name="colorPersonalizeTree_purple">#9C27B0</color>
+    <color name="colorPersonalizeTree_yellow">#FFEB3B</color>
 </resources>

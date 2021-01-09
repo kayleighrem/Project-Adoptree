@@ -169,4 +169,5 @@
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="title_book_a_tour">Book a tour</string>
     <string name="something_went_wrong">Something went wrong</string>
+    <string name="tree_name">tree name</string>
 </resources>

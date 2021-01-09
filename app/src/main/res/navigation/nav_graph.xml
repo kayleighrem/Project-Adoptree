@@ -53,6 +53,9 @@
         <action
             android:id="@+id/action_homeFragment_to_adoptionFragment"
             app:destination="@id/adoptionFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_personalizeTreeActivity"
+            app:destination="@id/personalizeTreeActivity" />
     </fragment>
 
     <fragment
@@ -150,7 +153,11 @@
         android:id="@+id/feedFragment"
         android:name="nl.rem.kayleigh.project_adoptree.ui.fragments.FeedFragment"
         android:label="fragment_feed"
-        tools:layout="@layout/fragment_feed" />
+        tools:layout="@layout/fragment_feed" >
+        <action
+            android:id="@+id/action_feedFragment_to_bookATourActivity"
+            app:destination="@id/bookATourActivity" />
+    </fragment>
     <fragment
         android:id="@+id/settingsFragment"
         android:name="nl.rem.kayleigh.project_adoptree.ui.fragments.SettingsFragment"
@@ -206,4 +213,18 @@
             android:id="@+id/action_SecondFragment_to_FirstFragment"
             app:destination="@id/FirstFragment" />
     </fragment>
+    <activity
+        android:id="@+id/bookATourActivity"
+        android:name="nl.rem.kayleigh.project_adoptree.ui.activities.BookATourActivity"
+        android:label="activity_book_a_tour"
+        tools:layout="@layout/activity_book_a_tour" />
+    <activity
+        android:id="@+id/personalizeTreeActivity"
+        android:name="nl.rem.kayleigh.project_adoptree.ui.activities.PersonalizeTreeActivity"
+        android:label="activity_personalize_tree"
+        tools:layout="@layout/activity_personalize_tree">
+        <argument
+            android:name="tree"
+            app:argType="nl.rem.kayleigh.project_adoptree.model.Tree" />
+    </activity>
 </navigation>

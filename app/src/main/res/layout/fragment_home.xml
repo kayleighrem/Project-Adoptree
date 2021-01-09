@@ -7,10 +7,8 @@
     app:navGraph="@navigation/nav_graph"
     android:theme="@style/AppTheme"
     android:background="@color/colorBackground"
-    android:clickable="true"
     tools:context=".ui.fragments.HomeFragment"
-    android:orientation="vertical"
-    android:focusable="true">
+    android:orientation="vertical">
 
         <androidx.appcompat.widget.Toolbar android:id="@+id/toolbar"
             android:layout_width="match_parent"
@@ -50,6 +48,7 @@
                                     android:layout_height="match_parent"
                                     android:clipToPadding="false"
                                     android:paddingBottom="50sp"
+                                    app:defaultNavHost="true"
                                     tools:listitem="@layout/item_tree_card" />
                         </RelativeLayout>
 

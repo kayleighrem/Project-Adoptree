@@ -19,4 +19,13 @@
         <item>english</item>
         <item>dutch</item>
     </string-array>
+
+
+    <array name="color_values">
+        <item>@color/colorPersonalizeTree_green</item>
+        <item>@color/colorPersonalizeTree_blue</item>
+        <item>@color/colorPersonalizeTree_purple</item>
+        <item>@color/colorPersonalizeTree_red</item>
+        <item>@color/colorPersonalizeTree_yellow</item>
+    </array>
 </resources>

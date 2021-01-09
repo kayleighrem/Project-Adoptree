@@ -46,9 +46,9 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
         loginFragment = (activity as MainActivity).loginFragment
         adoptionFragment = AdoptionFragment()
 
-        println("session? " + sessionManager.isLogin())
         initializeUI()
 
+        // TODO: delete user details because they are not there?
         if (!sessionManager.isLogin()) { // if not logged in, don't show user details
             ll_profile_not_logged_in.visibility = View.VISIBLE
             rl_profile_logged_in.visibility = View.GONE
@@ -63,16 +63,12 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
     private fun initializeUI() {
         if (sessionManager.isLogin()) {
             // TODO
-            println("session access token = " + sessionManager.getUserDetails().accessToken)
             userViewModel.getLoggedInUser(sessionManager.getUserDetails().accessToken)
 
             userViewModel.loggedinUserResponse.observe(viewLifecycleOwner, Observer { response ->
-                println("response ? 70 " + response.data)
                 when (response) {
                     is Resource.Success -> {
-                        println("response ==== " + response)
                         try {
-                            println("logged in user? profilefragment 64: " + userViewModel.loggedinUserResponse.value?.data)
                             val user: User = userViewModel.loggedinUserResponse.value!!.data!!
                             tv_username.text = "Hi ${user.firstname} !"
                             your_email.text = user.email
@@ -81,7 +77,6 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
                         }
                     }
                     is Resource.Error -> {
-                        println("response = " + response)
                         Toast.makeText(
                                 requireContext(),
                                 R.string.something_went_wrong,

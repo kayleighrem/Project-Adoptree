@@ -58,19 +58,5 @@ class AdoptionActivity : AppCompatActivity() {
                 .url("https://www.thisismylink.com/api/create-payment")
                 .post(requestBody)
                 .build();
-
-//        try {
-//            response = client.newCall(request).execute();
-//        } catch (e: IOException) {
-//            e.printStackTrace();
-//        }
-//
-//        if (response === null || !response.isSuccessful()) {
-//            Log.w("Create Payment", "HTTPS-call failed");
-//        } else {
-//            val browserIntent = Intent(Intent.ACTION_VIEW)
-//            browserIntent.data = Uri.parse(response.body().string())
-//            startActivity(browserIntent);
-//        }
     }
 }

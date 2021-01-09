@@ -1,21 +1,13 @@
 package nl.rem.kayleigh.project_adoptree.util
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.content.SharedPreferences
-import android.os.Handler
-import android.os.Looper
 import nl.rem.kayleigh.project_adoptree.model.LoginResponse
-import nl.rem.kayleigh.project_adoptree.ui.viewmodels.UserViewModel
 import nl.rem.kayleigh.project_adoptree.util.Constants.Companion.ACCESSTOKEN
 import nl.rem.kayleigh.project_adoptree.util.Constants.Companion.LOGIN
 import nl.rem.kayleigh.project_adoptree.util.Constants.Companion.PREF_NAME
 import nl.rem.kayleigh.project_adoptree.util.Constants.Companion.PRIVATE_MODE
 import nl.rem.kayleigh.project_adoptree.util.Constants.Companion.REFRESHTOKEN
-import nl.rem.kayleigh.project_adoptree.util.Constants.Companion.USERID
-import java.lang.Exception
-import java.text.SimpleDateFormat
-import java.util.*
 
 class SessionManager(context: Context) {
     private val shared: SharedPreferences

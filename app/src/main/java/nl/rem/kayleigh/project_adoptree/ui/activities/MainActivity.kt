@@ -19,6 +19,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import nl.rem.kayleigh.project_adoptree.R
+import nl.rem.kayleigh.project_adoptree.adapters.UserAdapter
 import nl.rem.kayleigh.project_adoptree.model.OrderProduct
 import nl.rem.kayleigh.project_adoptree.repository.AdoptionRepository
 import nl.rem.kayleigh.project_adoptree.repository.OrderRepository
@@ -67,6 +68,8 @@ class MainActivity : AppCompatActivity() {
     lateinit var homeViewModel: HomeViewModel
     lateinit var sessionManager: SessionManager
     lateinit var bottomNavigationView: BottomNavigationView
+
+    var userAdapter: UserAdapter = UserAdapter()
 
     var adoptionFragment: AdoptionFragment = AdoptionFragment()
     var loginFragment: LoginFragment = LoginFragment()

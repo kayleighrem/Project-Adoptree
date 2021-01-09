@@ -11,10 +11,12 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:defaultNavHost="true"
+        android:layout_marginVertical="10sp"
         android:backgroundTint="@color/white"
         app:cardCornerRadius="20sp" >
         <LinearLayout
-            android:id="@+id/cv_rl_tree_item"
+            android:id="@+id/ll_rl_tree_item"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
@@ -30,7 +32,7 @@
                     android:layout_height="69sp"
                     android:src="@drawable/tree_icon"
                     android:layout_marginEnd="10sp"
-                    app:tint="@color/colorAccentGreen" />
+                    app:tint="@color/colorPersonalizeTree_green" />
                 <TextView android:id="@+id/tree_name"
                     android:layout_width="0dp"
                     android:layout_height="47sp"
@@ -49,6 +51,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
+                android:visibility="gone"
                 android:layout_below="@id/ll_tree_header">
 
                 <!-- Monitoring data -->

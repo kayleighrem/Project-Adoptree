@@ -46,20 +46,8 @@ class AdoptionOverviewFragment : Fragment(R.layout.fragment_adoption_overview) {
         sessionManager = SessionManager(view.context)
         setUpRecyclerView()
         initializeUI()
-//            self.orderViewModel.createOrder(order: order) { result in
-//                    switch (result) {
-//                        case .failure(_):
-//                        break
-//                        case .success(let success):
-//                        if let url = URL(string: success.paymentLink) {
-//                        if UIApplication.shared.canOpenURL(url) {
-//                            UIApplication.shared.open(url, options: [:], completionHandler: nil)
-//                        }
-//                    }
-//                    }
-//            }
+
         orderViewModel.orderResponse.observe(viewLifecycleOwner, Observer { response ->
-            println("response orderresponse? " + response.data)
             when (response) {
                 is Resource.Success -> {
                     try {
@@ -102,19 +90,12 @@ class AdoptionOverviewFragment : Fragment(R.layout.fragment_adoption_overview) {
     private fun initializeUI() {
         btn_next_step_pay.setOnClickListener {
             try { // try to create an order
-
-//                mainActivity.getToken()
-//                val order = orderViewModel.createOrderObject(loggedinuser.value?.data?.id) // TODO: userid ???
-                val order = orderViewModel.createOrderObject() // TODO: userid ???
-//                orderViewModel.createOrder(order) // TODO: this should work
-
-//                val bundle = bundleOf("order" to order)
+                val order = orderViewModel.createOrderObject()
                 if (sessionManager.isLogin()) { // if user is logged in, go to mollie
                     // TODO
-                        userViewModel.getLoggedInUser(sessionManager.getUserDetails().accessToken)
+                    userViewModel.getLoggedInUser(sessionManager.getUserDetails().accessToken)
                     println("logged in user response: " + userViewModel.loggedinUserResponse.value!!.data)
 
-                    println("test if still here")
                     try {
                         orderViewModel.createOrder(order, userViewModel.loggedinUserResponse.value!!.data!!.id!!, sessionManager.getUserDetails().accessToken)
                         orderViewModel.orderResponse.observe(viewLifecycleOwner, Observer { response ->
