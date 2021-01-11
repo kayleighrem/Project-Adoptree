@@ -61,22 +61,28 @@ class OrderAdapter : RecyclerView.Adapter<OrderAdapter.ViewHolder>()  {
     private var onMinusButtonClickListener: ((OrderProduct, Int) -> Unit)? = null
     private var onRemoveButtonClickListener: ((OrderProduct, Int) -> Unit)? = null
 
-    @SuppressLint("ResourceAsColor")
+    @SuppressLint("ResourceAsColor", "SetTextI18n")
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val product = differ.currentList[position]
 
         holder.itemView.apply {
-            if (holder.sessionManager.isLogin()) {
-                // TODO if login
-            }
             tree_name.text = product.product?.name.toString()
-            tree_status.text = product.product?.id.toString()
-            amount_price.text = product.product?.price.toString()
+//            amount_price.text = product.product?.price.toString()
             amount_number.text = product.quantity.toString()
-            tree_age.text = LocalDateTime.parse(product.product?.createdAt).toLocalDate().format(
-                    DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG).withLocale(Locale.getDefault())
-            )
+            tree_price_euro.text = "€ ${product.product?.price}"
+            amount_price.text = ""
+
+            if (product.product?.categoryId == 9) { // Sapling
+                iv_adoption_overview_tree_card.setImageResource(R.drawable.tree_icon_sapling)
+                tree_status.text = "Not planted yet"
+                tree_age.text = ""
+            }
+            if (product.product?.categoryId == 2) {
+                iv_adoption_overview_tree_card.setImageResource(R.drawable.tree_icon_adult_tree)
+                tree_status.text = "Already planted"
+                tree_age.text = "Planted on: ${LocalDateTime.parse(product.product?.createdAt).toLocalDate().format(DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG).withLocale(Locale.getDefault()))}"
+            }
 
             btn_minus.setOnClickListener {
                 val pos: Int = holder.adapterPosition

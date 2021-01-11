@@ -157,6 +157,9 @@
         <action
             android:id="@+id/action_feedFragment_to_bookATourActivity"
             app:destination="@id/bookATourActivity" />
+        <action
+            android:id="@+id/action_feedFragment_to_greenIdeasFragment"
+            app:destination="@id/greenIdeasFragment" />
     </fragment>
     <fragment
         android:id="@+id/settingsFragment"
@@ -227,4 +230,9 @@
             android:name="tree"
             app:argType="nl.rem.kayleigh.project_adoptree.model.Tree" />
     </activity>
+    <fragment
+        android:id="@+id/greenIdeasFragment"
+        android:name="nl.rem.kayleigh.project_adoptree.ui.fragments.screens.GreenIdeasFragment"
+        android:label="fragment_green_ideas"
+        tools:layout="@layout/fragment_green_ideas" />
 </navigation>

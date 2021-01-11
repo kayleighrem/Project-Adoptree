@@ -8,6 +8,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.Observer
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import com.theartofdev.edmodo.cropper.CropImage
 import com.theartofdev.edmodo.cropper.CropImageView
 import kotlinx.android.synthetic.main.fragment_feed.*
@@ -42,8 +44,6 @@ class FeedFragment : Fragment(R.layout.fragment_feed) {
         sessionManager = SessionManager(view.context)
         mainActivity = (activity as MainActivity)
         contentViewModel =  mainActivity.contentViewModel
-//        contentRepository = ContentRepository()
-
 
         if (!sessionManager.isLogin()) { // if not logged in, don't show the 'add' button for booking a new tour
             btn_add_tour.visibility = View.GONE
@@ -52,7 +52,6 @@ class FeedFragment : Fragment(R.layout.fragment_feed) {
         }
 
         initializeUI()
-        setUpRecyclerView()
     }
 
     private fun initializeUI() {
@@ -64,24 +63,6 @@ class FeedFragment : Fragment(R.layout.fragment_feed) {
                     try {
                         println("response = " + response)
                         contentViewModel.contentResponse.value?.data?.forEach {
-
-                            when (it.contentType) {
-                                "informative" -> {
-                                    informativeList.plus(it)
-                                }
-                                "about" -> {
-                                }
-                                "announcement" -> {
-                                }
-                                "event" -> {
-                                }
-                            }
-//                            if (it.contentType == "informative") {
-//                                println("content = " + it)
-//                                informativeList.plus(it)
-//                            }
-                            println("list " + informativeList)
-
                         }
                     } catch (e: Exception) {
                         Log.e(ProfileFragment.TAG, "${getString(R.string.error_log)} ${e.message}")
@@ -100,19 +81,10 @@ class FeedFragment : Fragment(R.layout.fragment_feed) {
             }
         })
         action_read_more_tips.setOnClickListener {
-            // TODO
+            findNavController().navigate(R.id.action_feedFragment_to_greenIdeasFragment)
         }
         btn_add_tour.setOnClickListener {
-            // TODO
-        }
-    }
-
-    private fun setUpRecyclerView() {
-        println("list? " +informativeList)
-        contentAdapter = (activity as MainActivity).contentAdapter
-        rv_booked_tour.apply {
-            adapter = contentAdapter
-            layoutManager = LinearLayoutManagerWrapper(activity)
+            findNavController().navigate(R.id.action_feedFragment_to_bookATourActivity)
         }
     }
 }

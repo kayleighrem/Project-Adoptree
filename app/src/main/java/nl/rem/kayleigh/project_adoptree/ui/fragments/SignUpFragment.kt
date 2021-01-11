@@ -1,5 +1,7 @@
 package nl.rem.kayleigh.project_adoptree.ui.fragments
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
@@ -74,18 +76,32 @@ class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
                                         val order: Order = arguments?.get("order") as Order
                                         println("en nu ook nog? " + order)
                                         mainActivity.activateHandler() // Get the latest user tokens
-                                        userViewModel.getLoggedInUser(sessionManager.getUserDetails().accessToken)
-                                        try { // Try to create an order with the logged in user id
-                                            order.userId = userViewModel.loggedinUserResponse.value?.data?.id
-                                            mainActivity.orderViewModel.createOrder(order, mainActivity.userViewModel.loggedinUserResponse.value!!.data!!.id!!, sessionManager.getUserDetails().accessToken)
-                                        } catch (e: Exception) { // Catch if the order was not being made
+                                        userViewModel.getLoggedInUser(sessionManager.getUserDetails())
+//                                        try { // Try to create an order with the logged in user id
+//                                            order.userId = userViewModel.loggedinUserResponse.value?.data?.id
+//                                            mainActivity.orderViewModel.createOrder(order, mainActivity.userViewModel.loggedinUserResponse.value!!.data!!.id!!, sessionManager.getUserDetails().accessToken)
+//                                        } catch (e: Exception) { // Catch if the order was not being made
+//
+//                                        }
 
+                                        try {
+//                                            order.userId = userViewModel.loggedinUserResponse.value?.data?.id
+                                            mainActivity.orderViewModel.createOrder(order, userViewModel.loggedinUserResponse.value!!.data!!.id!!, sessionManager.getUserDetails().accessToken)
+                                            mainActivity.orderViewModel.orderResponse.observe(viewLifecycleOwner, Observer { response ->
+                                                println("response orderresponse? " + response.data)
+                                                when (response) {
+                                                    is Resource.Success -> {
+                                                        try {
+                                                            pay(response.data!!.paymentLink)
+                                                        } catch (e: Exception) {
+                                                            Log.e(TAG, "${getString(R.string.error_log)} ${getString(R.string.test)} \${getString(R.string.test)} ${e.message}")
+                                                        }
+                                                    }
+                                                }
+                                            })
+                                        } catch (e: Exception) {
+                                            Log.e(TAG, "${getString(R.string.error_log)} ${getString(R.string.test)} \${getString(R.string.test)} ${e.message}")
                                         }
-
-                                        // TODO volgens mij kan dit weg :
-                                        findNavController().navigate(
-                                                R.id.action_signUpFragment_to_adoptionResponseFragment
-                                        )
                                     } catch (e: Exception) { // Catch if there was a problem with logging in the user
                                         Log.e(LoginFragment.TAG, "${getString(R.string.error_log)} ${e.message}")
                                     }
@@ -150,5 +166,12 @@ class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
 
     private fun isPasswordMatching(password: String, confirmPassword: String): Boolean {
         return password == confirmPassword
+    }
+
+
+    fun pay(url: String?) {
+        val intent = Intent(Intent.ACTION_VIEW)
+        intent.data = Uri.parse(url)
+        startActivity(intent)
     }
 }

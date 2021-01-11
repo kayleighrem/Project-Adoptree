@@ -14,25 +14,20 @@ data class Tree(
 ) : Serializable
 
 data class AssignedTree(
-    val user_id: Int?,
-    val tree_id: Int?,
-    val order_id: Int?,
-    val created_at: String?,
-    val expire_date: String?,
-    val tree_name: String?,
-    val tree_color: String?
+        val user_id: Int?,
+        val tree_id: Int?,
+        val order_id: Int?,
+        val created_at: String?,
+        val expire_date: String?,
+        var tree_name: String?,
+        val tree_color: String?
 ) : Serializable
 
-data class TreeSpecies(
-    val treeFactorAdjustment: Double?,
-    val treeProductId: Int?,
-    val treeWeightAlgorithmId: Int?
-): Serializable
+data class TreeObjectCombined(
+        val tree: Tree,
+        val forest: Forest?,
+        val wildlife: Wildlife?,
+        val telemetry: Telemetry,
+        val sequestration: Double?
 
-data class TreeWeightAlgorithm(
-    val formulaAboveThreshold: String?,
-    val formulaBelowThreshold: String?,
-    val id: Int?,
-    val sizeThreshold: Int?,
-    val species: String?
-): Serializable
+)

@@ -34,7 +34,7 @@
                     android:layout_height="69sp"
                     android:src="@drawable/tree_icon"
                     android:layout_marginEnd="10sp"
-                    />
+                    app:tint="@color/color_redBrown" />
                 <TextView android:id="@+id/tree_name"
                     android:layout_width="0dp"
                     android:layout_height="47sp"

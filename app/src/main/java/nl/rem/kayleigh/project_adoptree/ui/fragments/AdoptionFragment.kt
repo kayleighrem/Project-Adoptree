@@ -8,6 +8,7 @@ import android.view.View
 import android.widget.AbsListView
 import android.widget.Toast
 import androidx.lifecycle.Observer
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import kotlinx.android.synthetic.main.fragment_adoption_overview.*
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -61,7 +62,7 @@ class AdoptionFragment : Fragment(R.layout.fragment_adoption) {
 
 
         setUpRecyclerView()
-        initializeUI()
+        initializeUI(view)
 
         adoptionViewModel.trees.observe(viewLifecycleOwner, Observer { response ->
             Log.d("Response trees: ", response.data.toString())
@@ -99,7 +100,7 @@ class AdoptionFragment : Fragment(R.layout.fragment_adoption) {
     }
 
     @SuppressLint("SetTextI18n")
-    private fun initializeUI() {
+    private fun initializeUI(view: View) {
         productList == adoptionViewModel.getProducts()
         sr_adoptionLayout.isRefreshing = false
 
@@ -114,19 +115,25 @@ class AdoptionFragment : Fragment(R.layout.fragment_adoption) {
             }
         }
 
-        btn_next_step.setOnClickListener {
-            mainActivity.navigateToFragment(mainActivity.adoptionOverviewFragment)
-            this.findNavController().navigate(R.id.action_adoptionFragment_to_adoptionOverviewFragment)
+        view.btn_next_step.setOnClickListener {
+            try {
+                mainActivity.navigateToFragment(mainActivity.adoptionOverviewFragment)
+            } catch (e: Exception) {}
+
+//            this.findNavController().navigate(R.id.action_adoptionFragment_to_adoptionOverviewFragment)
         }
 
         adoptionAdapter.setOnInfoButtonClickListener { product, i ->
-            val bundle = Bundle().apply {
-                putSerializable("product", product)
-            }
-            this.findNavController().navigate(
-                    R.id.action_adoptionFragment_to_adoptionTreeInfoActivity,
-                    bundle
-            )
+            try {
+                val bundle = Bundle().apply {
+                    putSerializable("product", product)
+                }
+                view.findNavController().navigate(
+                        R.id.action_adoptionFragment_to_adoptionTreeInfoActivity,
+                        bundle
+                )
+            } catch (e: Exception) { }
+
         }
 
         adoptionAdapter.setOnAdoptButtonClickListener { product, i ->

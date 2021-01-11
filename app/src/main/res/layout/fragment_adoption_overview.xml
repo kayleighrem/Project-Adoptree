@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/colorBackground">
 
@@ -29,31 +30,26 @@
     <ScrollView
         android:id="@+id/sv_recyclerview"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/toolbar"
-        app:layout_constraintTop_toBottomOf="@id/toolbar"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_height="0dp"
         android:paddingTop="20sp"
-        android:paddingBottom="56sp">
+        android:paddingBottom="5sp"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        app:layout_constraintBottom_toTopOf="@id/total_section"
+        tools:ignore="MissingConstraints">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_overview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="parent"
             tools:listitem="@layout/item_adoption_tree_card_overview" />
     </ScrollView>
 
-    <LinearLayout
+    <LinearLayout android:id="@+id/total_section"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/rv_overview"
         app:layout_constraintStart_toStartOf="parent"
         tools:ignore="MissingConstraints,NotSibling">
         <LinearLayout android:id="@+id/section_total"

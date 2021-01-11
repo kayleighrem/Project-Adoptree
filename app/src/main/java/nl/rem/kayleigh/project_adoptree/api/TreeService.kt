@@ -28,8 +28,15 @@ interface TreeService {
                                        @Path("id") id: Int) : Response<Tree>
 
     @Headers("Content-Type: application/json")
-    @PUT("trees/personalize")
+    @PUT("tree/personalize")
     suspend fun personalizeTree(
             @Header("Authorization") token: String,
             @Body assignedTree: AssignedTree) : Response<AssignedTree>
+
+    @Headers("Content-Type: application/json")
+    @GET("tree/{id}/sequestration")
+    suspend fun getCO2ReducePerTree(
+            @Header("Authorization") token: String,
+            @Path("id") id: Int) : Double
+//    : Response<Double>
 }

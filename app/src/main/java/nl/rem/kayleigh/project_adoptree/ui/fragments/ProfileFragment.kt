@@ -73,7 +73,7 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
         } else if (sessionManager.isLogin()) { // if logged in, show user
             rl_profile_logged_in.visibility = View.VISIBLE
             ll_profile_not_logged_in.visibility = View.GONE
-            userViewModel.getLoggedInUser(sessionManager.getUserDetails().accessToken)
+            userViewModel.getLoggedInUser(sessionManager.getUserDetails())
 
             userViewModel.loggedinUserResponse.observe(viewLifecycleOwner, Observer { response ->
                 when (response) {

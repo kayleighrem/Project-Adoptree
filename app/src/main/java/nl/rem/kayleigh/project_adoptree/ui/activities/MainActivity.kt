@@ -28,10 +28,7 @@ import nl.rem.kayleigh.project_adoptree.ui.fragments.screens.AboutAppFragment
 import nl.rem.kayleigh.project_adoptree.ui.fragments.screens.ContractInformationFragment
 import nl.rem.kayleigh.project_adoptree.ui.fragments.screens.PrivacyPolicyFragment
 import nl.rem.kayleigh.project_adoptree.ui.viewmodels.*
-import nl.rem.kayleigh.project_adoptree.ui.viewmodels.factory.AdoptionViewModelFactory
-import nl.rem.kayleigh.project_adoptree.ui.viewmodels.factory.ContentViewModelFactory
-import nl.rem.kayleigh.project_adoptree.ui.viewmodels.factory.OrderViewModelFactory
-import nl.rem.kayleigh.project_adoptree.ui.viewmodels.factory.UserViewModelProviderFactory
+import nl.rem.kayleigh.project_adoptree.ui.viewmodels.factory.*
 import nl.rem.kayleigh.project_adoptree.util.SessionManager
 import java.lang.Exception
 import java.sql.Time
@@ -119,6 +116,9 @@ class MainActivity : AppCompatActivity() {
         val contentRepository = ContentRepository()
         val contentViewModelFactory = ContentViewModelFactory(contentRepository, this)
         contentViewModel = ViewModelProvider(this, contentViewModelFactory).get(ContentViewModel::class.java)
+
+        val homeViewModelFactory = HomeViewModelFactory(this@MainActivity, this)
+        homeViewModel = ViewModelProvider(this, homeViewModelFactory).get(HomeViewModel::class.java)
     }
 
     fun activateHandler() {
@@ -144,7 +144,7 @@ class MainActivity : AppCompatActivity() {
             println("old refresh token: " + sessionManager.getUserDetails().refreshToken)
             userViewModel.refreshToken(sessionManager.getUserDetails().accessToken)
             println("test ")
-            userViewModel.getLoggedInUser(sessionManager.getUserDetails().accessToken)
+            userViewModel.getLoggedInUser(sessionManager.getUserDetails())
             println("loggedin user? " + userViewModel.loggedinUserResponse.value!!.data!!.username)
 
             println("new access token: " + sessionManager.getUserDetails().accessToken)

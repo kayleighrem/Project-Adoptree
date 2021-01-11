@@ -45,7 +45,6 @@ class PersonalizeTreeActivity : AppCompatActivity(), AdapterView.OnItemSelectedL
         const val GREEN = "green"
         const val PURPLE = "purple"
         const val ORANGE = "orange"
-
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -65,27 +64,22 @@ class PersonalizeTreeActivity : AppCompatActivity(), AdapterView.OnItemSelectedL
         tree = args.tree ?: (intent.getSerializableExtra(TREE) as Tree)
         et_tree_name.hint = tree.assignedTree?.tree_name
 
-        val tree_name = et_tree_name.text.toString().trim()
-
         ib_tree_color.setOnClickListener {
             showPopUp(it)
         }
 
-        var assignedTree: AssignedTree = AssignedTree(user_id = 100, tree_id = tree.id!!, order_id = null, created_at = null, expire_date = null, tree_color = color_name, tree_name = tree.assignedTree!!.tree_name)
+        var assignedTree: AssignedTree = AssignedTree(user_id = 100, tree_id = tree.id!!, order_id = null, created_at = null, expire_date = null, tree_color = null, tree_name = null)
 
         btn_commit_changes.setOnClickListener {
             if (assignedTree.tree_color == null || assignedTree.tree_color == "") {
-                assignedTree.tree_color == GREEN
+                assignedTree.tree_color == null
+            } else {
+                assignedTree.tree_color === color_name
             }
             if (assignedTree.tree_name == null || assignedTree.tree_name == "") {
-                if (assignedTree.tree_name.equals(tree.assignedTree?.tree_name) == false) {
-//                    try {
-                        assignedTree.tree_name === tree.assignedTree!!.tree_name.toString()
-//                    } catch (e: Exception) {
-//                        assignedTree.tree_name === " "
-//                    }
-                }
-
+                assignedTree.tree_name = null
+            } else {
+                assignedTree.tree_name = et_tree_name.text.toString()
             }
             println("color? = " + color_name)
             try {

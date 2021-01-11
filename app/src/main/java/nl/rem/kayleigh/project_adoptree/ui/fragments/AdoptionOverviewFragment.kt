@@ -14,6 +14,7 @@ import androidx.navigation.fragment.findNavController
 import kotlinx.android.synthetic.main.fragment_adoption_overview.*
 import kotlinx.android.synthetic.main.fragment_adoption_overview.rv_overview
 import kotlinx.android.synthetic.main.fragment_login.*
+import kotlinx.android.synthetic.main.item_adoption_tree_card.view.*
 import nl.rem.kayleigh.project_adoptree.R
 import nl.rem.kayleigh.project_adoptree.adapters.OrderAdapter
 import nl.rem.kayleigh.project_adoptree.model.OrderProduct
@@ -93,13 +94,12 @@ class AdoptionOverviewFragment : Fragment(R.layout.fragment_adoption_overview) {
                 val order = orderViewModel.createOrderObject()
                 if (sessionManager.isLogin()) { // if user is logged in, go to mollie
                     // TODO
-                    userViewModel.getLoggedInUser(sessionManager.getUserDetails().accessToken)
+                    userViewModel.getLoggedInUser(sessionManager.getUserDetails())
                     println("logged in user response: " + userViewModel.loggedinUserResponse.value!!.data)
 
                     try {
                         orderViewModel.createOrder(order, userViewModel.loggedinUserResponse.value!!.data!!.id!!, sessionManager.getUserDetails().accessToken)
                         orderViewModel.orderResponse.observe(viewLifecycleOwner, Observer { response ->
-                            println("response orderresponse? " + response.data)
                             when (response) {
                                 is Resource.Success -> {
                                     try {
@@ -175,5 +175,7 @@ class AdoptionOverviewFragment : Fragment(R.layout.fragment_adoption_overview) {
             val intent = Intent(Intent.ACTION_VIEW)
             intent.data = Uri.parse(url)
             startActivity(intent)
+        
+        mainActivity.navigateToFragment(mainActivity.adoptionResponseFragment)
     }
 }

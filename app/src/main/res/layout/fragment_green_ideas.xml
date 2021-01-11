@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:backgroundTint="@color/colorBackground"
+    android:background="@color/colorBackground"
+    tools:context=".ui.fragments.screens.GreenIdeasFragment">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="56sp"
+        android:layout_alignParentStart="true"
+        android:background="@color/colorWhite"
+        tools:ignore="MissingConstraints">
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/green_ideas"
+            android:theme="@style/ToolbarTitle"
+            android:layout_marginLeft="30sp"
+            android:layout_marginRight="30sp"
+            android:gravity="center" />
+    </androidx.appcompat.widget.Toolbar>
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        android:layout_height="wrap_content"
+        tools:ignore="MissingConstraints">
+        <androidx.recyclerview.widget.RecyclerView android:id="@+id/rv_green_ideas"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clipToPadding="false"
+            app:layout_constraintTop_toBottomOf="@id/toolbar"
+            android:paddingBottom="50sp"
+            tools:listitem="@layout/item_green_ideas" />
+    </ScrollView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

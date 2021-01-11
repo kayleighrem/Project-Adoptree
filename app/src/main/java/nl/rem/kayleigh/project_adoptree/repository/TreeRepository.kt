@@ -9,4 +9,5 @@ class TreeRepository {
     suspend fun getTelemetryByTreeId(id: Int, token: String) = RetrofitInstance.treeapi.getTelemetryByTreeId(id, token)
     suspend fun getTreesByUserByTreeId(id: Int, token: String) = RetrofitInstance.treeapi.getTreesByUserByTreeId(token, id)
     suspend fun personalizeTree(token: String, assignedTree: AssignedTree) = RetrofitInstance.treeapi.personalizeTree(token, assignedTree)
+    suspend fun getCO2ReducePerTree(token: String, tree_id: Int) = RetrofitInstance.treeapi.getCO2ReducePerTree(token, tree_id)
 }

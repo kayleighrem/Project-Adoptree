@@ -48,14 +48,15 @@ class UserViewModel(private val userRepository: UserRepository, val context: Con
         isAuthenticated = accessTokenKey != null
     }
 
-    fun getLoggedInUser(accesstoken: String) = viewModelScope.launch {
+    fun getLoggedInUser(loginResponse: LoginResponse) = viewModelScope.launch {
         try {
-            val tokenstring = "Bearer $accesstoken"
+            println("loginresponse old : " + loginResponse)
+            val tokenstring = "Bearer ${loginResponse.accessToken}"
             try {
                 handleLoggedInUserResponse(userRepository.getLoggedInUser(tokenstring))
                 _loggedinUserResponse.value = handleLoggedInUserResponse(userRepository.getLoggedInUser(tokenstring))
             } catch (e: java.lang.Exception) {
-                refreshToken(accesstoken)
+                refreshToken(loginResponse.refreshToken)
             }
         } catch (e: java.lang.Exception) {
             Log.e(
@@ -67,9 +68,11 @@ class UserViewModel(private val userRepository: UserRepository, val context: Con
 
     fun refreshToken(token: String) = viewModelScope.launch {
         try {
+            println("refresh token ? = " + token)
             val tokenstring = "Bearer $token"
             val refresh = userRepository.newTokens(tokenstring)
             _refreshTokenResponse.value = handleRefreshTokenResponse(refresh)
+            println("refresj from new tokens = " + refresh.body())
             sessionManager.updateSession(refreshTokenResponse.value!!.data!!.accessToken, refreshTokenResponse.value!!.data!!.refreshToken)
         } catch (e: java.lang.Exception) {
             Log.e(
@@ -135,6 +138,8 @@ class UserViewModel(private val userRepository: UserRepository, val context: Con
                 it.refreshToken = response.body()!!.refreshToken
                 it.userId = response.body()!!.userId
 
+                println("new access token: " + it.accessToken)
+                println("new refreshtoken: " + it.refreshToken)
                 return Resource.Success(it)
             }
         }
@@ -153,7 +158,7 @@ class UserViewModel(private val userRepository: UserRepository, val context: Con
                 try {
                     println("loginresponse access " + loginResponse.value?.data?.accessToken)
                     println("session response access " + sessionManager.getUserDetails().accessToken)
-                    refreshToken(sessionManager.getUserDetails().accessToken)
+                    refreshToken(sessionManager.getUserDetails().refreshToken)
                     response.body()!!.let {
                         return Resource.Success(it)
                     }
@@ -170,8 +175,10 @@ class UserViewModel(private val userRepository: UserRepository, val context: Con
     private fun handleRefreshTokenResponse(response: Response<RefreshTokenResponse>) : Resource<RefreshTokenResponse> {
         if (response.code() in 200..299) {
             try {
+                println("new values? " + response.body())
                 sessionManager.updateSession(response.body()!!.accessToken, response.body()!!.refreshToken)
                 response.body()!!.let {
+                    println("is updated? " + sessionManager.getUserDetails())
                     return Resource.Success(it)
                 }
             } catch (e: java.lang.Exception) {

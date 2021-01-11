@@ -5,7 +5,6 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.google.android.gms.common.util.CollectionUtils.listOf
 import kotlinx.coroutines.launch
 import nl.rem.kayleigh.project_adoptree.R
 import nl.rem.kayleigh.project_adoptree.model.Telemetry
@@ -29,6 +28,11 @@ class HomeViewModel(private val mainActivity: MainActivity, val context: Context
     val treeTelemetries: MutableLiveData<Resource<List<TreeTelemetry>>>
         get() = _treeTelemetries
 
+//    private val _co2reduction: MutableLiveData<Resource<Double>> = MutableLiveData()
+//    val co2reduction: MutableLiveData<Resource<Double>> get() = _co2reduction
+
+    var co2reduction: Double = 1.0
+
     companion object {
         const val TAG ="HomeViewModel"
     }
@@ -40,6 +44,16 @@ class HomeViewModel(private val mainActivity: MainActivity, val context: Context
             _trees.value = handleTreesResponse(mainActivity.userRepository.getTreesByUser(tokenstring))
         } catch (e: Exception) {
             _trees.postValue(Resource.Error(context.getString(R.string.connection_error)))
+            Log.e(TAG, "${context.getString(R.string.error_log)} ${e.message}")
+        }
+    }
+
+    fun getCO2ReducePerTree(token: String, id: Int) = viewModelScope.launch {
+        try {
+            val tokenstring = "Bearer $token"
+            co2reduction = mainActivity.treeRepository.getCO2ReducePerTree(tokenstring, id)
+        } catch (e: Exception) {
+//            println("test? ")
             Log.e(TAG, "${context.getString(R.string.error_log)} ${e.message}")
         }
     }
@@ -73,4 +87,14 @@ class HomeViewModel(private val mainActivity: MainActivity, val context: Context
             else -> return null
         }
     }
+
+//    private fun handleSequestrationResponse(response: Response<Double>): Resource<Double> {
+//        if (response.isSuccessful) {
+//            response.body()!!.let {
+//                return Resource.Success(it)
+//            }
+//        } else {
+//            return Resource.Error()
+//        }
+//    }
 }

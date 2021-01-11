@@ -43,18 +43,12 @@ class ContentAdapter : RecyclerView.Adapter<ContentAdapter.ViewHolder>() {
         )
     }
 
-    private var onPayButtonClickListener: ((Product, Int) -> Unit)? = null
-    private var onPlusButtonClickListener: ((OrderProduct, Int) -> Unit)? = null
-    private var onMinusButtonClickListener: ((OrderProduct, Int) -> Unit)? = null
-    private var onRemoveButtonClickListener: ((OrderProduct, Int) -> Unit)? = null
-
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val tree = differ.currentList[position]
+        val content = differ.currentList[position]
     }
 
-
     override fun getItemCount(): Int {
-        TODO("Not yet implemented")
+        return differ.currentList.size
     }
 }

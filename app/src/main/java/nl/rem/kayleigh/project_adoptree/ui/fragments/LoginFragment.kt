@@ -9,9 +9,11 @@ import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.fragment_login.*
+import kotlinx.android.synthetic.main.fragment_login.view.*
 import nl.rem.kayleigh.project_adoptree.R
 import nl.rem.kayleigh.project_adoptree.model.User
 import nl.rem.kayleigh.project_adoptree.model.UserLogin
@@ -21,6 +23,7 @@ import nl.rem.kayleigh.project_adoptree.ui.viewmodels.HomeViewModel
 import nl.rem.kayleigh.project_adoptree.ui.viewmodels.UserViewModel
 import nl.rem.kayleigh.project_adoptree.util.Resource
 import nl.rem.kayleigh.project_adoptree.util.SessionManager
+
 
 class LoginFragment : Fragment(R.layout.fragment_login) {
     lateinit var homeViewModel: HomeViewModel
@@ -51,7 +54,7 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
         bottomNavigationView.visibility = View.GONE
 
         sessionManager = SessionManager(view.context)
-        initializeUI()
+        initializeUI(view)
 
         viewModel.loginResponse.observe(viewLifecycleOwner, Observer { response ->
             loading.visibility = View.GONE
@@ -71,7 +74,7 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
 //                        findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
                         Toast.makeText(
                                 requireContext(),
-                                "${getString(R.string.test)} ${userLogin.username}",
+                                "${getString(R.string.hello)} ${userLogin.username}",
                                 Toast.LENGTH_LONG
                         ).show()
                     } catch (e: Exception) {
@@ -93,17 +96,16 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
-    private fun initializeUI() {
-        btn_forgot_password.setOnClickListener {
-            this.findNavController().navigate(R.id.action_loginFragment_to_forgotPasswordFragment)
+    private fun initializeUI(view: View) {
+        view.btn_forgot_password.setOnClickListener {
+            findNavController().navigate(R.id.action_loginFragment_to_forgotPasswordFragment)
         }
 
-        btn_new_user.setOnClickListener {
+        view.btn_new_user.setOnClickListener {
             this.findNavController().navigate(R.id.action_loginFragment_to_adoptionFragment)
         }
 
         btn_login.setOnClickListener {
-            // TODO: login button
             val username = et_username.text.toString().trim()
             val password = et_password.text.toString().trim()
             if (isPasswordValid(password)) {

@@ -62,15 +62,12 @@ class AdoptionAdapter : RecyclerView.Adapter<AdoptionAdapter.ViewHolder>()  {
             tree_age2.text = LocalDateTime.parse(product.createdAt).toLocalDate().format(
                     DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG).withLocale(Locale.getDefault())
             )
-            if (product.categoryId == 9) {
-                iv_adoption_tree_card.setImageResource(R.drawable.image_white_oak_sapling)
+            if (product.categoryId == 9) { // Sapling
+                iv_adoption_tree_card.setImageResource(R.drawable.tree_icon_sapling)
                 tree_location.text = "Not planted yet"
             }
-            if (product.categoryId == 2 && product.name == "Black Birch Tree") {
-                iv_adoption_tree_card.setImageResource(R.drawable.image_black_birch_tree)
-                tree_location.text = "Already planted"
-            } else if (product.categoryId == 2 && product.name == "White Oak Tree") {
-                iv_adoption_tree_card.setImageResource(R.drawable.image_white_oak_tree)
+            if (product.categoryId == 2) {
+                iv_adoption_tree_card.setImageResource(R.drawable.tree_icon_adult_tree)
                 tree_location.text = "Already planted"
             }
 //            tv_tree_item_description.text = product.description.toString()

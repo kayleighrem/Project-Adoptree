@@ -1,6 +1,6 @@
 package nl.rem.kayleigh.project_adoptree.ui.fragments
 
-import android.content.Intent
+import android.annotation.SuppressLint
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.util.Log
@@ -9,22 +9,24 @@ import android.widget.Toast
 import androidx.constraintlayout.motion.widget.Debug.getLocation
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.navigation.fragment.findNavController
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment.findNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.fragment_adoption.*
 import kotlinx.android.synthetic.main.fragment_home.*
+import kotlinx.android.synthetic.main.fragment_home.view.*
 import kotlinx.android.synthetic.main.item_tree_card.*
+import kotlinx.android.synthetic.main.item_tree_card.view.*
 import nl.rem.kayleigh.project_adoptree.R
 import nl.rem.kayleigh.project_adoptree.adapters.UserAdapter
+import nl.rem.kayleigh.project_adoptree.model.TreeObjectCombined
 import nl.rem.kayleigh.project_adoptree.ui.activities.AdoptionActivity
 import nl.rem.kayleigh.project_adoptree.ui.activities.MainActivity
-import nl.rem.kayleigh.project_adoptree.ui.activities.PersonalizeTreeActivity
 import nl.rem.kayleigh.project_adoptree.ui.viewmodels.HomeViewModel
 import nl.rem.kayleigh.project_adoptree.ui.viewmodels.UserViewModel
 import nl.rem.kayleigh.project_adoptree.util.LinearLayoutManagerWrapper
 import nl.rem.kayleigh.project_adoptree.util.Resource
 import nl.rem.kayleigh.project_adoptree.util.SessionManager
-import java.time.format.DateTimeFormatter
 import java.util.*
 
 class HomeFragment : Fragment(R.layout.fragment_home) {
@@ -36,7 +38,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     lateinit var sessionManager: SessionManager
     lateinit var userViewModel: UserViewModel
     lateinit var homeViewModel: HomeViewModel
-    lateinit var bottomNavigationView: BottomNavigationView
+    var totalCO2reduction: Double = 0.0
 
     var isLoading = false
 
@@ -45,25 +47,22 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         private const val REQUEST_PERMISSIONS_REQUEST_CODE = 1
     }
 
-//    private lateinit var fusedLocationClient: FusedLocationProviderClient
-    private var myLongitude: Double? = null
-    private var myLatitude: Double? = null
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         sessionManager = SessionManager(view.context)
-        this.bottomNavigationView = (activity as MainActivity).bottomNavigationView
-        bottomNavigationView = bottomNavigationView.findViewById(R.id.bottomNavigationView)
-        bottomNavigationView.visibility = View.VISIBLE
         mainActivity = (activity as MainActivity)
+//        bottomNavigationView = bottomNavigationView.findViewById(R.id.bottomNavigationView)
+//        bottomNavigationView.visibility = View.VISIBLE
+        mainActivity.bottomNavigationView.visibility = View.VISIBLE
+//        mainActivity = (activity as MainActivity)
 
         adoptionActivity = AdoptionActivity()
 
         userViewModel = (activity as MainActivity).userViewModel
         homeViewModel = HomeViewModel(mainActivity, requireContext())
 
-        initializeUI()
+        initializeUI(view)
     }
 
     override fun onCreateView(
@@ -74,12 +73,15 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         return inflater.inflate(R.layout.fragment_home, container, false)
     }
 
-    private fun initializeUI() {
+    @SuppressLint("SetTextI18n")
+    private fun initializeUI(view: View) {
+        mainActivity.userAdapter.mainActivity = mainActivity
+
         if (sessionManager.isLogin()) {
             rl_home_not_logged_in.visibility = View.GONE
             ll_home_logged_in_no_trees.visibility = View.GONE
 
-            userViewModel.getLoggedInUser(sessionManager.getUserDetails().accessToken)
+            userViewModel.getLoggedInUser(sessionManager.getUserDetails())
             homeViewModel.getTrees(sessionManager.getUserDetails().accessToken)
 
             homeViewModel.trees.observe(viewLifecycleOwner, Observer { response ->
@@ -92,6 +94,20 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                         try {
                             rl_home_not_logged_in.visibility = View.GONE
                             mainActivity.userAdapter.differ.submitList(response.data)
+                            try {
+                                homeViewModel.trees.value?.data?.forEach {
+                                    homeViewModel.getCO2ReducePerTree(
+                                        sessionManager.getUserDetails().accessToken,
+                                        it.id!!
+                                    )
+                                    homeViewModel.co2reduction
+                                    println("values co2reduction? " + homeViewModel.co2reduction)
+//                                    totalCO2reduction.plus(homeViewModel.co2reduction.value)
+                                    println("totalCO2reduction " + totalCO2reduction)
+                                }
+                            } catch (e: Exception) { // Catch try when resource = success
+                                Log.e(TAG, "${getString(R.string.error_log)} ${e.message}")
+                            }
 
                             if (homeViewModel.trees.value != null) { // if there are trees
                                 rl_home_logged_in.visibility = View.VISIBLE
@@ -112,9 +128,9 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                         rl_home_logged_in.visibility = View.GONE
                         ll_home_logged_in_no_trees.visibility = View.VISIBLE
                         Toast.makeText(
-                                requireContext(),
-                                R.string.error_log,
-                                Toast.LENGTH_LONG
+                            requireContext(),
+                            R.string.error_log,
+                            Toast.LENGTH_LONG
                         ).show()
                         response.message?.let { message ->
                             Log.e(TAG, "${getString(R.string.error_log)} $message")
@@ -123,34 +139,49 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                 }
             })
 
+//            val listItemBinding = DataBindingUtil.inflate(layoutInflater, R.layout.item_tree_card, viewgroup, false)
+
+//            total_co2reduction_value
+
             mainActivity.userAdapter.setOnPersonalizeButtonClickListener { tree, i ->
                 val bundle = Bundle().apply {
                     putSerializable("tree", tree)
                 }
-                this.findNavController().navigate(
-                    R.id.action_homeFragment_to_personalizeTreeActivity,
-                    bundle
-                )
+                try {
+                    view.findNavController().navigate(
+                            R.id.action_homeFragment_to_personalizeTreeActivity,
+                            bundle
+                    )
+                } catch (e: Exception) {
+                    println("error nav = " + e.message)
+                }
             }
 
+
+
             mainActivity.userAdapter.setOnExpandButtonClickListener { tree, i ->
-                homeViewModel.getTelemetryByTreeId(sessionManager.getUserDetails().accessToken, tree.id!!.toInt())
-                val telemetry = homeViewModel.telemetries.value?.data
-                if (telemetry != null) {
-                    userAdapter.thisTelemetry(telemetry)
-                    userAdapter.telemetry = telemetry
-                }
+//                println("treeobject combined" + treeObjectCombinedList)
+//                userAdapter.treeObjectCombined = treeObjectCombined
+//                homeViewModel.getTelemetryByTreeId(sessionManager.getUserDetails().accessToken, tree.id!!.toInt())
+//                homeViewModel.getCO2ReducePerTree(sessionManager.getUserDetails().accessToken, tree.id!!)
+//                val telemetry = homeViewModel.telemetries.value?.data
+//                if (telemetry != null) {
+//                    userAdapter.thisTelemetry(telemetry)
+//                    userAdapter.telemetry = telemetry
+//                    tv_co2reduction_value.text = "${homeViewModel.co2reduction.toString()} g"
+//                }
                 userAdapter.notifyItemChanged(i)
             }
-            btn_home_logged_in_adopt_more_trees.setOnClickListener{
+            view.btn_home_logged_in_adopt_more_trees.setOnClickListener{
                 try {
-                    this.findNavController().navigate(R.id.action_homeFragment_to_adoptionFragment)
+                    view.findNavController().navigate(R.id.action_homeFragment_to_adoptionFragment)
                 } catch (e: Exception) {}
 
             }
 
-            btn_logged_in_adopt_more.setOnClickListener {
-                mainActivity.navigateToFragment(mainActivity.adoptionFragment)
+            view.btn_logged_in_adopt_more.setOnClickListener {
+                view.findNavController().navigate(R.id.action_homeFragment_to_adoptionFragment)
+//                mainActivity.navigateToFragment(mainActivity.adoptionFragment)
             }
         } else if (!sessionManager.isLogin()) { // if not logged in
             rl_home_not_logged_in.visibility = View.VISIBLE
@@ -167,6 +198,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     }
 
     private fun setUpRecyclerView() {
+        println("total : " + totalCO2reduction)
         userAdapter = (activity as MainActivity).userAdapter
         rv_home_tree_items.apply {
             adapter = userAdapter
