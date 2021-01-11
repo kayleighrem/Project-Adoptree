@@ -39,11 +39,12 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        mainActivity = (activity as MainActivity)
+
         userRepository = UserRepository()
         viewModel = UserViewModel(userRepository, requireContext())
-        homeViewModel = HomeViewModel(userRepository, requireContext())
+        homeViewModel = HomeViewModel(mainActivity, requireContext())
 
-        mainActivity = (activity as MainActivity)
 
         this.bottomNavigationView = (activity as MainActivity).bottomNavigationView
         bottomNavigationView = bottomNavigationView.findViewById(R.id.bottomNavigationView)
@@ -61,7 +62,7 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
                         response.data?.accessToken?.let {
                             sessionManager.createSession(
                                     it,
-                                    response.data.refreshToken!!
+                                    response.data!!.refreshToken!!
                             )
                             mainActivity.activateHandler()
                         }
@@ -94,11 +95,11 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
     @RequiresApi(Build.VERSION_CODES.O)
     private fun initializeUI() {
         btn_forgot_password.setOnClickListener {
-            findNavController().navigate(R.id.action_loginFragment_to_forgotPasswordFragment)
+            this.findNavController().navigate(R.id.action_loginFragment_to_forgotPasswordFragment)
         }
 
         btn_new_user.setOnClickListener {
-            findNavController().navigate(R.id.action_loginFragment_to_adoptionFragment)
+            this.findNavController().navigate(R.id.action_loginFragment_to_adoptionFragment)
         }
 
         btn_login.setOnClickListener {

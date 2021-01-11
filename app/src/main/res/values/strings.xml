@@ -170,4 +170,8 @@
     <string name="title_book_a_tour">Book a tour</string>
     <string name="something_went_wrong">Something went wrong</string>
     <string name="tree_name">tree name</string>
+    <string name="change">Change</string>
+    <string name="save_changes">Save changes</string>
+    <string name="personalize_tree">Personalize your tree</string>
+    <string name="read_more"><![CDATA[Read more ->]]></string>
 </resources>

@@ -8,3 +8,7 @@ data class Telemetry(
     val treeId: String?
 ): Serializable
 
+data class TreeTelemetry (
+        var tree: Tree,
+        var telemetry: Telemetry?
+        )

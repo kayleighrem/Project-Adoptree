@@ -5,6 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:backgroundTint="@color/colorBackground"
+    app:navGraph="@navigation/nav_graph"
+    app:defaultNavHost="true"
     app:cardCornerRadius="2sp"
     app:cardElevation="3sp">
 
@@ -32,12 +34,13 @@
                     android:layout_height="69sp"
                     android:src="@drawable/tree_icon"
                     android:layout_marginEnd="10sp"
-                    app:tint="@color/colorPersonalizeTree_green" />
+                    />
                 <TextView android:id="@+id/tree_name"
                     android:layout_width="0dp"
                     android:layout_height="47sp"
                     android:layout_weight="0.7"
                     android:text="Tree name"
+                    android:textAlignment="viewStart"
                     android:textColor="@color/colorAccentBrown"
                     android:textSize="25sp" />
                 <ImageButton android:id="@+id/btn_personalize_tree"
@@ -53,6 +56,7 @@
                 android:orientation="vertical"
                 android:visibility="gone"
                 android:layout_below="@id/ll_tree_header">
+<!--                TODO: set above (@+id/expandable_card_layout) back to android:visibility="gone" -->
 
                 <!-- Monitoring data -->
                 <RelativeLayout android:id="@+id/rl_section_health"
@@ -76,7 +80,9 @@
                         android:layout_height="40sp"
                         android:layout_below="@id/health"
                         android:progress="70"
-                        android:progressTint="@color/colorAccentGreen" />
+                        android:progressTint="@color/colorAccentGreen"
+
+                        />
                 </RelativeLayout>
 
                 <LinearLayout android:id="@+id/ll_monitor1"

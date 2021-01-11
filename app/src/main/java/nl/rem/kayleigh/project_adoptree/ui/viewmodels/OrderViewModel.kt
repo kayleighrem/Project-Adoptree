@@ -30,7 +30,6 @@ class OrderViewModel(private val orderRepository: OrderRepository, val context: 
     var totalPrice: Double = 0.0
 
     var sessionManager: SessionManager = SessionManager(context)
-//    var orderResponse: OrderResponse? = null
     lateinit var order: Order
     var orderLines: MutableList<OrderLine> = mutableListOf<OrderLine>()
 
@@ -130,6 +129,7 @@ class OrderViewModel(private val orderRepository: OrderRepository, val context: 
 
     private fun handleOrderResponse(response:Response<OrderResponse>): Resource<OrderResponse>? {
         if (response.isSuccessful && response.body() != null) {
+            println("order = " + response.body())
             response.body()?.let {
                 return Resource.Success(it)
             }

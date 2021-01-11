@@ -52,6 +52,7 @@ class UserViewModel(private val userRepository: UserRepository, val context: Con
         try {
             val tokenstring = "Bearer $accesstoken"
             try {
+                handleLoggedInUserResponse(userRepository.getLoggedInUser(tokenstring))
                 _loggedinUserResponse.value = handleLoggedInUserResponse(userRepository.getLoggedInUser(tokenstring))
             } catch (e: java.lang.Exception) {
                 refreshToken(accesstoken)
@@ -149,8 +150,18 @@ class UserViewModel(private val userRepository: UserRepository, val context: Con
             }
             in 400..404 -> {
                 println("test response when code is error")
-                refreshToken(loginResponse.value?.data?.accessToken!!)
-                return Resource.Error(response.message())
+                try {
+                    println("loginresponse access " + loginResponse.value?.data?.accessToken)
+                    println("session response access " + sessionManager.getUserDetails().accessToken)
+                    refreshToken(sessionManager.getUserDetails().accessToken)
+                    response.body()!!.let {
+                        return Resource.Success(it)
+                    }
+                } catch (e: Exception) {
+                    return Resource.Error(response.message())
+                }
+//                refreshToken(loginResponse.value?.data?.accessToken!!)
+//                return Resource.Error(response.message())
             }
             else -> return Resource.Error(response.message())
         }

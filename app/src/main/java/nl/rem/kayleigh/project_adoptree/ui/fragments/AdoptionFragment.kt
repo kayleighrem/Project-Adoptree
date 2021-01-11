@@ -104,8 +104,7 @@ class AdoptionFragment : Fragment(R.layout.fragment_adoption) {
         sr_adoptionLayout.isRefreshing = false
 
         if (sessionManager.isLogin()) {
-//            authToken = sessionManager.getUserDetails().AuthToken.toString()
-            authToken = sessionManager.getUserDetails().accessToken.toString()
+            authToken = sessionManager.getUserDetails().accessToken
         }
 
         if (adoptionViewModel.products.value?.data?.isNullOrEmpty() == true) {
@@ -117,14 +116,14 @@ class AdoptionFragment : Fragment(R.layout.fragment_adoption) {
 
         btn_next_step.setOnClickListener {
             mainActivity.navigateToFragment(mainActivity.adoptionOverviewFragment)
-//            findNavController().navigate(R.id.action_adoptionFragment_to_adoptionOverviewFragment)
+            this.findNavController().navigate(R.id.action_adoptionFragment_to_adoptionOverviewFragment)
         }
 
         adoptionAdapter.setOnInfoButtonClickListener { product, i ->
             val bundle = Bundle().apply {
                 putSerializable("product", product)
             }
-            findNavController().navigate(
+            this.findNavController().navigate(
                     R.id.action_adoptionFragment_to_adoptionTreeInfoActivity,
                     bundle
             )

@@ -26,6 +26,26 @@
         <item>@color/colorPersonalizeTree_blue</item>
         <item>@color/colorPersonalizeTree_purple</item>
         <item>@color/colorPersonalizeTree_red</item>
-        <item>@color/colorPersonalizeTree_yellow</item>
+        <item>@color/colorPersonalizeTree_orange</item>
     </array>
+
+    <string-array name="array_color_names">
+        <item>Green</item>
+        <item>Blue</item>
+        <item>Pink</item>
+        <item>Purple</item>
+        <item>Orange</item>
+        <item>Red</item>
+    </string-array>
+
+    <string-array name="planets_array">
+        <item>Mercury</item>
+        <item>Venus</item>
+        <item>Earth</item>
+        <item>Mars</item>
+        <item>Jupiter</item>
+        <item>Saturn</item>
+        <item>Uranus</item>
+        <item>Neptune</item>
+    </string-array>
 </resources>

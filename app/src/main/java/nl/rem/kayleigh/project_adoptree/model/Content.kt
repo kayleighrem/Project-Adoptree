@@ -4,7 +4,7 @@ import java.io.Serializable
 
 data class Content(
         val contentId: String?,
-        val contentType: ContentTypeEnum?,
+        val contentType: String?,
         val createdOn: String?,
         val id: String?,
         val text: String?,

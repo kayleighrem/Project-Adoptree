@@ -22,17 +22,14 @@
             android:background="@color/colorWhite"
             android:layout_margin="15sp">
 
-            <ImageView android:id="@+id/tree_image"
+            <ImageView android:id="@+id/iv_adoption_tree_card"
                 android:layout_width="106sp"
                 android:layout_height="149sp"
                 android:layout_marginStart="10sp"
                 android:layout_marginTop="10sp"
                 android:layout_marginEnd="10sp"
                 android:layout_marginBottom="10sp"
-                android:foregroundGravity="left"
-                android:background="@drawable/rounded_corners"
-                android:src="@drawable/tree_icon"
-                app:tint="@color/colorAccentGreen" />
+                android:foregroundGravity="left" />
 
             <LinearLayout android:id="@+id/info_tree"
                 android:layout_width="wrap_content"
@@ -40,7 +37,7 @@
                 android:layout_margin="10sp"
                 android:orientation="vertical"
                 android:gravity="start"
-                android:layout_toRightOf="@id/tree_image">
+                android:layout_toRightOf="@id/iv_adoption_tree_card">
 
                 <TextView android:id="@+id/tree_name"
                     android:layout_width="wrap_content"
@@ -85,7 +82,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/btn_adopt"
                 android:layout_marginStart="10sp"
-                android:layout_toRightOf="@id/tree_image"
+                android:layout_toRightOf="@id/iv_adoption_tree_card"
                 android:layout_below="@id/info_tree"/>
             <Button android:id="@+id/btn_info"
                 android:layout_width="wrap_content"

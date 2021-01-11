@@ -19,20 +19,17 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import nl.rem.kayleigh.project_adoptree.R
+import nl.rem.kayleigh.project_adoptree.adapters.ContentAdapter
 import nl.rem.kayleigh.project_adoptree.adapters.UserAdapter
 import nl.rem.kayleigh.project_adoptree.model.OrderProduct
-import nl.rem.kayleigh.project_adoptree.repository.AdoptionRepository
-import nl.rem.kayleigh.project_adoptree.repository.OrderRepository
-import nl.rem.kayleigh.project_adoptree.repository.UserRepository
+import nl.rem.kayleigh.project_adoptree.repository.*
 import nl.rem.kayleigh.project_adoptree.ui.fragments.*
 import nl.rem.kayleigh.project_adoptree.ui.fragments.screens.AboutAppFragment
 import nl.rem.kayleigh.project_adoptree.ui.fragments.screens.ContractInformationFragment
 import nl.rem.kayleigh.project_adoptree.ui.fragments.screens.PrivacyPolicyFragment
-import nl.rem.kayleigh.project_adoptree.ui.viewmodels.AdoptionViewModel
-import nl.rem.kayleigh.project_adoptree.ui.viewmodels.HomeViewModel
-import nl.rem.kayleigh.project_adoptree.ui.viewmodels.OrderViewModel
-import nl.rem.kayleigh.project_adoptree.ui.viewmodels.UserViewModel
+import nl.rem.kayleigh.project_adoptree.ui.viewmodels.*
 import nl.rem.kayleigh.project_adoptree.ui.viewmodels.factory.AdoptionViewModelFactory
+import nl.rem.kayleigh.project_adoptree.ui.viewmodels.factory.ContentViewModelFactory
 import nl.rem.kayleigh.project_adoptree.ui.viewmodels.factory.OrderViewModelFactory
 import nl.rem.kayleigh.project_adoptree.ui.viewmodels.factory.UserViewModelProviderFactory
 import nl.rem.kayleigh.project_adoptree.util.SessionManager
@@ -44,32 +41,18 @@ import java.util.*
 class MainActivity : AppCompatActivity() {
     lateinit var mainHandler: Handler
 
-//    lateinit var adoptionViewModel: AdoptionViewModel
-//    lateinit var orderViewModel: OrderViewModel
-//    lateinit var userViewModel: UserViewModel
-//    lateinit var homeViewModel: HomeViewModel
-//    lateinit var sessionManager: SessionManager
-//    lateinit var bottomNavigationView: BottomNavigationView
-//
-//    lateinit var adoptionFragment: AdoptionFragment
-//    lateinit var loginFragment: LoginFragment
-//    lateinit var adoptionOverviewFragment: AdoptionOverviewFragment
-//    lateinit var signUpFragment: SignUpFragment
-//
-//    lateinit var homeFragment: HomeFragment
-//    lateinit var timeLineFragment: TimelineFragment
-//    lateinit var feedFragment: FeedFragment
-//    lateinit var profileFragment: ProfileFragment
-//    lateinit var settingsFragment: SettingsFragment
-
     lateinit var adoptionViewModel: AdoptionViewModel
     lateinit var orderViewModel: OrderViewModel
     lateinit var userViewModel: UserViewModel
+    lateinit var contentViewModel: ContentViewModel
     lateinit var homeViewModel: HomeViewModel
     lateinit var sessionManager: SessionManager
     lateinit var bottomNavigationView: BottomNavigationView
 
     var userAdapter: UserAdapter = UserAdapter()
+    var userRepository: UserRepository = UserRepository()
+    var treeRepository: TreeRepository = TreeRepository()
+    var contentAdapter: ContentAdapter = ContentAdapter()
 
     var adoptionFragment: AdoptionFragment = AdoptionFragment()
     var loginFragment: LoginFragment = LoginFragment()
@@ -97,17 +80,6 @@ class MainActivity : AppCompatActivity() {
 
         val defaultlayout: FrameLayout = findViewById(R.id.fl_fragment)
         bottomNavigationView = findViewById(R.id.bottomNavigationView)
-
-//        adoptionFragment = AdoptionFragment()
-//        adoptionOverviewFragment = AdoptionOverviewFragment()
-//        loginFragment = LoginFragment()
-//        signUpFragment = SignUpFragment()
-//
-//        homeFragment = HomeFragment()
-//        timeLineFragment = TimelineFragment()
-//        feedFragment = FeedFragment()
-//        profileFragment = ProfileFragment()
-//        settingsFragment = SettingsFragment()
 
         bottomNavigationView.setOnNavigationItemSelectedListener{
             when (it.itemId) {
@@ -143,6 +115,10 @@ class MainActivity : AppCompatActivity() {
         val userRepository = UserRepository()
         val userViewModelProviderFactory = UserViewModelProviderFactory(userRepository, this)
         userViewModel = ViewModelProvider(this, userViewModelProviderFactory).get(UserViewModel::class.java)
+
+        val contentRepository = ContentRepository()
+        val contentViewModelFactory = ContentViewModelFactory(contentRepository, this)
+        contentViewModel = ViewModelProvider(this, contentViewModelFactory).get(ContentViewModel::class.java)
     }
 
     fun activateHandler() {

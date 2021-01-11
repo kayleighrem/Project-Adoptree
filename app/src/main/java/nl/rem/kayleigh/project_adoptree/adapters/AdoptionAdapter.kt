@@ -8,6 +8,7 @@ import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.load.engine.executor.GlideExecutor.UncaughtThrowableStrategy.LOG
 import kotlinx.android.synthetic.main.item_adoption_tree_card.view.*
 import nl.rem.kayleigh.project_adoptree.R
 import nl.rem.kayleigh.project_adoptree.model.Product
@@ -15,6 +16,7 @@ import nl.rem.kayleigh.project_adoptree.util.SessionManager
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import java.time.format.FormatStyle
+import java.time.temporal.ChronoUnit
 import java.util.*
 
 class AdoptionAdapter : RecyclerView.Adapter<AdoptionAdapter.ViewHolder>()  {
@@ -55,15 +57,22 @@ class AdoptionAdapter : RecyclerView.Adapter<AdoptionAdapter.ViewHolder>()  {
         val product = differ.currentList[position]
 
         holder.itemView.apply {
-            if (holder.sessionManager.isLogin()) {
-                // TODO if login
-            }
             tree_name.text = product.name.toString()
             tree_price.text =  product.price.toString()
-            tree_location.text = product.createdAt
             tree_age2.text = LocalDateTime.parse(product.createdAt).toLocalDate().format(
                     DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG).withLocale(Locale.getDefault())
             )
+            if (product.categoryId == 9) {
+                iv_adoption_tree_card.setImageResource(R.drawable.image_white_oak_sapling)
+                tree_location.text = "Not planted yet"
+            }
+            if (product.categoryId == 2 && product.name == "Black Birch Tree") {
+                iv_adoption_tree_card.setImageResource(R.drawable.image_black_birch_tree)
+                tree_location.text = "Already planted"
+            } else if (product.categoryId == 2 && product.name == "White Oak Tree") {
+                iv_adoption_tree_card.setImageResource(R.drawable.image_white_oak_tree)
+                tree_location.text = "Already planted"
+            }
 //            tv_tree_item_description.text = product.description.toString()
 //            tree_age.text = LocalDateTime.parse(product.createdAt).toLocalDate().format(
 //                    DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG).withLocale(Locale.getDefault())

@@ -9,3 +9,8 @@ data class Image(
         val image_blobname: String?,
         val tree_id: Int?
 ): Serializable
+
+data class TreeImage(
+        val tree_id: Int?,
+        val images: List<Image>
+)

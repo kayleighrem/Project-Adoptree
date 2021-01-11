@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/pink"
+        android:title="pink"
+        android:icon="@color/colorPersonalizeTree_red"/>
+    <item
+        android:id="@+id/orange"
+        android:title="orange" />
+    <item
+        android:id="@+id/red"
+        android:title="red" />
+    <item
+        android:id="@+id/blue"
+        android:title="blue" />
+    <item
+        android:id="@+id/purple"
+        android:title="purple" />
+    <item
+        android:id="@+id/green"
+        android:title="green" />
+</menu>

@@ -16,7 +16,8 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".ui.activities.PersonalizeTreeActivity"/>
+            android:name=".ui.activities.PersonalizeTreeActivity"
+            android:theme="@style/AppThemeNoActionBar"/>
         <activity
             android:name=".ui.activities.BookATourActivity"
             android:label="@string/title_activity_book_a_tour"

@@ -55,7 +55,7 @@ class AdoptionOverviewFragment : Fragment(R.layout.fragment_adoption_overview) {
 //                        findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
                         Toast.makeText(
                                 requireContext(),
-                                "${getString(R.string.test)} ",
+                                "${getString(R.string.pay)} ",
                                 Toast.LENGTH_LONG
                         ).show()
                     } catch (e: Exception) {
@@ -116,8 +116,12 @@ class AdoptionOverviewFragment : Fragment(R.layout.fragment_adoption_overview) {
 
                 } else { // if user is not logged in, sign up first
 //                    mainActivity.navigateToFragment(mainActivity.signUpFragment)
-                    val bundle = bundleOf("order" to order)
-                    findNavController().navigate(R.id.action_adoptionOverviewFragment_to_signUpFragment, bundle)
+                    try {
+                        val bundle = bundleOf("order" to order)
+                        mainActivity.navigateToFragment(mainActivity.signUpFragment)
+//                        findNavController().navigate(R.id.action_adoptionOverviewFragment_to_signUpFragment, bundle)
+                    } catch (e: Exception) {}
+
                 }
             } catch (e: Exception) {
                 Log.e(TAG, "${getString(R.string.error_log)} ${getString(R.string.test)} ${e.message}")
@@ -125,7 +129,11 @@ class AdoptionOverviewFragment : Fragment(R.layout.fragment_adoption_overview) {
         }
 
         btn_logged_in_adopt_more.setOnClickListener {
-            findNavController().navigate(R.id.action_adoptionOverviewFragment_to_adoptionFragment)
+            try {
+                mainActivity.navigateToFragment(mainActivity.adoptionFragment)
+//                findNavController().navigate(R.id.action_adoptionOverviewFragment_to_adoptionFragment)
+            }catch (e: Exception) {}
+
         }
 
         orderAdapter.setOnPayButtonClickListener { product, i ->

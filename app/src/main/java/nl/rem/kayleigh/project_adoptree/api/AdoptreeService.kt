@@ -20,6 +20,14 @@ interface AdoptreeService {
     ) : Response<List<Product>>
 
     @Headers("Content-Type: application/json")
+    @GET("product/2")
+    suspend fun getBigTrees() : Response<List<Product>>
+
+    @Headers("Content-Type: application/json")
+    @GET("product/9")
+    suspend fun getSaplings() : Response<List<Product>>
+
+    @Headers("Content-Type: application/json")
     @GET("category")
     suspend fun getCategories() : Response<List<Category>>
 }

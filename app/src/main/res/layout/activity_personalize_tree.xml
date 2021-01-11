@@ -4,34 +4,61 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:backgroundTint="@color/colorBackground"
+    android:background="@color/colorBackground"
     tools:context=".ui.activities.PersonalizeTreeActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30sp"
+        android:layout_gravity="start"
+        android:gravity="start"
         android:orientation="vertical">
-        <EditText android:id="@+id/tv_tree_name"
+        <TextView android:id="@+id/tv_tree_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/test" />
+            android:textSize="25sp"
+            android:layout_marginBottom="30sp"
+            android:layout_gravity="center_horizontal"
+            android:text="@string/personalize_tree" />
 
-        <EditText android:id="@+id/et_tree_name"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="80sp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20sp"
             android:layout_marginStart="24sp"
-            android:layout_marginTop="96sp"
+            android:layout_marginTop="20sp"
             android:layout_marginEnd="24sp"
-            android:padding="15sp"
-            android:background="@drawable/rounded_corners"
-            android:backgroundTint="@color/colorInputGrey"
-            android:textColor="@color/colorAccentBrown"
-            android:hint="@string/tree_name"
-            android:inputType="textPersonName" />
+            android:orientation="horizontal">
+            <EditText android:id="@+id/et_tree_name"
+                android:layout_width="match_parent"
+                android:layout_height="80sp"
+                android:layout_weight="0.9"
+                android:layout_marginRight="5sp"
+                android:padding="15sp"
+                android:background="@drawable/rounded_corners"
+                android:backgroundTint="@color/colorInputGrey"
+                android:textColor="@color/colorAccentBrown"
+                android:hint="@string/tree_name"
+                android:inputType="textPersonName" />
 
-        <Button android:id="@+id/ib_tree_color"
-            android:layout_width="40sp"
-            android:layout_height="40sp"
-            android:src="@drawable/rounded_corners"/>
+            <Button android:id="@+id/ib_tree_color"
+                android:layout_width="40sp"
+                android:layout_height="40sp"
+                android:layout_weight="0.1"
+                android:src="@drawable/rounded_corners"/>
+
+        </LinearLayout>
+
+        <Button android:id="@+id/btn_commit_changes"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/button_height"
+            android:layout_gravity="center_horizontal"
+            style="@style/CustomButtonStyle"
+            android:text="@string/save_changes" />
+
     </LinearLayout>
 
 

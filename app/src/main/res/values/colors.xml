@@ -49,5 +49,6 @@
     <color name="colorPersonalizeTree_blue">#2196F3</color>
     <color name="colorPersonalizeTree_green">#4CAF50</color>
     <color name="colorPersonalizeTree_purple">#9C27B0</color>
-    <color name="colorPersonalizeTree_yellow">#FFEB3B</color>
+    <color name="colorPersonalizeTree_pink">#FF00B6</color>
+    <color name="colorPersonalizeTree_orange">#FFC107</color>
 </resources>

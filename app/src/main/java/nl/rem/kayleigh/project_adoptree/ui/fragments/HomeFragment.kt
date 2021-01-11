@@ -1,34 +1,31 @@
 package nl.rem.kayleigh.project_adoptree.ui.fragments
 
-import android.Manifest
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.util.Log
 import android.view.*
-import android.view.inputmethod.EditorInfo
 import android.widget.Toast
 import androidx.constraintlayout.motion.widget.Debug.getLocation
-import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import kotlinx.android.synthetic.main.fragment_adoption.*
 import kotlinx.android.synthetic.main.fragment_home.*
-import kotlinx.android.synthetic.main.fragment_login.*
+import kotlinx.android.synthetic.main.item_tree_card.*
 import nl.rem.kayleigh.project_adoptree.R
 import nl.rem.kayleigh.project_adoptree.adapters.UserAdapter
-import androidx.navigation.fragment.NavHostFragment
-import nl.rem.kayleigh.project_adoptree.model.Tree
-import nl.rem.kayleigh.project_adoptree.model.User
-import nl.rem.kayleigh.project_adoptree.repository.UserRepository
 import nl.rem.kayleigh.project_adoptree.ui.activities.AdoptionActivity
 import nl.rem.kayleigh.project_adoptree.ui.activities.MainActivity
+import nl.rem.kayleigh.project_adoptree.ui.activities.PersonalizeTreeActivity
 import nl.rem.kayleigh.project_adoptree.ui.viewmodels.HomeViewModel
 import nl.rem.kayleigh.project_adoptree.ui.viewmodels.UserViewModel
 import nl.rem.kayleigh.project_adoptree.util.LinearLayoutManagerWrapper
 import nl.rem.kayleigh.project_adoptree.util.Resource
 import nl.rem.kayleigh.project_adoptree.util.SessionManager
+import java.time.format.DateTimeFormatter
+import java.util.*
 
 class HomeFragment : Fragment(R.layout.fragment_home) {
     lateinit var adoptionActivity: AdoptionActivity
@@ -40,6 +37,8 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     lateinit var userViewModel: UserViewModel
     lateinit var homeViewModel: HomeViewModel
     lateinit var bottomNavigationView: BottomNavigationView
+
+    var isLoading = false
 
     companion object {
         const val TAG = "HomeFragment"
@@ -53,14 +52,6 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-//        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
-//
-//        val permissionState = ActivityCompat.checkSelfPermission(this.requireContext(), Manifest.permission.ACCESS_COARSE_LOCATION)
-//        if (permissionState != PackageManager.PERMISSION_GRANTED) {
-//            ActivityCompat.requestPermissions(mainActivity, arrayOf(Manifest.permission.ACCESS_COARSE_LOCATION), REQUEST_PERMISSIONS_REQUEST_CODE)
-//        }
-
-
         sessionManager = SessionManager(view.context)
         this.bottomNavigationView = (activity as MainActivity).bottomNavigationView
         bottomNavigationView = bottomNavigationView.findViewById(R.id.bottomNavigationView)
@@ -70,23 +61,9 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         adoptionActivity = AdoptionActivity()
 
         userViewModel = (activity as MainActivity).userViewModel
-        homeViewModel = HomeViewModel(userRepository = UserRepository(), requireContext())
+        homeViewModel = HomeViewModel(mainActivity, requireContext())
 
         initializeUI()
-//            homeViewModel.getTrees(sessionManager.getUserDetails().accessToken)
-//            println("are there any trees? " + homeViewModel.trees.value)
-//            if (homeViewModel.trees.value != null) { // if there are trees
-//                println("trees not null?")
-//                rl_home_logged_in.visibility = View.VISIBLE
-//                ll_home_logged_in_no_trees.visibility = View.GONE
-//                setUpRecyclerView()
-//            } else if (homeViewModel.trees.value == null) { // if user has no trees
-//                println("trees null?")
-//                rl_home_not_logged_in.visibility = View.GONE
-//                rl_home_logged_in.visibility = View.GONE
-//                ll_home_logged_in_no_trees.visibility = View.VISIBLE
-//            }
-//        }
     }
 
     override fun onCreateView(
@@ -98,46 +75,45 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     }
 
     private fun initializeUI() {
-        println("test ui?")
         if (sessionManager.isLogin()) {
-            println("test login? " + sessionManager.isLogin())
+            rl_home_not_logged_in.visibility = View.GONE
+            ll_home_logged_in_no_trees.visibility = View.GONE
+
+            userViewModel.getLoggedInUser(sessionManager.getUserDetails().accessToken)
             homeViewModel.getTrees(sessionManager.getUserDetails().accessToken)
-            println("test trees " + homeViewModel.trees.value?.data)
 
             homeViewModel.trees.observe(viewLifecycleOwner, Observer { response ->
-                println("test response = " + response.data)
                 when (response) {
+                    is Resource.Loading -> {
+                        showProgressBar()
+                    }
                     is Resource.Success -> {
-                        println("response ==== " + response)
+                        hideProgressBar()
                         try {
-                            println("response trees??? " + response.data)
                             rl_home_not_logged_in.visibility = View.GONE
-
-//                            homeViewModel.getTrees(sessionManager.getUserDetails().accessToken)
-                            println("are there any trees? " + homeViewModel.trees.value)
                             mainActivity.userAdapter.differ.submitList(response.data)
+
                             if (homeViewModel.trees.value != null) { // if there are trees
-                                println("trees not null?")
                                 rl_home_logged_in.visibility = View.VISIBLE
                                 ll_home_logged_in_no_trees.visibility = View.GONE
-                                    setUpRecyclerView()
+                                setUpRecyclerView()
                             } else if (homeViewModel.trees.value == null) { // if user has no trees
-                                println("trees null?")
                                 rl_home_not_logged_in.visibility = View.GONE
                                 rl_home_logged_in.visibility = View.GONE
                                 ll_home_logged_in_no_trees.visibility = View.VISIBLE
                             }
-//                            setUpRecyclerView()
-                        } catch (e: Exception) {
+                        } catch (e: Exception) { // Catch try when resource = success
                             Log.e(TAG, "${getString(R.string.error_log)} ${e.message}")
                         }
-//                        setUpRecyclerView()
                     }
                     is Resource.Error -> {
-                        println("response = " + response)
+                        hideProgressBar()
+                        rl_home_not_logged_in.visibility = View.GONE
+                        rl_home_logged_in.visibility = View.GONE
+                        ll_home_logged_in_no_trees.visibility = View.VISIBLE
                         Toast.makeText(
                                 requireContext(),
-                                R.string.wrong_credentials,
+                                R.string.error_log,
                                 Toast.LENGTH_LONG
                         ).show()
                         response.message?.let { message ->
@@ -157,9 +133,24 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                 )
             }
 
+            mainActivity.userAdapter.setOnExpandButtonClickListener { tree, i ->
+                homeViewModel.getTelemetryByTreeId(sessionManager.getUserDetails().accessToken, tree.id!!.toInt())
+                val telemetry = homeViewModel.telemetries.value?.data
+                if (telemetry != null) {
+                    userAdapter.thisTelemetry(telemetry)
+                    userAdapter.telemetry = telemetry
+                }
+                userAdapter.notifyItemChanged(i)
+            }
+            btn_home_logged_in_adopt_more_trees.setOnClickListener{
+                try {
+                    this.findNavController().navigate(R.id.action_homeFragment_to_adoptionFragment)
+                } catch (e: Exception) {}
+
+            }
+
             btn_logged_in_adopt_more.setOnClickListener {
                 mainActivity.navigateToFragment(mainActivity.adoptionFragment)
-//                findNavController().navigate(R.id.action_homeFragment_to_adoptionFragment)
             }
         } else if (!sessionManager.isLogin()) { // if not logged in
             rl_home_not_logged_in.visibility = View.VISIBLE
@@ -168,11 +159,9 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
             btn_guest_adopt_now.setOnClickListener {
                 mainActivity.navigateToFragment(mainActivity.adoptionFragment)
-//                findNavController().navigate(R.id.action_homeFragment_to_adoptionFragment)
             }
             btn_guest_start_adopt_now.setOnClickListener {
                 mainActivity.navigateToFragment(mainActivity.adoptionFragment)
-//                findNavController().navigate(R.id.action_homeFragment_to_adoptionFragment)
             }
         }
     }
@@ -192,5 +181,15 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                     getLocation()
             }
         }
+    }
+
+    fun hideProgressBar() {
+        pb_paginationProgressBar.visibility = View.INVISIBLE
+        isLoading = false
+    }
+
+    fun showProgressBar() {
+        pb_paginationProgressBar.visibility = View.VISIBLE
+        isLoading = true
     }
 }

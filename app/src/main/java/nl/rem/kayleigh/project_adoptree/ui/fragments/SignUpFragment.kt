@@ -65,7 +65,7 @@ class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
                                         loginresponse.data?.accessToken?.let { // create session
                                             sessionManager.createSession(
                                                     it,
-                                                    loginresponse.data.refreshToken!!
+                                                    loginresponse.data!!.refreshToken!!
                                             )
                                         }
                                         // TODO: go to the payment
